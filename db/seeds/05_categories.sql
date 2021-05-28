@@ -1,0 +1,10 @@
+INSERT INTO categories (type) VALUES ('Geography');
+INSERT INTO categories (type) VALUES ('History');
+INSERT INTO categories (type) VALUES ('Sports');
+INSERT INTO categories (type) VALUES ('Computer Science');
+INSERT INTO categories (type) VALUES ('Popular Culture');
+INSERT INTO categories (type) VALUES ('Music');
+INSERT INTO categories (type) VALUES ('Art');
+INSERT INTO categories (type) VALUES ('Biology');
+INSERT INTO categories (type) VALUES ('Space');
+INSERT INTO categories (type) VALUES ('Miscellaneous');

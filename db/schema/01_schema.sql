@@ -30,6 +30,7 @@ CREATE TABLE questions (
 
 CREATE TABLE answers (
   id SERIAL PRIMARY KEY NOT NULL,
+  is_answer BOOLEAN NOT NULL,
   text TEXT NOT NULL,
   question_id INTEGER REFERENCES questions(id) ON DELETE CASCADE
 );

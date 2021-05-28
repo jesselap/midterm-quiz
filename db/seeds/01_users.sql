@@ -1,3 +1,10 @@
--- Users table seeds here (Example)
-INSERT INTO users (name) VALUES ('Alice');
-INSERT INTO users (name) VALUES ('Kira');
+INSERT INTO users (name, email, password) VALUES ('Stephanie Wolff', 'darius.homenick@tod.ca', 'password');
+INSERT INTO users (name, email, password) VALUES ('Stan Miller', 'mcdermott.maxie@schoen.com', 'password');
+INSERT INTO users (name, email, password) VALUES ('Armand Hilll', 'lera_hahn@dickens.org', 'password');
+INSERT INTO users (name, email, password) VALUES ('Elliot Dickinson', 'derrick_pollich@gmail.com', 'password');
+INSERT INTO users (name, email, password) VALUES ('Lloyd Boehm', 'ebba.deckow@yahoo.com', 'password');
+INSERT INTO users (name, email, password) VALUES ('Erna Cassin', 'miguel.barrows@yahoo.com', 'password');
+INSERT INTO users (name, email, password) VALUES ('Edison Brown', 'alysha.daniel@boyer.tv', 'password');
+INSERT INTO users (name, email, password) VALUES ('Lionel Morar', 'bradtke.mallie@yahoo.com', 'password');
+INSERT INTO users (name, email, password) VALUES ('Donnie Lueilwitz', 'kattie_dibbert@winnifred.name', 'password');
+INSERT INTO users (name, email, password) VALUES ('Obie Howell', 'elisha_wisoky@gmail.com', 'password');

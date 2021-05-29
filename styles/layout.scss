@@ -8,3 +8,28 @@ body {
     color: #244751;
   }
 }
+
+nav {
+ background-color:#32a8c9;
+ a {
+   color:#EEE;
+ }
+ .nav-link {
+  color:#EEE;
+ }
+}
+
+
+.main-body {
+  background-color: #e3908a;
+}
+// .home-header {
+// }
+.leaderboard {
+  li {
+    // background-color: #e3908a;
+    span{
+      background-color: red;
+    }
+  }
+}

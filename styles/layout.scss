@@ -2,8 +2,46 @@
 
 body {
   background-color: #EEE;
+  padding: 1%;
 
   h1 {
     color: #244751;
   }
 }
+
+nav {
+ background-color:#32a8c9;
+ a {
+   color:#EEE;
+ }
+ .nav-link {
+  color:#EEE;
+ }
+}
+
+
+.main-body {
+  background-color: #bfbbb0;
+}
+.home-header {
+  .jumbotron {
+    border-radius: 25px;
+    width: 65%;
+  }
+  .leaderboard {
+    background-color: #bfbbb0;
+    border-radius: 25px;
+    h4 {
+      text-align: center;
+      text-transform: uppercase;
+      color: #36874c;
+    }
+    li {
+      span{
+        background-color:#36874c;
+        // color:black;
+      }
+    }
+  }
+}
+

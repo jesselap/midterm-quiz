@@ -5,17 +5,13 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    res.send("Quizes Routes")
-    // db.query(`SELECT * FROM users;`)
-    //   .then(data => {
-    //     const users = data.rows;
-    //     res.json({ users });
-    //   })
-    //   .catch(err => {
-    //     res
-    //       .status(500)
-    //       .json({ error: err.message });
-    //   });
+
+    const queryContent = `SELECT * FROM quizes;`
+    db.query(queryContent).then(data => res.json(data.rows))
+      .catch(err => res.json(err))
+  });
+  router.get("/create", (req, res) => {
+    res.render('create_quiz')
   });
   return router;
 };

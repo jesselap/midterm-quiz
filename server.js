@@ -51,8 +51,12 @@ app.get("/", (req, res) => {
 });
 
 // Create a quiz page
-app.get("/create", (req, res) => {
+app.get("/quiz/create", (req, res) => {
   res.render("create_quiz");
+});
+
+app.get("/login", (req, res) => {
+  res.render("login");
 });
 
 app.listen(PORT, () => {

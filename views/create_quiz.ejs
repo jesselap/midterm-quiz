@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Quiz App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+  </head>
+
+  <body>
+    <main class="main-body px-3">
+      <section class="home-header row p-4 d-flex justify-content-between">
+        <div class=" bg-light col-md-8 jumbotron pt-3">
+          <h2 class="display-4 text-center">Create a Quiz</h2>
+          <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to
+            featured content or information.</p>
+          <hr class="my-4">
+          <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+          <form action="form_sent.php" method="post">
+            <ul id="fieldList">
+              <label for="question">Your Question:</label>
+              <li>
+                <input type="text"/>
+              </li>
+              <label for="answer">The Answer:</label>
+              <li>
+                <input type="text"/>
+              </li>
+              <label for="option-a">Option A:</label>
+              <li>
+                <input type="text"/>
+              </li>
+              <label for="option-b">Option B:</label>
+              <li>
+                <input type="text"/>
+              </li>
+              <label for="option-c">Option C:</label>
+              <li>
+                <input type="text"/>
+              </li>
+            </ul>
+            <p class="lead">
+              <a class="btn btn-primary btn-lg" id="moreQuestions" href="#" role="button">Add more questions</a>
+            </p>
+            <input class="btn btn-primary btn-lg" type="submit">
+          </form>
+        </div>
+        <div class="col-md-4 d-flex flex-column leaderboard bg-light">
+          <h4 class="pt-3">Your Quizes</h4>
+          <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              ABC
+              <span class="badge badge-pill badge-danger">55</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              ABC
+              <span class="badge badge-primary badge-pill">55</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              ABC
+              <span class="badge badge-primary badge-pill">55</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              ABC
+              <span class="badge badge-primary badge-pill">55</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              ABC
+              <span class="badge badge-primary badge-pill">55</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"></script>
+  </body>
+</html>

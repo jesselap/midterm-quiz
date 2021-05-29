@@ -50,6 +50,11 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+// Create a quiz page
+app.get("/create", (req, res) => {
+  res.render("create_quiz");
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });

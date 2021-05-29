@@ -12,6 +12,7 @@ $(() => {
 $(function() {
   $("#moreQuestions").click(function(e) {
     e.preventDefault();
+    $("#fieldList").append("<br>");
     $("#fieldList").append("<label for='question'>Your Question:</label>");
     $("#fieldList").append("<li><input type='text'/></li>");
     $("#fieldList").append("<label for='answer'>The Answer:</label>");

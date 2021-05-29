@@ -17,6 +17,10 @@ module.exports = (db) => {
       .catch(err => res.json(err))
   });
 
+  router.get("/new", (req, res) => {
+    res.render('create_quiz')
+    res.send("Hello")
+  });
   router.get("/:id", (req, res) => {
     const queryContent = `
                           SELECT * FROM quizes
@@ -25,10 +29,6 @@ module.exports = (db) => {
     db.query(queryContent)
       .then(data => res.json(data.rows))
       .catch(err => res.json(err))
-  });
-
-  router.get("/new", (req, res) => {
-    res.render('create_quiz')
   });
 
   router.post("/", (req, res) => {

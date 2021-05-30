@@ -12,10 +12,17 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    const queryContent = `SELECT * FROM quizes;`
-    // db.query(queryContent).then(data => res.json(data.rows))
-    //   .catch(err => res.json(err))
-    res.render('quizes')
+    const queryContent = `SELECT quizes.id, title, created_at, public, categories.type as category
+                          FROM quizes
+                          JOIN categories ON quizes.category_id = categories.id;
+    `
+    db.query(queryContent).then(data => {
+      console.log(data.rows)
+      // res.json(data.rows)
+      const templateVars = {data: data.rows}
+      res.render('quizes', templateVars)
+    })
+      .catch(err => res.json(err))
   });
 
   router.get("/new", (req, res) => {

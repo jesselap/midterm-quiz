@@ -43,29 +43,36 @@ nav {
       }
     }
   }
-// }
-// .quizes-container {
-//   // background-color: red;
-//   // height: 200px;
+}
+.quizes-container {
+  // background-color: red;
+  // height: 200px;
 
-//   .card{
-//     background-image: url;
-//     border: 2px solid blue;
-//     width: 32.5%;
-//     margin-bottom: 1.5%;
+  .card{
+    border: 2px solid blue;
+    width: 32.5%;
+    margin-bottom: 1.5%;
+    align-items: flex-start;
+    justify-content: flex-end;
 
-//     img{
-//       max-width: 100%;
-//     }
-//     .overlay {
-//       width: 100%;
-//       align-self: flex-end;
-//       background-color: transparent;
-//       span {
-//         background-color: brown;
-//       }
-//     }
-//   }
+    img{
+      max-width: 100%;
+    }
+    .overlay {
+      position: absolute;
+      word-break: break-word;
+      width: 100%;
+      span {
+        background-color: brown;
+        text-transform: uppercase;
+        padding: 0.2rem 0.5rem;
+      }
+      .card-title {
+        font-size: 1.4rem;
+        padding-left: 0.5rem;
+      }
+    }
+  }
 
   h4{
     background-color: #32a8c9;

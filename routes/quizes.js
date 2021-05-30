@@ -13,8 +13,9 @@ const router = express.Router();
 module.exports = (db) => {
   router.get("/", (req, res) => {
     const queryContent = `SELECT * FROM quizes;`
-    db.query(queryContent).then(data => res.json(data.rows))
-      .catch(err => res.json(err))
+    // db.query(queryContent).then(data => res.json(data.rows))
+    //   .catch(err => res.json(err))
+    res.render('quizes')
   });
 
   router.get("/new", (req, res) => {

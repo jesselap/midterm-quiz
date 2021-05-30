@@ -54,21 +54,32 @@ nav {
     margin-bottom: 1.5%;
     align-items: flex-start;
     justify-content: flex-end;
+    &:hover {
+      img {
+        opacity: 0.9;
+      }
+      .overlay {
+        background-color: rgba(0,0,0,.5);
+      }
+    }
 
     img{
       max-width: 100%;
+      opacity: 1.0;
     }
     .overlay {
+      background-color: rgba(0,0,0,.3);
       position: absolute;
       word-break: break-word;
       width: 100%;
+      padding-bottom: 2%;
       span {
         background-color: brown;
         text-transform: uppercase;
         padding: 0.2rem 0.5rem;
+        font-size: 0.9rem;
       }
-      .card-title {
-        font-size: 1.4rem;
+      .card-text {
         padding-left: 0.5rem;
       }
     }
@@ -78,5 +89,7 @@ nav {
     background-color: #32a8c9;
     margin-top: 1%;
     color: #EEE;;
+    text-transform: uppercase;
+    text-align: center;
   }
 }

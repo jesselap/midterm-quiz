@@ -46,5 +46,10 @@ nav {
 }
 .quizes-container {
   background-color: red;
-  height: 200px;
+  // height: 200px;
+
+  .card{
+    border: 2px solid blue;
+    margin-right: 1.5rem;
+  }
 }

@@ -19,8 +19,9 @@ module.exports = (db) => {
     db.query(queryContent).then(data => {
       console.log(data.rows)
       // res.json(data.rows)
-      const templateVars = {data: data.rows}
-      res.render('quizes', templateVars)
+      // const templateVars = {data: data.rows}
+      // res.render('quizes', templateVars)
+      res.json(data.rows)
     })
       .catch(err => res.json(err))
   });

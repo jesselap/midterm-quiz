@@ -10,111 +10,119 @@
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
-  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
   <script type="text/javascript" src="/scripts/quizes.js"></script>
 </head>
 
 <body>
   <%- include('partials/_nav'); %>
-  <header class="main-body px-3">
-    <section class="home-header row p-4 d-flex justify-content-between">
-      <div class=" bg-light col-md-8 jumbotron pt-3">
-        <h2 class="display-4 text-center">Hello, world!</h2>
-        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to
-          featured content or information.</p>
-        <hr class="my-4">
-        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-        <p class="lead">
-          <a class="btn btn-primary btn-lg" href="#" role="button">START QUIZ</a>
-        </p>
+    <header class="main-body px-3">
+      <section class="home-header row p-4 d-flex justify-content-between">
+        <div class=" bg-light col-md-8 jumbotron pt-3">
+          <h2 class="display-4 text-center">Hello, world!</h2>
+          <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to
+            featured content or information.</p>
+          <hr class="my-4">
+          <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+          <p class="lead">
+            <a class="btn btn-primary btn-lg" href="#" role="button">START QUIZ</a>
+          </p>
+        </div>
+        <div class="col-md-4 d-flex flex-column leaderboard bg-light">
+          <h4 class="pt-3">Leaderboard</h4>
+          <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              ABC
+              <span class="badge badge-pill badge-danger">55</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              ABC
+              <span class="badge badge-primary badge-pill">55</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              ABC
+              <span class="badge badge-primary badge-pill">55</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              ABC
+              <span class="badge badge-primary badge-pill">55</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              ABC
+              <span class="badge badge-primary badge-pill">55</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </header>
+
+    <section class="quizes-container d-flex flex-column flex-md-row flex-wrap justify-content-between">
+      <div class="col-md-12">
+        <h4 class="display-5">All Our Quizes</h4>
+
       </div>
-      <div class="col-md-4 d-flex flex-column leaderboard bg-light">
-        <h4 class="pt-3">Leaderboard</h4>
-        <ul class="list-group">
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            ABC
-            <span class="badge badge-pill badge-danger">55</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            ABC
-            <span class="badge badge-primary badge-pill">55</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            ABC
-            <span class="badge badge-primary badge-pill">55</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            ABC
-            <span class="badge badge-primary badge-pill">55</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            ABC
-            <span class="badge badge-primary badge-pill">55</span>
-          </li>
-        </ul>
+      <div class="card bg-dark text-white col-md-4">
+        <img
+          src="https://i.guim.co.uk/img/media/5cbce71c025dd78ca31d03111bd2ee4453a7029e/0_167_2400_1440/master/2400.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=b44c9a27a5b38c0388b092e5b0291c32"
+          class="card-img" alt="...">
+        <div class="overlay">
+          <span>Science</span>
+          <p class="card-text">How much do you know about Mars</p>
+        </div>
+      </div>
+      <div class="card bg-dark text-white col-md-4">
+        <img src="https://cdn-prod.medicalnewstoday.com/content/images/articles/325/325466/man-walking-dog.jpg"
+          class="card-img" alt="...">
+        <div class="overlay">
+          <span>Nature</span>
+          <p class="card-text">Do you love Nature? Then this Quiz for you!</p>
+        </div>
+      </div>
+      <div class="card bg-dark text-white col-md-4">
+        <img
+          src="https://i.guim.co.uk/img/media/5cbce71c025dd78ca31d03111bd2ee4453a7029e/0_167_2400_1440/master/2400.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=b44c9a27a5b38c0388b092e5b0291c32"
+          class="card-img" alt="...">
+        <div class="overlay">
+          <span>Science</span>
+          <p class="card-text">How much do you know about Mars</p>
+        </div>
+      </div>
+      <div class="card bg-dark text-white col-md-4">
+        <img
+          src="https://i.guim.co.uk/img/media/5cbce71c025dd78ca31d03111bd2ee4453a7029e/0_167_2400_1440/master/2400.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=b44c9a27a5b38c0388b092e5b0291c32"
+          class="card-img" alt="...">
+        <div class="overlay">
+          <span>Science</span>
+          <p class="card-text">How much do you know about Mars</p>
+        </div>
+      </div>
+      <div class="card bg-dark text-white col-md-4">
+        <img
+          src="https://i.guim.co.uk/img/media/5cbce71c025dd78ca31d03111bd2ee4453a7029e/0_167_2400_1440/master/2400.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=b44c9a27a5b38c0388b092e5b0291c32"
+          class="card-img" alt="...">
+        <div class="overlay">
+          <span>Science</span>
+          <p class="card-text">How much do you know about Mars</p>
+        </div>
+      </div>
+      <div class="card bg-dark text-white col-md-4">
+        <img
+          src="https://i.guim.co.uk/img/media/5cbce71c025dd78ca31d03111bd2ee4453a7029e/0_167_2400_1440/master/2400.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=b44c9a27a5b38c0388b092e5b0291c32"
+          class="card-img" alt="...">
+        <div class="overlay">
+          <span>Science</span>
+          <p class="card-text">How much do you know about Mars</p>
+        </div>
       </div>
     </section>
-  </header>
 
-  <section class="quizes-container d-flex flex-column flex-md-row flex-wrap justify-content-between">
-    <div class="col-md-12">
-      <h4 class="display-5">All Our Quizes</h4>
-
-    </div>
-    <div class="card bg-dark text-white col-md-4">
-      <img src="https://i.guim.co.uk/img/media/5cbce71c025dd78ca31d03111bd2ee4453a7029e/0_167_2400_1440/master/2400.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=b44c9a27a5b38c0388b092e5b0291c32" class="card-img" alt="...">
-       <div class="overlay">
-         <span>Science</span>
-         <p class="card-text">How much do you know about Mars</p>
-       </div>
-    </div>
-    <div class="card bg-dark text-white col-md-4">
-      <img src="https://cdn-prod.medicalnewstoday.com/content/images/articles/325/325466/man-walking-dog.jpg" class="card-img" alt="...">
-       <div class="overlay">
-         <span>Nature</span>
-         <p class="card-text">Do you love Nature? Then this Quiz for you!</p>
-       </div>
-    </div>
-    <div class="card bg-dark text-white col-md-4">
-      <img src="https://i.guim.co.uk/img/media/5cbce71c025dd78ca31d03111bd2ee4453a7029e/0_167_2400_1440/master/2400.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=b44c9a27a5b38c0388b092e5b0291c32" class="card-img" alt="...">
-       <div class="overlay">
-         <span>Science</span>
-         <p class="card-text">How much do you know about Mars</p>
-       </div>
-    </div>
-    <div class="card bg-dark text-white col-md-4">
-      <img src="https://i.guim.co.uk/img/media/5cbce71c025dd78ca31d03111bd2ee4453a7029e/0_167_2400_1440/master/2400.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=b44c9a27a5b38c0388b092e5b0291c32" class="card-img" alt="...">
-       <div class="overlay">
-         <span>Science</span>
-         <p class="card-text">How much do you know about Mars</p>
-       </div>
-    </div>
-    <div class="card bg-dark text-white col-md-4">
-      <img src="https://i.guim.co.uk/img/media/5cbce71c025dd78ca31d03111bd2ee4453a7029e/0_167_2400_1440/master/2400.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=b44c9a27a5b38c0388b092e5b0291c32" class="card-img" alt="...">
-       <div class="overlay">
-         <span>Science</span>
-         <p class="card-text">How much do you know about Mars</p>
-       </div>
-    </div>
-    <div class="card bg-dark text-white col-md-4">
-      <img src="https://i.guim.co.uk/img/media/5cbce71c025dd78ca31d03111bd2ee4453a7029e/0_167_2400_1440/master/2400.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=b44c9a27a5b38c0388b092e5b0291c32" class="card-img" alt="...">
-       <div class="overlay">
-         <span>Science</span>
-         <p class="card-text">How much do you know about Mars</p>
-       </div>
-    </div>
-  </section>
-
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"></script>
 </body>
 
 </html>

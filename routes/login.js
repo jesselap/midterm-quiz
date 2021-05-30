@@ -4,26 +4,28 @@ const router  = express.Router();
 module.exports = (db) => {
 
   // login
-  router.get('/login', (req, res) => {
+  router.get('/', (req, res) => {
+    let templateVars = {};
     if (!req.session.user_id) {
-      let templatevars = {
+      templatevars = {
         user: null
-      }
-      res.render('../views/login', templateVars);
-    } else {
-      res.redirect('/');
-    }
+      };
+      res.render('login', templateVars);
+    } //else {
+    //   res.redirect('/');
+    // }
   });
 
-  router.post('/login', (req, res) => {
+  router.post('/', (req, res) => {
     const { email, password } = req.body;
+    console.log(req.body)
 
     db.query(`
-    SELECT * FROM users WHERE id = $1
+    SELECT * FROM users WHERE email = $1
     `, [email])
       .then(data => {
         if (password === data.rows[0].password) {
-          req.session.user_id = data.rows[0].id;
+          req.session["user_id"] = data.rows[0].email;
           res.redirect('/');
         } else {
           res
@@ -38,4 +40,5 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+  return router;
 };

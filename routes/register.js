@@ -4,14 +4,15 @@ const router  = express.Router();
 module.exports = (db) => {
 
   // register user
-  router.get('/register', (req, res) => {
+  router.get('/', (req, res) => {
     let templateVars = {
       user: null
     }
-    res.render('../views/register', templateVars);
+    res.render('register', templateVars);
   });
 
-  router.post('/register', (req, res) => {
+  router.post('/', (req, res) => {
+    console.log('inside^^^^^^^^^^')
     const { name, email, password } = req.body
     db.query(`
       INSERT INTO users (name, email, password)
@@ -27,5 +28,6 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+  return router;
 };
 

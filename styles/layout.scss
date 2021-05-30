@@ -55,6 +55,7 @@ nav {
     align-items: flex-start;
     justify-content: flex-end;
     &:hover {
+      cursor: pointer;
       img {
         opacity: 0.9;
       }
@@ -64,8 +65,8 @@ nav {
     }
 
     img{
-      max-width: 100%;
       opacity: 1.0;
+      max-height: 350px;
     }
     .overlay {
       background-color: rgba(0,0,0,.3);

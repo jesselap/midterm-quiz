@@ -1,5 +1,5 @@
 // Routes for a user's played quiz history
-// /users/:id GET (all quizes created by a user)
+// /users/:id/activity GET (all quizes created by a user)
 
 const express = require('express');
 const router = express.Router();

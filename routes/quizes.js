@@ -48,7 +48,25 @@ module.exports = (db) => {
       .catch(err => res.json(err))
   });
 
+
+  // CREATE TABLE quizes (
+  //   id SERIAL PRIMARY KEY NOT NULL,
+  //   owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  //   category_id INTEGER REFERENCES categories(id) ON DELETE CASCADE,
+  //   title VARCHAR(255) NOT NULL,
+  //   created_at TIMESTAMP,
+  //   public BOOLEAN NOT NULL DEFAULT TRUE
+  // );
   router.post("/", (req, res) => {
+    const owner_id = req.session.user_id;
+    const created_at = Date.now();
+    const {category_id, title} = req.body
+    const public = req.body.public ? true : false;
+    console.log(owner_id, created_at)
+    const queryContent = `
+                          INSERT INTO quizes
+                          VALUES(owner_id, category_id, title)
+                         `
     res.send(req.body)
   });
   return router;

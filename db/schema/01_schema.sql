@@ -40,6 +40,7 @@ CREATE TABLE attempts (
   id SERIAL PRIMARY KEY NOT NULL,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   quiz_id INTEGER REFERENCES quizes(id) ON DELETE CASCADE,
+  score INTEGER,
   attempted_at TIMESTAMP
 );
 

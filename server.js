@@ -47,10 +47,10 @@ const authRoutes = require("./routes/auth");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/api/users", usersRoutes(db));
-app.use("/api/widgets", widgetsRoutes(db));
+
+
 app.use("/quizes", quizesRoutes(db));
-app.use("/auth", authRoutes(db));
+app.use("/", authRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 

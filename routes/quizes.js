@@ -16,21 +16,27 @@ module.exports = (db) => {
                           FROM quizes
                           JOIN categories ON quizes.category_id = categories.id;
     `
-    db.query(queryContent).then(data => {
+    db.query(queryContent)
+     .then(data => {
       console.log(data.rows)
       // res.json(data.rows)
       // const templateVars = {data: data.rows}
       // res.render('quizes', templateVars)
       res.json(data.rows)
     })
-      .catch(err => res.json(err))
+     .catch(err => res.json(err))
   });
 
   router.get("/new", (req, res) => {
     if(!req.session.user_id){
       res.redirect('/')
     }
-    res.render('create_quiz', {user: req.session.user_id})
+    const queryContent = `SELECT * FROM categories;`
+    db.query(queryContent)
+      .then(data => {
+        const templateVars = {categories: data.rows, user: req.session.user_id}
+        res.render('create_quiz', templateVars)
+      })
   });
   router.get("/:id", (req, res) => {
     const queryContent = `

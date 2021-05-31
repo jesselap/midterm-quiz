@@ -23,7 +23,7 @@
       </form>
       <% if (!user) { %>
       <a class="btn btn-success mx-md-2 my-sm-2 my-md-0" href="/auth/login">LOGIN</a>
-      <button class="btn btn-secondary" href="/auth/register">SIGNUP</button>
+      <a class="btn btn-secondary" href="/auth/register">SIGNUP</a>
       <% } else { %>
         <a class="btn btn-success mx-md-2 my-sm-2 my-md-0" href="/user"><%= user.name %></a>
         <form action="/auth/logout" method="post">

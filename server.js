@@ -60,7 +60,24 @@ app.use("/login", loginRoutes(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
-  res.render("index");
+  if (!req.session.user_id) {
+    let templateVars = {
+      user: null
+    }
+    res.render("index", templateVars);
+  } else {
+    db.query(`SELECT *
+    FROM users
+    WHERE id = $1;`, [req.session.user_id])
+      .then(data => {
+        let templateVars = {
+          user: data.rows[0] };
+        res.render("index", templateVars);
+      })
+    .catch(err => {
+      res.status(500).json({ error: err.message });
+    })
+  }
 });
 
 // Create a quiz page

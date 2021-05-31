@@ -5,15 +5,14 @@ module.exports = (db) => {
 
   // login
   router.get('/', (req, res) => {
-    let templateVars = {};
     if (!req.session.user_id) {
-      templatevars = {
+      let templateVars = {
         user: null
-      };
-      res.render('login', templateVars);
-    } //else {
-    //   res.redirect('/');
-    // }
+      }
+      res.render("login", templateVars);
+    } else {
+      res.redirect("/");
+    }
   });
 
   router.post('/', (req, res) => {
@@ -25,7 +24,8 @@ module.exports = (db) => {
     `, [email])
       .then(data => {
         if (password === data.rows[0].password) {
-          req.session["user_id"] = data.rows[0].email;
+          req.session.user_id = data.rows[0].id;
+          console.log(`line 28 ${req.session.user_id}`);
           res.redirect('/');
         } else {
           res

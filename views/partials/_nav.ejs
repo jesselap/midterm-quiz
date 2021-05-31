@@ -21,8 +21,18 @@
         <input class="form-control px-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-dark my-2 my-sm-0" type="submit">Search</button>
       </form>
+      <% if (!user) { %>
       <button class="btn btn-success mx-md-2 my-sm-2 my-md-0">LOGIN</button>
       <button class="btn btn-secondary">SIGNUP</button>
+      <% } else { %>
+        <a class="btn btn-success mx-md-2 my-sm-2 my-md-0" href="/user"><%= user.name %></a>
+        <form action="/logout" method="post">
+          <button class="btn btn-secondary" type="submit" >Logout</button>
+        </form>
+        <a class="btn btn-secondary" href="">New Quiz</a>
+        <% } %>
     </div>
   </div>
 </nav>
+
+

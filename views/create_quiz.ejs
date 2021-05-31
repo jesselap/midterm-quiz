@@ -17,7 +17,7 @@
 <body>
   <%- include('partials/_nav'); %>
     <main class="main-body px-3">
-      <section class="home-header d-flex row justify-content-center">
+      <section class="home-header d-flex p-4 row justify-content-center">
         <!-- <div class=" bg-light col-md-8 jumbotron pt-3">
           <h2 class="display-4 text-center">Create a Quiz</h2>
           <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to
@@ -25,7 +25,10 @@
           <hr class="my-4">
           <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
         </div> -->
-        <form id= "quiz-form" class="row col-lg-7 g-3" action="">
+        <form id= "quiz-form" class="row col-lg-7" action="">
+          <div class="col-md-12">
+            <h3 class="text-center">Add a new quiz</h4>
+          </div>
             <div class="col-md-12">
               <label for="questionTitle">Quiz Title</label>
               <input type="text" class="form-control" id="questionTitle" placeholder="Quiz Title">

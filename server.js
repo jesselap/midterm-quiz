@@ -51,8 +51,7 @@ const loginRoutes = require("./routes/login");
 app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
 app.use("/quizes", quizesRoutes(db));
-app.use("/register", registerRoutes(db));
-app.use("/login", loginRoutes(db));
+app.use("/auth", authRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 

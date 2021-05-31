@@ -63,11 +63,27 @@ module.exports = (db) => {
     const {category_id, title} = req.body
     const public = req.body.public ? true : false;
     console.log(owner_id, created_at)
-    const queryContent = `
-                          INSERT INTO quizes
-                          VALUES(owner_id, category_id, title)
-                         `
-    res.send(req.body)
+
+    // INSERT INTO quizes (owner_id, category_id, title, created_at, public)
+    // VALUES (9, 3, 'This is the title of my quiz', '2018-02-12T08:00:00.000Z', false);
+    console.log(
+      "owner_id: --", owner_id,
+      "category_id: --", category_id,
+      "title: --", title,
+      "created_at: --", created_at,
+      ": --", public
+    )
+    const queryContent =
+    `
+      INSERT INTO quizes(owner_id, category_id, title, public)
+      VALUES($1, $2, $3, $4)
+      returning *;
+    `;
+    db.query(queryContent, [owner_id, category_id, title, public])
+    .then(data => {
+      res.send(data);
+    })
+    // res.send(req.body);
   });
   return router;
 };

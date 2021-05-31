@@ -1,4 +1,7 @@
 $(document).ready(function() {
 console.log('jquery is ready')
-// $.get()
+// $('#quiz-form').submit(function(e) {
+//   e.preventDefault();
+//   console.log("Form has been submitted")
+// })
 })

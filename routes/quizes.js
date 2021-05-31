@@ -49,7 +49,7 @@ module.exports = (db) => {
   });
 
   router.post("/", (req, res) => {
-    res.send("POST METHOD")
+    res.send(req.body)
   });
   return router;
 };

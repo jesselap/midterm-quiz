@@ -27,8 +27,10 @@ module.exports = (db) => {
   });
 
   router.get("/new", (req, res) => {
-    res.render('create_quiz')
-    res.send("Hello")
+    if(!req.session.user_id){
+      res.redirect('/')
+    }
+    res.render('create_quiz', {user: req.session.user_id})
   });
   router.get("/:id", (req, res) => {
     const queryContent = `

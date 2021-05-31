@@ -3,8 +3,8 @@ const router  = express.Router();
 
 module.exports = (db) => {
 
-  // login
-  router.get('/', (req, res) => {
+  // login page
+  router.get('/login', (req, res) => {
     if (!req.session.user_id) {
       let templateVars = {
         user: null
@@ -14,8 +14,8 @@ module.exports = (db) => {
       res.redirect("/");
     }
   });
-
-  router.post('/', (req, res) => {
+  // login form
+  router.post('/login', (req, res) => {
     const { email, password } = req.body;
     console.log(req.body)
 
@@ -41,9 +41,15 @@ module.exports = (db) => {
       });
   });
 
+  // logout
+  router.post('/logout', (req, res) => {
+    req.session = null;
+    res.redirect("/");
+  });
+
 
   // register user
-  router.get('/', (req, res) => {
+  router.get('/register', (req, res) => {
     let templateVars = {
       user: null
     }
@@ -51,7 +57,6 @@ module.exports = (db) => {
   });
 
   router.post('/', (req, res) => {
-    console.log('inside^^^^^^^^^^')
     const { name, email, password } = req.body
     db.query(`
       INSERT INTO users (name, email, password)

@@ -26,7 +26,7 @@
       <button class="btn btn-secondary">SIGNUP</button>
       <% } else { %>
         <a class="btn btn-success mx-md-2 my-sm-2 my-md-0" href="/user"><%= user.name %></a>
-        <form action="/logout" method="post">
+        <form action="/auth/logout" method="post">
           <button class="btn btn-secondary" type="submit" >Logout</button>
         </form>
         <a class="btn btn-secondary" href="">New Quiz</a>

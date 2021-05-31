@@ -21,8 +21,9 @@ CREATE TABLE quizes (
   id SERIAL PRIMARY KEY NOT NULL,
   owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   category_id INTEGER REFERENCES categories(id) ON DELETE CASCADE,
+  image_url VARCHAR(255),
   title VARCHAR(255) NOT NULL,
-  created_at TIMESTAMP,
+  created_at TIMESTAMP DEFAULT now(),
   public BOOLEAN NOT NULL DEFAULT TRUE
 );
 

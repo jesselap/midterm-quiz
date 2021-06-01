@@ -36,7 +36,7 @@ const renderQuestion = function(count) {
 }
 
 $(document).ready(function () {
-  renderQuestion(5);
+  renderQuestion(2);
   renderQuestion(this.value);
   $('#questionCount').change(function () {
     $('#questions-container div').remove();

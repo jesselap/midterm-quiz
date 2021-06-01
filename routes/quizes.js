@@ -76,8 +76,7 @@ module.exports = (db) => {
       return Promise.all(questions.map((question, index)=>
       db.query(insertIntoQuestions, [quiz_id, question, answers[index], optionA[index], optionB[index], optionC[index]])))
     }).then(data => {
-      console.log("line 79", data)
-      res.send(data.rows)
+      res.redirect('/')
     }).catch(err => {
       console.log("error----line 82", err)
     })

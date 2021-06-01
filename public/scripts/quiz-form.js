@@ -2,7 +2,7 @@ const createQuizHTML = function(no) {
   const quizHTML =
   `
     <div class="col-12">
-    <label for="question1">Question No: ${no}/label>
+    <label for="question1">Question No: ${no}</label>
     <input type="text" class="form-control" id="question1" name="questions[${no}]" placeholder="First Question">
     </div>
     <div class="col-md-6">
@@ -20,6 +20,8 @@ const createQuizHTML = function(no) {
     <div class="col-md-6">
     <label for="optionA">Option C</label>
     <input type="text" class="form-control" id="optionC" name="optionC[${no}]" placeholder="Option C">
+    <br>
+    <br>
     </div>
   `
   return quizHTML;
@@ -29,9 +31,10 @@ $(document).ready(function () {
   $('#questionCount').change(function () {
     const count = $('#questionCount').val();
     console.log(count)
-    for(const i = 0; i < count; i++) {
+    for(let i = 1; i <= count; i++) {
       createQuizHTML(i);
       const newQuestion = createQuizHTML(i);
+      $('#questions-container').append(newQuestion);
 
     }
   })

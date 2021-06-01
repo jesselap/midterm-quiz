@@ -23,7 +23,7 @@
   <form class="quiz-display" action="/quizes/result"  method="POST">
   <% for (question of data) { %>
     <fieldset>
-    <legend><%= question.text %></legend>
+    <legend><%= question.question %></legend>
     <% let choices = [question.choice_a, question.choice_b, question.choice_c, question.choice_d].sort(()=> Math.random() - 0.5) %>
       <input type="radio" name='<%=question.question_id%>' id="opt1" value="<%= choices[0] %>"> <%= choices[0] %>
       <br>

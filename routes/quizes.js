@@ -12,18 +12,15 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
+    console.log(`line 15: ------- ${req.session.user_id}`)
     const queryContent =
     `
-      SELECT quizes.id, title, created_at, public, categories.type as category
+      SELECT quizes.id, title,image_url, created_at, public, categories.type as category
       FROM quizes
       JOIN categories ON quizes.category_id = categories.id;
     `
     db.query(queryContent)
      .then(data => {
-      console.log(data.rows)
-      // res.json(data.rows)
-      // const templateVars = {data: data.rows}
-      // res.render('quizes', templateVars)
       res.json(data.rows)
     })
      .catch(err => res.json(err))
@@ -41,40 +38,54 @@ module.exports = (db) => {
       })
   });
   router.get("/:quiz_id", (req, res) => {
-    const queryContent = `
-                          SELECT quizes.*, text, choice_a, choice_b, choice_c, answer as choice_d, users.*, questions.id as question_id
+    if (!req.session["user_id"]) {
+      res.status(403).send("<html><body><h1>Please login or register</h1></body></html>");
+      return;
+    }
+    db.query(`SELECT *
+    FROM users
+    WHERE id = $1;`, [req.session.user_id])
+      .then(data => {
+        let templateVars = {
+          user: data.rows[0]
+        };
+        const queryContent = `
+                          SELECT quizes.*, questions.question as question, choice_a, choice_b, choice_c, answer as choice_d, users.*, questions.id as question_id
                           FROM quizes
                           JOIN questions ON quizes.id = quiz_id
                           JOIN users ON users.id = quizes.owner_id
                           WHERE quizes.id = $1
                           AND users.id = quizes.owner_id;
                          `;
-    db.query(queryContent, [req.params.quiz_id])
-      .then((data) => {
-        let templateVars = {
-          user: data.rows[0],
-          data: data.rows
-        };
-        res.render('quiz_play', templateVars)
-      })
-      .catch((err) => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
+      db.query(queryContent, [req.params.quiz_id])
+        .then((data) => {
+          console.log(`line 52: --- ${req.session.user_id}`)
+          templateVars.data = data.rows;
+          console.log(`line 54${Object.keys(templateVars.user)}`)
+          res.render('quiz_play', templateVars)
+        })
+        .catch((err) => {
+          res
+            .status(500)
+            .json({ error: err.message });
+        });
+        })
+        .catch(err => {
+          res.status(500).json({ error: err.message });
+        })
   });
 
   router.post("/", (req, res) => {
     const owner_id = req.session.user_id;
-    const {category_id, title} = req.body
+    const {category_id, title, image_url} = req.body
     const public = req.body.public ? true : false;
     const insertIntoQuizes =
     `
-      INSERT INTO quizes(owner_id, category_id, title, public)
-      VALUES($1, $2, $3, $4)
+      INSERT INTO quizes(owner_id, category_id, image_url, title, public)
+      VALUES($1, $2, $3, $4, $5)
       returning *;
     `;
-    db.query(insertIntoQuizes, [owner_id, category_id, title, public])
+    db.query(insertIntoQuizes, [owner_id, category_id, image_url, title, public])
     .then(data => {
       const quiz_id = data.rows[0].id;
       const {questions, answers, optionA, optionB, optionC} = req.body ;
@@ -111,7 +122,7 @@ module.exports = (db) => {
     FROM questions
     WHERE questions.id = $1)`;
 
-    db.query(queryStr, [keys[0]]  )
+    db.query(queryStr, [keys[0]])
       .then((data) => {
         for (let i = 0; i < data.rows.length; i++) {
           let questId = data.rows[i].question_id;
@@ -119,21 +130,56 @@ module.exports = (db) => {
             counter++;
           }
         }
-        let result = (counter / keys.length) * 100
-        let user = {
-          id: data.rows[0].owner_id,
-          name: data.rows[0].name,
-          email: data.rows[0].email,
-          password: data.rows[0].password,
-        }
-        let score = Math.round(result)
-        let templateVars = {
-          user,
-          score
-        };
-        console.log(templateVars.user)
+        console.log(`line 133: --- ${Object.keys(data.rows[0])}`)
+        let result = Math.round((counter / keys.length) * 100)
 
-        res.render('result', templateVars);
+        db.query(`
+          INSERT INTO attempts (user_id, quiz_id, score)
+          VALUES ($1, $2, $3)
+          RETURNING user_id;
+        `, [req.session.user_id, data.rows[0].id, result])
+          .then((user_id => {
+              db.query(`SELECT *
+                FROM users
+                WHERE id = $1;`, [req.session.user_id])
+                .then((userData) => {
+
+                let templateVars = {
+                user: userData.rows[0],
+                score: result
+              };
+              res.render('result', templateVars);
+
+            })
+            .catch((err) => {
+              res
+                .status(500)
+                .json({ error: err.message });
+            });
+
+          }))
+          .catch((err) => {
+            res
+              .status(500)
+              .json({ error: err.message });
+          });
+
+
+
+        // const queryString = `
+        //   INSERT INTO attempts (user_id, quiz_id, score, attempted_at)
+        //   VALUES ($1, $2, $3, $4);
+        // `
+        // db.query(queryString, [])
+        //   .then((data) => {
+        //     res.render('result', templateVars);
+        //     console.log('hello')
+        //   })
+        //   .catch((err) => {
+        //     res
+        //       .status(500)
+        //       .json({ error: err.message });
+        //   });
     })
     .catch((err) => {
       res
@@ -141,6 +187,9 @@ module.exports = (db) => {
         .json({ error: err.message });
     });
   });
+
+
+
 
 
 

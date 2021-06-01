@@ -130,21 +130,34 @@ module.exports = (db) => {
             counter++;
           }
         }
+        console.log(`line 133: --- ${Object.keys(data.rows[0])}`)
         let result = Math.round((counter / keys.length) * 100)
 
+        db.query(`
+          INSERT INTO attempts (user_id, quiz_id, score)
+          VALUES ($1, $2, $3)
+          RETURNING user_id;
+        `, [req.session.user_id, data.rows[0].id, result])
+          .then((user_id => {
+              db.query(`SELECT *
+                FROM users
+                WHERE id = $1;`, [req.session.user_id])
+                .then((userData) => {
 
-        db.query(`SELECT *
-        FROM users
-        WHERE id = $1;`, [req.session.user_id])
-          .then((userData) => {
+                let templateVars = {
+                user: userData.rows[0],
+                score: result
+              };
+              res.render('result', templateVars);
 
-            let templateVars = {
-              user: userData.rows[0],
-              score: result
-            };
-            res.render('result', templateVars);
+            })
+            .catch((err) => {
+              res
+                .status(500)
+                .json({ error: err.message });
+            });
 
-          })
+          }))
           .catch((err) => {
             res
               .status(500)

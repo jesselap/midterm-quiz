@@ -62,15 +62,15 @@ module.exports = (db) => {
 
   router.post("/", (req, res) => {
     const owner_id = req.session.user_id;
-    const {category_id, title} = req.body
+    const {category_id, title, image_url} = req.body
     const public = req.body.public ? true : false;
     const insertIntoQuizes =
     `
-      INSERT INTO quizes(owner_id, category_id, title, public)
-      VALUES($1, $2, $3, $4)
+      INSERT INTO quizes(owner_id, category_id, image_url, title, public)
+      VALUES($1, $2, $3, $4, $5)
       returning *;
     `;
-    db.query(insertIntoQuizes, [owner_id, category_id, title, public])
+    db.query(insertIntoQuizes, [owner_id, category_id, image_url, title, public])
     .then(data => {
       const quiz_id = data.rows[0].id;
       const {questions, answers, optionA, optionB, optionC} = req.body ;
@@ -137,9 +137,6 @@ module.exports = (db) => {
         .json({ error: err.message });
     });
   });
-
-
-
 
   return router;
 };

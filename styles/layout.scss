@@ -102,3 +102,8 @@ nav {
 h3 {
   @include title-tab;
 }
+
+#questions-container{
+  padding: 20px 0;
+  margin: auto;
+}

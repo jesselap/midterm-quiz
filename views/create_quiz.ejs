@@ -19,22 +19,22 @@
   <%- include('partials/_nav'); %>
     <main class="main-body px-3">
       <section class="home-header d-flex p-4 row justify-content-center">
-        <form id="quiz-form" class="row col-lg-7" action="/quizes" method="POST">
+        <form id="quiz-form" class="row col-lg-8" action="/quizes" method="POST">
           <div class="col-md-12">
             <h3 class="text-center">Add a new quiz</h4>
           </div>
           <div class="col-md-12">
             <label for="quizTitle">Quiz Title</label>
-            <input type="text" class="form-control" id="quizTitle" name="title" placeholder="Quiz Title">
+            <input type="text" class="form-control" id="quizTitle" name="title" placeholder="Quiz Title" required>
           </div>
-          <div class="col-6">
+          <div class="col-12">
             <label for="imageUrl">Image Url</label>
-            <input type="url" class="form-control" id="imageUrl" name="image_url" placeholder="https://example.com">
+            <input type="url" class="form-control" id="imageUrl" name="image_url" placeholder="https://example.com" required>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-8">
             <label for="category">Category</label>
-            <select id="category" class="form-select" name="category_id" aria-label="Choose Category">
-              <option selected>choose category</option>
+            <select id="category" class="form-select" name="category_id" aria-label="Choose Category" required>
+              <option value="" disabled selected hidden>select category</option>
               <% for(let category of categories) {%>
                 <option value="<%= category.id %> ">
                   <%= category.type %>
@@ -42,72 +42,12 @@
                 <%} %>
             </select>
           </div>
-          <div class="col-12">
-            <label for="question1">First Question</label>
-            <input type="text" class="form-control" id="question1" name="questions[1]" placeholder="First Question">
+          <div class="col-md-4">
+            <label for="questionCount">No of Questions?</label>
+            <input type="number" id='questionCount' class="form-control" min="5" max="15" placeholder="No of Questions?" value="5">
           </div>
-          <div class="col-md-6">
-            <label for="answer">Your Answer</label>
-            <input type="text" class="form-control" id="answer" name="answers[1]" placeholder="Your Answer">
-          </div>
-          <div class="col-md-6">
-            <label for="optionA">Option A</label>
-            <input type="text" class="form-control" id="optionA" name="optionA[1]" placeholder="Option A">
-          </div>
-          <div class="col-md-6">
-            <label for="optionA">Option B</label>
-            <input type="text" class="form-control" id="optionB" name="optionB[1]" placeholder="Option B">
-          </div>
-          <div class="col-md-6">
-            <label for="optionA">Option C</label>
-            <input type="text" class="form-control" id="optionC" name="optionC[1]" placeholder="Option C">
-            <hr>
-          </div>
-          <div class="col-12">
-            <label for="question1">Second Question</label>
-            <input type="text" class="form-control" id="question1" name="questions[2]" placeholder="First Question">
-          </div>
-          <div class="col-md-6">
-            <label for="answer">Your Answer</label>
-            <input type="text" class="form-control" id="answer" name="answers[2]" placeholder="Your Answer">
-          </div>
-          <div class="col-md-6">
-            <label for="optionA">Option A</label>
-            <input type="text" class="form-control" id="optionA" name="optionA[2]" placeholder="Option A">
-          </div>
-          <div class="col-md-6">
-            <label for="optionA">Option B</label>
-            <input type="text" class="form-control" id="optionB" name="optionB[2]" placeholder="Option B">
-          </div>
-          <div class="col-md-6">
-            <label for="optionA">Option C</label>
-            <input type="text" class="form-control" id="optionC" name="optionC[2]" placeholder="Option C">
-            <hr>
-          </div>
-          <div class="col-12">
-            <label for="question1">Second Question</label>
-            <input type="text" class="form-control" id="question1" name="questions[3]" placeholder="First Question">
-          </div>
-          <div class="col-md-6">
-            <label for="answer">Your Answer</label>
-            <input type="text" class="form-control" id="answer" name="answers[3]" placeholder="Your Answer">
-          </div>
-          <div class="col-md-6">
-            <label for="optionA">Option A</label>
-            <input type="text" class="form-control" id="optionA" name="optionA[3]" placeholder="Option A">
-          </div>
-          <div class="col-md-6">
-            <label for="optionA">Option B</label>
-            <input type="text" class="form-control" id="optionB" name="optionB[3]" placeholder="Option B">
-          </div>
-          <div class="col-md-6">
-            <label for="optionA">Option C</label>
-            <input type="text" class="form-control" id="optionC" name="optionC[3]" placeholder="Option C">
-            <hr>
-          </div>
-          <!-- <div class="col-12">
-              <a class="btn btn-primary btn-lg" id="moreQuestions" href="#" role="button">Add more questions</a>
-            </div> -->
+          <fieldset id="questions-container" class="row">
+          </fieldset>
           <div class="col-12">
             <div class="form-check">
               <label class="form-check-label" for="isPrivate"></label>
@@ -120,31 +60,6 @@
             <input type="submit" class="btn btn-primary btn-lg"></input>
           </div>
         </form>
-        <div class="col-lg-3 d-flex flex-column leaderboard bg-light">
-          <h4 class="pt-3">Leaderboard</h4>
-          <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              ABC
-              <span class="badge badge-pill badge-danger">55</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              ABC
-              <span class="badge badge-primary badge-pill">55</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              ABC
-              <span class="badge badge-primary badge-pill">55</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              ABC
-              <span class="badge badge-primary badge-pill">55</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              ABC
-              <span class="badge badge-primary badge-pill">55</span>
-            </li>
-          </ul>
-        </div>
       </section>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"

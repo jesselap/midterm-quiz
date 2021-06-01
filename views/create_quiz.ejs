@@ -27,11 +27,11 @@
             <label for="quizTitle">Quiz Title</label>
             <input type="text" class="form-control" id="quizTitle" name="title" placeholder="Quiz Title">
           </div>
-          <div class="col-6">
+          <div class="col-12">
             <label for="imageUrl">Image Url</label>
             <input type="url" class="form-control" id="imageUrl" name="image_url" placeholder="https://example.com">
           </div>
-          <div class="col-md-6">
+          <div class="col-md-8">
             <label for="category">Category</label>
             <select id="category" class="form-select" name="category_id" aria-label="Choose Category">
               <option selected>choose category</option>
@@ -41,6 +41,10 @@
                 </option>
                 <%} %>
             </select>
+          </div>
+          <div class="col-md-4">
+            <label for="questionCount">No of Questions?</label>
+            <input type="number" id='questionCount' class="form-control" min="5" max="15" placeholder="No of Questions?">
           </div>
           <div class="col-12">
             <label for="question1">First Question</label>
@@ -61,50 +65,8 @@
           <div class="col-md-6">
             <label for="optionA">Option C</label>
             <input type="text" class="form-control" id="optionC" name="optionC[1]" placeholder="Option C">
-            <hr>
           </div>
-          <div class="col-12">
-            <label for="question1">Second Question</label>
-            <input type="text" class="form-control" id="question1" name="questions[2]" placeholder="First Question">
-          </div>
-          <div class="col-md-6">
-            <label for="answer">Your Answer</label>
-            <input type="text" class="form-control" id="answer" name="answers[2]" placeholder="Your Answer">
-          </div>
-          <div class="col-md-6">
-            <label for="optionA">Option A</label>
-            <input type="text" class="form-control" id="optionA" name="optionA[2]" placeholder="Option A">
-          </div>
-          <div class="col-md-6">
-            <label for="optionA">Option B</label>
-            <input type="text" class="form-control" id="optionB" name="optionB[2]" placeholder="Option B">
-          </div>
-          <div class="col-md-6">
-            <label for="optionA">Option C</label>
-            <input type="text" class="form-control" id="optionC" name="optionC[2]" placeholder="Option C">
-            <hr>
-          </div>
-          <div class="col-12">
-            <label for="question1">Second Question</label>
-            <input type="text" class="form-control" id="question1" name="questions[3]" placeholder="First Question">
-          </div>
-          <div class="col-md-6">
-            <label for="answer">Your Answer</label>
-            <input type="text" class="form-control" id="answer" name="answers[3]" placeholder="Your Answer">
-          </div>
-          <div class="col-md-6">
-            <label for="optionA">Option A</label>
-            <input type="text" class="form-control" id="optionA" name="optionA[3]" placeholder="Option A">
-          </div>
-          <div class="col-md-6">
-            <label for="optionA">Option B</label>
-            <input type="text" class="form-control" id="optionB" name="optionB[3]" placeholder="Option B">
-          </div>
-          <div class="col-md-6">
-            <label for="optionA">Option C</label>
-            <input type="text" class="form-control" id="optionC" name="optionC[3]" placeholder="Option C">
-            <hr>
-          </div>
+
           <!-- <div class="col-12">
               <a class="btn btn-primary btn-lg" id="moreQuestions" href="#" role="button">Add more questions</a>
             </div> -->

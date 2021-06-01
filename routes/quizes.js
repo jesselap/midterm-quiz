@@ -130,7 +130,7 @@ module.exports = (db) => {
             counter++;
           }
         }
-        let result = (counter / keys.length) * 100
+        let result = Math.round((counter / keys.length) * 100)
 
 
         db.query(`SELECT *
@@ -140,7 +140,7 @@ module.exports = (db) => {
 
             let templateVars = {
               user: userData.rows[0],
-              score: Math.round(result)
+              score: result
             };
             res.render('result', templateVars);
 

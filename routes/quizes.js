@@ -131,18 +131,28 @@ module.exports = (db) => {
           }
         }
         let result = (counter / keys.length) * 100
-        let user = {
-          id: data.rows[0].owner_id,
-          name: data.rows[0].name,
-          email: data.rows[0].email,
-          password: data.rows[0].password,
-        }
-        let score = Math.round(result)
-        let templateVars = {
-          user,
-          score
-        };
-        res.render('result', templateVars);
+
+
+        db.query(`SELECT *
+        FROM users
+        WHERE id = $1;`, [req.session.user_id])
+          .then((userData) => {
+
+            let templateVars = {
+              user: userData.rows[0],
+              score: Math.round(result)
+            };
+            res.render('result', templateVars);
+
+          })
+          .catch((err) => {
+            res
+              .status(500)
+              .json({ error: err.message });
+          });
+
+
+
         // const queryString = `
         //   INSERT INTO attempts (user_id, quiz_id, score, attempted_at)
         //   VALUES ($1, $2, $3, $4);

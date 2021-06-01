@@ -63,7 +63,7 @@ module.exports = (db) => {
             return;
           }
           if (!quizData.rows[0].public) {
-            res.status(403).send("<html><body><h1>Sorry, you do not have permission to view this quiz</h1></body></html>");
+            res.redirect('/')
             return;
           }
           // console.log(`line 67: --- ${data.rows[0].public}`)

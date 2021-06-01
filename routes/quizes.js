@@ -42,7 +42,7 @@ module.exports = (db) => {
   });
   router.get("/:quiz_id", (req, res) => {
     const queryContent = `
-                          SELECT quizes.*, text, choice_a, choice_b, choice_c, answer as choice_d, users.*, questions.id as question_id
+                          SELECT quizes.*, questions.question as question, choice_a, choice_b, choice_c, answer as choice_d, users.*, questions.id as question_id
                           FROM quizes
                           JOIN questions ON quizes.id = quiz_id
                           JOIN users ON users.id = quizes.owner_id

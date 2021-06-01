@@ -18,4 +18,10 @@ INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) 
 INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (6, 'Where is the Great Pyramid of Giza?', 'Mexico', 'Dubai', 'Las Vegas', 'Egypt');
 INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (6, 'What do bees make?', 'Aligators', 'Jam', 'New Laws', 'Honey');
 INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (7, 'Who wrote Hamlet?', 'J.J. Abrams', 'Nic Pizzolatto', 'Manuel Neuer', 'William Shakespeare');
+INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (7, 'Who wrote Hamlet?', 'J.J. Abrams', 'Nic Pizzolatto', 'Manuel Neuer', 'William Shakespeare');
+INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (14, 'When was Chelsea founded?', '1905', '2004', '1960', '2021');
+INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (14, 'How many times chelsea win the champions league?', '2', '5', '1', '0');
+INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (14, 'current chelsea manager?', 'Thomas Tuchel', 'Jose Mourinho', 'Frank Lampard', 'Pep Guardiola');
+INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (14, 'Most expensive chelsea player?', 'kepa arrizabalaga', 'Kai Havertz', 'Eden Hazard', 'Timo Werner');
+INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (14, 'Best team in the world?', 'Chelsea', 'Chelsea', 'Chelsea', 'Chelsea');
 

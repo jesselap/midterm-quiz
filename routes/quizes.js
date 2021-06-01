@@ -36,50 +36,7 @@ module.exports = (db) => {
         res.render('create_quiz', templateVars)
       })
   });
-  router.get("/:quiz_id", (req, res) => {
-    if (!req.session["user_id"]) {
-      res.status(403).send("<html><body><h1>Please login or register</h1></body></html>");
-      return;
-    }
-    db.query(`SELECT *
-    FROM users
-    WHERE id = $1;`, [req.session.user_id])
-      .then(data => {
-        let templateVars = {
-          user: data.rows[0]
-        };
-        const queryContent = `
-                            SELECT quizes.*, questions.question as question, choice_a, choice_b, choice_c, answer as choice_d, users.*, questions.id as question_id
-                            FROM quizes
-                            JOIN questions ON quizes.id = quiz_id
-                            JOIN users ON users.id = quizes.owner_id
-                            WHERE quizes.id = $1
-                            AND users.id = quizes.owner_id;
-                         `;
-      db.query(queryContent, [req.params.quiz_id])
-        .then((quizData) => {
-          if (!quizData.rows[0]) {
-            res.status(403).send("<html><body><h1>ERROR: bad gateway</h1></body></html>");
-            return;
-          }
-          if (!quizData.rows[0].public) {
-            res.redirect('/')
-            return;
-          }
-          // console.log(`line 67: --- ${data.rows[0].public}`)
-          templateVars.data = quizData.rows;
-          res.render('quiz_play', templateVars)
-        })
-        .catch((err) => {
-          res
-            .status(500)
-            .json({ error: err.message });
-        });
-        })
-        .catch(err => {
-          res.status(500).json({ error: err.message });
-        })
-  });
+
 
   router.post("/", (req, res) => {
     const owner_id = req.session.user_id;
@@ -114,7 +71,50 @@ module.exports = (db) => {
 
 
 
-  // individual quiz page
+    // individual quiz page
+    router.get("/:quiz_id", (req, res) => {
+      db.query(`SELECT *
+      FROM users
+      WHERE id = $1;`, [req.session.user_id])
+        .then(data => {
+          let templateVars = {
+            user: data.rows[0]
+          };
+          const queryContent = `
+                              SELECT quizes.*, questions.question as question, choice_a, choice_b, choice_c, answer as choice_d, users.*, questions.id as question_id
+                              FROM quizes
+                              JOIN questions ON quizes.id = quiz_id
+                              JOIN users ON users.id = quizes.owner_id
+                              WHERE quizes.id = $1
+                              AND users.id = quizes.owner_id;
+                           `;
+        db.query(queryContent, [req.params.quiz_id])
+          .then((quizData) => {
+            if (!quizData.rows[0]) {
+              res.status(403).send("<html><body><h1>ERROR: bad gateway</h1></body></html>");
+              return;
+            }
+            if (!quizData.rows[0].public) {
+              res.redirect('/')
+              return;
+            }
+            templateVars.data = quizData.rows;
+            res.render('quiz_play', templateVars)
+          })
+          .catch((err) => {
+            res
+              .status(500)
+              .json({ error: err.message });
+          });
+          })
+          .catch(err => {
+            res.status(500).json({ error: err.message });
+          })
+    });
+
+
+
+  // individual quiz page (answer submission)
 
   router.post("/result", (req, res) => {
     console.log('line 120 --------')
@@ -137,14 +137,16 @@ module.exports = (db) => {
           }
         }
         let result = Math.round((counter / keys.length) * 100)
-        console.log(`line 141 ------- ${req.session.user_id}`)
-        console.log(`line 142 ------${data.rows[0].id}`)
-        console.log(`line 143 -------- ${result}`)
+        let reqSessionUserId = req.session.user_id
+        if (!req.session.user_id) {
+          // quiz saved to default user to log attempt
+          reqSessionUserId = 1;
+        }
         db.query(`
           INSERT INTO attempts (user_id, quiz_id, score)
           VALUES ($1, $2, $3)
           RETURNING user_id;
-        `, [req.session.user_id, data.rows[0].id, result])
+        `, [reqSessionUserId, data.rows[0].id, result])
           .then((user_id => {
               db.query(`SELECT *
                 FROM users

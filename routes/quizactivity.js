@@ -5,15 +5,30 @@ const express = require('express');
 const router = express.Router();
 
 module.exports = (db) => {
-  router.get("/:id/activity", (req, res) => {
-    const queryParams = [req.params.id];
-    const queryContent = `SELECT * FROM attempts
+  router.get("/activity/:id", (req, res) => {
+    const queryParams = [Number(req.params.id)];
+    const queryContent = `SELECT quizes.id, title, created_at, categories.type as category
                           FROM attempts
-                          WHERE attempts.user_id = $1`
+                          JOIN quizes ON attempts.quiz_id = quizes.id
+                          JOIN categories ON quizes.category_id = categories.id
+                          WHERE attempts.user_id = $1`;
     db.query(queryContent, queryParams)
     .then(data => {
-      console.log(data.rows)
-      res.json(data.rows)
+      if (!req.session.user_id) {
+        const templateVars = {activities: data.rows, user: null}
+        res.render("quizactivity", templateVars);
+      } else {
+        db.query(`SELECT *
+        FROM users
+        WHERE id = $1;`, [req.session.user_id])
+          .then(data => {
+            const templateVars = {activities: data.rows, user: data.rows[0]}
+            res.render("quizactivity", templateVars);
+          })
+        .catch(err => {
+          res.status(500).json({ error: err.message });
+        })
+      }
     })
       .catch(err => res.json(err))
   });

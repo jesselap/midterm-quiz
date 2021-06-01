@@ -46,26 +46,28 @@
             <label for="questionCount">No of Questions?</label>
             <input type="number" id='questionCount' class="form-control" min="5" max="15" placeholder="No of Questions?" value="5">
           </div>
-          <div class="col-12">
-            <label for="question1">First Question</label>
-            <input type="text" class="form-control" id="question1" name="questions[1]" placeholder="First Question">
-          </div>
-          <div class="col-md-6">
-            <label for="answer">Your Answer</label>
-            <input type="text" class="form-control" id="answer" name="answers[1]" placeholder="Your Answer">
-          </div>
-          <div class="col-md-6">
-            <label for="optionA">Option A</label>
-            <input type="text" class="form-control" id="optionA" name="optionA[1]" placeholder="Option A">
-          </div>
-          <div class="col-md-6">
-            <label for="optionA">Option B</label>
-            <input type="text" class="form-control" id="optionB" name="optionB[1]" placeholder="Option B">
-          </div>
-          <div class="col-md-6">
-            <label for="optionA">Option C</label>
-            <input type="text" class="form-control" id="optionC" name="optionC[1]" placeholder="Option C">
-          </div>
+          <fieldset id="questions-container" class="row">
+            <div class="col-12">
+              <label for="question1">Question No: 1</label>
+              <input type="text" class="form-control" id="question1" name="questions[1]" placeholder="First Question">
+            </div>
+            <div class="col-md-6">
+              <label for="answer">Your Answer</label>
+              <input type="text" class="form-control" id="answer" name="answers[1]" placeholder="Your Answer">
+            </div>
+            <div class="col-md-6">
+              <label for="optionA">Option A</label>
+              <input type="text" class="form-control" id="optionA" name="optionA[1]" placeholder="Option A">
+            </div>
+            <div class="col-md-6">
+              <label for="optionA">Option B</label>
+              <input type="text" class="form-control" id="optionB" name="optionB[1]" placeholder="Option B">
+            </div>
+            <div class="col-md-6">
+              <label for="optionA">Option C</label>
+              <input type="text" class="form-control" id="optionC" name="optionC[1]" placeholder="Option C">
+            </div>
+          </fieldset>
 
           <!-- <div class="col-12">
               <a class="btn btn-primary btn-lg" id="moreQuestions" href="#" role="button">Add more questions</a>

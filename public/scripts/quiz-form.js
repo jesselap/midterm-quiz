@@ -30,6 +30,8 @@ $(document).ready(function () {
     const count = $('#questionCount').val();
     console.log(count)
     for(const i = 0; i < count; i++) {
+      createQuizHTML(i);
+      const newQuestion = createQuizHTML(i);
 
     }
   })

@@ -27,16 +27,19 @@ const createQuizHTML = function(no) {
   return quizHTML;
 }
 
+const renderQuestion = function(count) {
+  for(let i = 1; i <= count; i++) {
+    createQuizHTML(i);
+    const newQuestion = createQuizHTML(i);
+    $('#questions-container').append(newQuestion);
+  }
+}
+
 $(document).ready(function () {
+  renderQuestion(5);
+  renderQuestion(this.value);
   $('#questionCount').change(function () {
     $('#questions-container div').remove();
-    const count = this.value;
-    console.log(count)
-    for(let i = 1; i <= count; i++) {
-      createQuizHTML(i);
-      const newQuestion = createQuizHTML(i);
-      $('#questions-container').append(newQuestion);
-
-    }
+    renderQuestion(this.value)
   })
 })

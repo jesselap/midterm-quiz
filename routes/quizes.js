@@ -77,7 +77,7 @@ module.exports = (db) => {
       db.query(insertIntoQuestions, [quiz_id, question, answers[index], optionA[index], optionB[index], optionC[index]])))
     }).then(data => {
       console.log("line 79", data)
-      res.send(data)
+      res.send(data.rows)
     }).catch(err => {
       console.log("error----line 82", err)
     })

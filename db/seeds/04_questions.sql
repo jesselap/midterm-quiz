@@ -1,6 +1,6 @@
 INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (1, 'What colour is the sky?', 'Green', 'Red', 'Brown', 'Blue');
-INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (1, "What element does 'O' represent on the periodic table?", 'Nitrogen', 'Gold', 'Helium', 'Oxygen');
-INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (1, "What's the name of the river that runs through Egypt?", 'The Amazon', 'The Ganges', 'The Thames', 'The Nile');
+INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (1, 'What element does N represent on the periodic table?', 'Oxygen', 'Gold', 'Helium', 'Nitrogen');
+INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (1, 'What is the name of the river that runs through Egypt?', 'The Amazon', 'The Ganges', 'The Thames', 'The Nile');
 INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (2, 'How many legs does a spider have?', '6', '4', '12', '8');
 INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (2, 'What is the name of the toy cowboy in Toy Story?', 'Buzz Lightyear', 'Mr. Potato Head', 'Andy', 'Woody');
 INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (2, 'What is the color of an emerald?', 'Red', 'Blue', 'Black', 'Green');

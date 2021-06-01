@@ -44,7 +44,7 @@ const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
 const quizesRoutes = require("./routes/quizes");
 const authRoutes = require("./routes/auth");
-const myquizzes = require('./routes/myquizzes');
+const userQuizzes = require('./routes/userQuizzes');
 const quizactivity = require('./routes/quizactivity');
 
 // Mount all resource routes
@@ -52,7 +52,7 @@ const quizactivity = require('./routes/quizactivity');
 
 
 app.use("/quizes", quizesRoutes(db));
-app.use("/users", myquizzes(db));
+app.use("/users", userQuizzes(db));
 app.use("/users", quizactivity(db));
 app.use("/", authRoutes(db));
 // Note: mount other resources here, using the same pattern above

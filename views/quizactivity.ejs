@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-
+  <link rel="stylesheet" href="/styles/cardstyle.css" type="text/css" />
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
 
 </head>
@@ -34,6 +34,13 @@
         <div class="overlay">
           <span><%= activity.category %> </span>
           <p class="card-text">placeholder lorem ipsum</p>
+          <% if (activity.score >= 80) {%>
+            <div id="percent" class="position-absolute bg-success text-white px-2 m-2"><%= activity.score %>%</div>
+          <% } else if (activity.score < 80 && activity.score >= 50) { %>
+            <div id="percent" class="position-absolute bg-warning text-white px-2 m-2"><%= activity.score %>%</div>
+          <% } else { %>
+            <div id="percent" class="position-absolute bg-danger text-white px-2 m-2"><%= activity.score %>%</div>
+          <% } %>
         </div>
       </div>
     <% } %>

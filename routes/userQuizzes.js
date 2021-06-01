@@ -12,22 +12,18 @@ module.exports = (db) => {
                           JOIN categories ON quizes.category_id = categories.id
                           JOIN users ON quizes.owner_id = users.id
                           WHERE users.id = $1`
-    db.query(queryContent, queryParams)
-    .then(data => {
-        db.query(`SELECT *
-        FROM users
-        WHERE id = $1;`, [req.session.user_id])
-          .then(data => {
-            const templateVars = {quizzes: data.rows, user: data.rows[0]}
-            res.render("myquizzes", templateVars);
-          })
-        .catch(err => {
-          res.status(500).json({ error: err.message });
-        })
-    })
-    .catch(err => {
-      res.render("myquizzes", {user: null})
-    })
-  });
-  return router;
-};
+      db.query(queryContent, queryParams)
+      .then(data => {
+        if (!req.session.user_id) {
+          const templateVars = {quizzes: data.rows, user: null}
+          res.render("userQuizzes", templateVars);
+        } else {
+          const templateVars = {quizzes: data.rows, user: req.session.user_id}
+          res.render("userQuizzes", templateVars);
+        }})
+      .catch(err => {
+        res.render("userQuizzes", {user: null})
+      })
+    });
+    return router;
+  };

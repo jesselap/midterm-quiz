@@ -83,13 +83,15 @@ module.exports = (db) => {
       `INSERT INTO questions(quiz_id, question, answer, choice_a, choice_b, choice_c)
        VALUES($1, $2, $3, $4, $5, $6)
       `
-      for(let i = 0; i < questions.length; i++) {
-        db.query(insertIntoQuestions, [quiz_id, questions[i], answers[i], optionA[i], optionB[i], optionC[i]])
-      }
+      // for(let i = 0; i < questions.length; i++) {
+      //   db.query(insertIntoQuestions, [quiz_id, questions[i], answers[i], optionA[i], optionB[i], optionC[i]])
+      // }
+      return Promise.all(questions.map((question, index)=>
+      db.query(insertIntoQuestions, [quiz_id, question, answers[index], optionA[index], optionB[index], optionC[index]])))
     }).then(data => {
       res.redirect('/')
     }).catch(err => {
-      console.log(err)
+      console.log("error----line 82", err)
     })
   });
 

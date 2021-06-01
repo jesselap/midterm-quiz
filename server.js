@@ -53,6 +53,7 @@ const quizactivity = require('./routes/quizactivity');
 
 app.use("/quizes", quizesRoutes(db));
 app.use("/users", myquizzes(db));
+app.use("/users", quizactivity(db));
 app.use("/", authRoutes(db));
 // Note: mount other resources here, using the same pattern above
 

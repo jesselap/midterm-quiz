@@ -1,9 +1,10 @@
 const createElement = function (quizObj) {
   const quizHTML =
     `<div class="card bg-dark text-white col-md-4">
+    <a href="/quizes/${quizObj.id}">
     <img
       src=${quizObj.image_url}
-      class="card-img" alt="...">
+      class="card-img" alt="..."></a>
     <div class="overlay">
       <span>${quizObj.category}</span>
       <p class="card-text">${quizObj.title}</p>

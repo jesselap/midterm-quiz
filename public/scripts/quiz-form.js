@@ -29,7 +29,8 @@ const createQuizHTML = function(no) {
 
 $(document).ready(function () {
   $('#questionCount').change(function () {
-    const count = $('#questionCount').val();
+    $('#questions-container div').remove();
+    const count = this.value;
     console.log(count)
     for(let i = 1; i <= count; i++) {
       createQuizHTML(i);

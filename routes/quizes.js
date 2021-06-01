@@ -20,10 +20,6 @@ module.exports = (db) => {
     `
     db.query(queryContent)
      .then(data => {
-      console.log(data.rows)
-      // res.json(data.rows)
-      // const templateVars = {data: data.rows}
-      // res.render('quizes', templateVars)
       res.json(data.rows)
     })
      .catch(err => res.json(err))
@@ -42,7 +38,7 @@ module.exports = (db) => {
   });
   router.get("/:quiz_id", (req, res) => {
     const queryContent = `
-                          SELECT quizes.*, text, choice_a, choice_b, choice_c, answer as choice_d, users.*, questions.id as question_id
+                          SELECT quizes.*, question , choice_a, choice_b, choice_c, answer as choice_d, users.*, questions.id as question_id
                           FROM quizes
                           JOIN questions ON quizes.id = quiz_id
                           JOIN users ON users.id = quizes.owner_id

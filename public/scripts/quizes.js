@@ -15,7 +15,6 @@ const createElement = function (quizObj) {
 const renderQuiz = function (quizes) {
   for (const item of quizes) {
     const quizElement = createElement(item)
-    console.log(quizElement)
     $('.quizes-container').append(quizElement)
   }
 }

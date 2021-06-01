@@ -9,6 +9,10 @@
 //   });;
 // });
 
+// const createQuestion = function() {
+
+// }
+
 $(function() {
   $("#moreQuestions").click(function(e) {
     e.preventDefault();

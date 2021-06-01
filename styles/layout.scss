@@ -1,5 +1,12 @@
 // See: https://sass-lang.com/
 
+@mixin title-tab {
+  background-color: #32a8c9;
+  color: #EEE;;
+  text-transform: uppercase;
+  text-align: center;
+}
+
 body {
   background-color: #EEE;
   padding: 1%;
@@ -87,10 +94,11 @@ nav {
   }
 
   h4{
-    background-color: #32a8c9;
+    @include title-tab;
     margin-top: 1%;
-    color: #EEE;;
-    text-transform: uppercase;
-    text-align: center;
   }
+}
+
+h3 {
+  @include title-tab;
 }

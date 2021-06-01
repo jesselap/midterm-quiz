@@ -60,4 +60,9 @@ GRANT SELECT ON attempts TO PUBLIC;
 GRANT SELECT ON ratings TO PUBLIC;
 
 GRANT ALL ON users_id_seq to labber;
+GRANT ALL ON categories_id_seq to labber;
+GRANT ALL ON quizes_id_seq to labber;
+GRANT ALL ON questions_id_seq to labber;
 GRANT ALL ON attempts_id_seq to labber;
+GRANT ALL ON ratings_id_seq to labber;
+GRANT ALL PRIVILEGES ON TABLE attempts TO labber;

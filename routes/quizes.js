@@ -12,9 +12,11 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    const queryContent = `SELECT quizes.id, title, created_at, public, categories.type as category
-                          FROM quizes
-                          JOIN categories ON quizes.category_id = categories.id;
+    const queryContent =
+    `
+      SELECT quizes.id, title, created_at, public, categories.type as category
+      FROM quizes
+      JOIN categories ON quizes.category_id = categories.id;
     `
     db.query(queryContent)
      .then(data => {
@@ -39,51 +41,43 @@ module.exports = (db) => {
       })
   });
   router.get("/:id", (req, res) => {
-    const queryContent = `
-                          SELECT * FROM quizes
-                          WHERE id = ${req.params.id};
-                         `;
+    const queryContent =
+    `
+      SELECT * FROM quizes
+      WHERE id = ${req.params.id};
+    `
     db.query(queryContent)
       .then(data => res.json(data.rows))
       .catch(err => res.json(err))
   });
 
-
-  // CREATE TABLE quizes (
-  //   id SERIAL PRIMARY KEY NOT NULL,
-  //   owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  //   category_id INTEGER REFERENCES categories(id) ON DELETE CASCADE,
-  //   title VARCHAR(255) NOT NULL,
-  //   created_at TIMESTAMP,
-  //   public BOOLEAN NOT NULL DEFAULT TRUE
-  // );
   router.post("/", (req, res) => {
     const owner_id = req.session.user_id;
-    const created_at = Date.now();
     const {category_id, title} = req.body
     const public = req.body.public ? true : false;
-    console.log(owner_id, created_at)
-
-    // INSERT INTO quizes (owner_id, category_id, title, created_at, public)
-    // VALUES (9, 3, 'This is the title of my quiz', '2018-02-12T08:00:00.000Z', false);
-    console.log(
-      "owner_id: --", owner_id,
-      "category_id: --", category_id,
-      "title: --", title,
-      "created_at: --", created_at,
-      ": --", public
-    )
-    const queryContent =
+    const insertIntoQuizes =
     `
       INSERT INTO quizes(owner_id, category_id, title, public)
       VALUES($1, $2, $3, $4)
       returning *;
     `;
-    db.query(queryContent, [owner_id, category_id, title, public])
+    db.query(insertIntoQuizes, [owner_id, category_id, title, public])
     .then(data => {
-      res.send(data);
+      const quiz_id = data.rows[0].id;
+      const {questions, answers, optionA, optionB, optionC} = req.body ;
+      // console.log("quiz_id: ", quiz_id)
+      const insertIntoQuestions =
+      `INSERT INTO questions(quiz_id, question, answer, choice_a, choice_b, choice_c)
+       VALUES($1, $2, $3, $4, $5, $6)
+      `
+      for(let i = 0; i < questions.length; i++) {
+        db.query(insertIntoQuestions, [quiz_id, questions[i], answers[i], optionA[i], optionB[i], optionC[i]])
+      }
+    }).then(data => {
+      res.redirect('/')
+    }).catch(err => {
+      console.log(err)
     })
-    // res.send(req.body);
   });
   return router;
 };

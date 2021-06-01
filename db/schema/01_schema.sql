@@ -30,11 +30,11 @@ CREATE TABLE quizes (
 CREATE TABLE questions (
   id SERIAL PRIMARY KEY NOT NULL,
   quiz_id INTEGER REFERENCES quizes(id) ON DELETE CASCADE,
-  text TEXT NOT NULL,
+  question TEXT NOT NULL,
+  answer TEXT NOT NULL,
   choice_a TEXT NOT NULL,
   choice_b TEXT NOT NULL,
-  choice_c TEXT NOT NULL,
-  answer TEXT NOT NULL
+  choice_c TEXT NOT NULL
 );
 
 CREATE TABLE attempts (
@@ -42,7 +42,7 @@ CREATE TABLE attempts (
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   quiz_id INTEGER REFERENCES quizes(id) ON DELETE CASCADE,
   score INTEGER,
-  attempted_at TIMESTAMP
+  attempted_at TIMESTAMP DEFAULT now()
 );
 
 CREATE TABLE ratings (

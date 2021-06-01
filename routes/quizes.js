@@ -148,7 +148,7 @@ module.exports = (db) => {
                 user: userData.rows[0],
                 score: result
               };
-              res.render('result', templateVars);
+              res.render('quiz_result', templateVars);
 
             })
             .catch((err) => {

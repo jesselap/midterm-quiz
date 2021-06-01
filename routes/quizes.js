@@ -17,7 +17,6 @@ module.exports = (db) => {
                           JOIN categories ON quizes.category_id = categories.id;
     `
     db.query(queryContent).then(data => {
-      console.log(data.rows)
       // res.json(data.rows)
       // const templateVars = {data: data.rows}
       // res.render('quizes', templateVars)
@@ -30,18 +29,83 @@ module.exports = (db) => {
     res.render('create_quiz')
     res.send("Hello")
   });
-  router.get("/:id", (req, res) => {
+  router.get("/:quiz_id", (req, res) => {
     const queryContent = `
-                          SELECT * FROM quizes
-                          WHERE id = ${req.params.id};
+                          SELECT quizes.*, text, choice_a, choice_b, choice_c, answer as choice_d, users.*, questions.id as question_id
+                          FROM quizes
+                          JOIN questions ON quizes.id = quiz_id
+                          JOIN users ON users.id = quizes.owner_id
+                          WHERE quizes.id = $1
+                          AND users.id = quizes.owner_id;
                          `;
-    db.query(queryContent)
-      .then(data => res.json(data.rows))
-      .catch(err => res.json(err))
+    db.query(queryContent, [req.params.quiz_id])
+      .then((data) => {
+        let templateVars = {
+          user: data.rows[0],
+          data: data.rows
+        };
+        res.render('quiz_play', templateVars)
+      })
+      .catch((err) => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
   });
 
   router.post("/", (req, res) => {
     res.send("POST METHOD")
   });
+
+
+
+  // individual quiz page
+
+  router.post("/result", (req, res) => {
+
+    const keys = Object.keys(req.body)
+    let counter = 0;
+    const queryStr = `SELECT quizes.*, users.*, questions.answer as answer, questions.id as question_id
+    FROM quizes
+    JOIN questions ON quiz_id = quizes.id
+    JOIN users ON quizes.owner_id = users.id
+    WHERE quizes.id = (SELECT quiz_id
+    FROM questions
+    WHERE questions.id = $1)`;
+
+    db.query(queryStr, [keys[0]]  )
+      .then((data) => {
+        for (let i = 0; i < data.rows.length; i++) {
+          let questId = data.rows[i].question_id;
+          if (data.rows[i].answer === req.body[questId]) {
+            counter++;
+          }
+        }
+        let result = (counter / keys.length) * 100
+        let user = {
+          id: data.rows[0].owner_id,
+          name: data.rows[0].name,
+          email: data.rows[0].email,
+          password: data.rows[0].password,
+        }
+        let score = Math.round(result)
+        let templateVars = {
+          user,
+          score
+        };
+        console.log(templateVars.user)
+
+        res.render('result', templateVars);
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+  });
+
+
+
+
   return router;
 };

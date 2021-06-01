@@ -64,7 +64,6 @@ module.exports = (db) => {
       RETURNING id;
     `, [name, email, password])
       .then((data) => {
-        console.log(data.rows[0].id)
         req.session.user_id = data.rows[0].id;
         res.redirect("/");
       })

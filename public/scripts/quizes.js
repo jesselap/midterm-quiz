@@ -2,7 +2,7 @@ const createElement = function (quizObj) {
   const quizHTML =
     `<div class="card bg-dark text-white col-md-4">
     <img
-      src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
+      src=${quizObj.image_url}
       class="card-img" alt="...">
     <div class="overlay">
       <span>${quizObj.category}</span>
@@ -25,8 +25,8 @@ $(document).ready(function () {
     console.log('clicked')
   })
   $.get('/quizes', function (data) {
-    // console.log("Inside get")
-    // console.log(data)
+    console.log("Inside get")
+    console.log(data)
     renderQuiz(data)
   });
 });

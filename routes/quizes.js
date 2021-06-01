@@ -14,7 +14,7 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
     const queryContent =
     `
-      SELECT quizes.id, title, created_at, public, categories.type as category
+      SELECT quizes.id, title,image_url, created_at, public, categories.type as category
       FROM quizes
       JOIN categories ON quizes.category_id = categories.id;
     `

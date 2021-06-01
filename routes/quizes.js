@@ -12,7 +12,6 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    console.log(`line 15: ------- ${req.session.user_id}`)
     const queryContent =
     `
       SELECT quizes.id, title,image_url, created_at, public, categories.type as category
@@ -50,18 +49,25 @@ module.exports = (db) => {
           user: data.rows[0]
         };
         const queryContent = `
-                          SELECT quizes.*, questions.question as question, choice_a, choice_b, choice_c, answer as choice_d, users.*, questions.id as question_id
-                          FROM quizes
-                          JOIN questions ON quizes.id = quiz_id
-                          JOIN users ON users.id = quizes.owner_id
-                          WHERE quizes.id = $1
-                          AND users.id = quizes.owner_id;
+                            SELECT quizes.*, questions.question as question, choice_a, choice_b, choice_c, answer as choice_d, users.*, questions.id as question_id
+                            FROM quizes
+                            JOIN questions ON quizes.id = quiz_id
+                            JOIN users ON users.id = quizes.owner_id
+                            WHERE quizes.id = $1
+                            AND users.id = quizes.owner_id;
                          `;
       db.query(queryContent, [req.params.quiz_id])
-        .then((data) => {
-          console.log(`line 52: --- ${req.session.user_id}`)
-          templateVars.data = data.rows;
-          console.log(`line 54${Object.keys(templateVars.user)}`)
+        .then((quizData) => {
+          if (!quizData.rows[0]) {
+            res.status(403).send("<html><body><h1>ERROR: bad gateway</h1></body></html>");
+            return;
+          }
+          if (!quizData.rows[0].public) {
+            res.status(403).send("<html><body><h1>Sorry, you do not have permission to view this quiz</h1></body></html>");
+            return;
+          }
+          // console.log(`line 67: --- ${data.rows[0].public}`)
+          templateVars.data = quizData.rows;
           res.render('quiz_play', templateVars)
         })
         .catch((err) => {
@@ -111,28 +117,29 @@ module.exports = (db) => {
   // individual quiz page
 
   router.post("/result", (req, res) => {
-
+    console.log('line 120 --------')
     const keys = Object.keys(req.body)
     let counter = 0;
-    const queryStr = `SELECT quizes.*, users.*, questions.answer as answer, questions.id as question_id
+    const queryStr = `SELECT quizes.*, questions.answer as answer, questions.id as question_id
     FROM quizes
     JOIN questions ON quiz_id = quizes.id
-    JOIN users ON quizes.owner_id = users.id
     WHERE quizes.id = (SELECT quiz_id
     FROM questions
     WHERE questions.id = $1)`;
 
     db.query(queryStr, [keys[0]])
       .then((data) => {
+        console.log('line 133 ----------')
         for (let i = 0; i < data.rows.length; i++) {
           let questId = data.rows[i].question_id;
           if (data.rows[i].answer === req.body[questId]) {
             counter++;
           }
         }
-        console.log(`line 133: --- ${Object.keys(data.rows[0])}`)
         let result = Math.round((counter / keys.length) * 100)
-
+        console.log(`line 141 ------- ${req.session.user_id}`)
+        console.log(`line 142 ------${data.rows[0].id}`)
+        console.log(`line 143 -------- ${result}`)
         db.query(`
           INSERT INTO attempts (user_id, quiz_id, score)
           VALUES ($1, $2, $3)
@@ -163,23 +170,6 @@ module.exports = (db) => {
               .status(500)
               .json({ error: err.message });
           });
-
-
-
-        // const queryString = `
-        //   INSERT INTO attempts (user_id, quiz_id, score, attempted_at)
-        //   VALUES ($1, $2, $3, $4);
-        // `
-        // db.query(queryString, [])
-        //   .then((data) => {
-        //     res.render('result', templateVars);
-        //     console.log('hello')
-        //   })
-        //   .catch((err) => {
-        //     res
-        //       .status(500)
-        //       .json({ error: err.message });
-        //   });
     })
     .catch((err) => {
       res

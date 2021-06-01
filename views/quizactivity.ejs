@@ -26,6 +26,7 @@
 
     </div>
   </section>
+  <% if (user) { %>
   <section class="quizes-container d-flex flex-column flex-md-row flex-wrap justify-content-between">
     <% for (activity of activities) { %>
       <div class="card bg-dark text-white col-md-4">
@@ -37,6 +38,9 @@
       </div>
     <% } %>
   </section>
+  <% } else { %>
+    <h2>NO! LOG IN!!!</h2>
+  <% } %>
 </main>
 
 </body>

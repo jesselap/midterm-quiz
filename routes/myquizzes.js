@@ -5,8 +5,8 @@ const express = require('express');
 const router = express.Router();
 
 module.exports = (db) => {
-  router.get("/quizzes/:id", (req, res) => {
-    const queryParams = [Number(req.params.id)];
+  router.get("/quizzes", (req, res) => {
+    const queryParams = [Number(req.session.user_id)];
     const queryContent = `SELECT quizes.id, title, created_at, categories.type as category, users.id as creator
                           FROM quizes
                           JOIN categories ON quizes.category_id = categories.id
@@ -14,10 +14,6 @@ module.exports = (db) => {
                           WHERE users.id = $1`
     db.query(queryContent, queryParams)
     .then(data => {
-      if (!req.session.user_id) {
-        const templateVars = {quizzes: data.rows, user: null}
-        res.render("myquizzes", templateVars);
-      } else {
         db.query(`SELECT *
         FROM users
         WHERE id = $1;`, [req.session.user_id])
@@ -28,7 +24,9 @@ module.exports = (db) => {
         .catch(err => {
           res.status(500).json({ error: err.message });
         })
-      }
+    })
+    .catch(err => {
+      res.render("myquizzes", {user: null})
     })
   });
   return router;

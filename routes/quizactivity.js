@@ -5,7 +5,7 @@ const express = require('express');
 const router = express.Router();
 
 module.exports = (db) => {
-  router.get("/users/:id/activity", (req, res) => {
+  router.get("/:id/activity", (req, res) => {
     const queryParams = [req.params.id];
     const queryContent = `SELECT * FROM attempts
                           FROM attempts

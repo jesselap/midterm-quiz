@@ -137,3 +137,21 @@ h3 {
 }
 
 
+.result-header{
+  display: flex;
+
+  .sec-1{
+    // width: 200px;
+    height: 200px;
+    background-color: blue;
+  }
+  .sec-2{
+    // width: 200px;
+    height: 200px;
+    background-color: red;
+  }
+
+  blockquote{
+    flex-grow: 1;
+  }
+}

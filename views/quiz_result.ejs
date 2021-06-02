@@ -16,7 +16,71 @@
 </head>
 
 <body>
-  <span>Your score Is: <%= score %></span>
-  <%- include('partials/_footer'); %>
+  <%- include('partials/_nav'); %>
+  <header class="container-fluid">
+    <section class="result-header row mt-2">
+      <div class="col-8 px-0 d-flex flex-column align-items-center">
+        <h3 class="w-100">Result of your attempt!</h3>
+        <blockquote class="blockquote text-center d-flex flex-column align-items-start justify-content-center">
+          <p class="mb-0"><span>Your score: <%= score %>%</span></p>
+          <p class="mb-0"><span>Your highest Score: 80%</span></p>
+          <p class="mb-0"><span>No of Attempts: 5</span></p>
+        </blockquote>
+        <div>
+          <a class="btn btn-info" href="/quizes/<%= quizId %> ">Retake this quiz</a>
+          <a class="btn btn-success" href="/quizes/new">Create your Own Quiz</a>
+        </div>
+
+      </div>
+      <div class="col-md-4 d-flex flex-column leaderboard bg-light">
+        <h4 class="pt-3">Leaderboard</h4>
+        <ul class="list-group">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            ABC
+            <span class="badge badge-pill badge-danger">55</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            ABC
+            <span class="badge badge-primary badge-pill">55</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            ABC
+            <span class="badge badge-primary badge-pill">55</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            ABC
+            <span class="badge badge-primary badge-pill">55</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            ABC
+            <span class="badge badge-primary badge-pill">55</span>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <% console.log("ejs------line 54", quizId) %>
+    <% if(quizes.length) {%>
+      <section class="quizes-container d-flex flex-column flex-md-row flex-wrap justify-content-between">
+        <div class="col-md-12">
+          <h4 class="display-7">Similar Quizes on <%= quizes[0].category  %> </h4>
+        </div>
+        <% for(let quiz of quizes) {%>
+        <div class="card bg-dark text-white col-md-4">
+          <img
+          src="<%= quiz.image_url %> "
+          class="card-img" alt="<%= quiz.category%> image ">
+          <div class="overlay">
+            <div class="header">
+              <span><%= quiz.category%></span>
+              <span class="avg-score">90%</span>
+            </div>
+            <p class="card-text"><%= quiz.title %> </p>
+          </div>
+        </div>
+        <% } %>
+      </section>
+      <%} %>
+  </main>
 </body>
+
 </html>

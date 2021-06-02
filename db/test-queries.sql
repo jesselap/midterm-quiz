@@ -1,5 +1,10 @@
-SELECT quizes.id, title, created_at, categories.type as category, score
+-- SELECT quizes.id, title, created_at, categories.type as category, score
+-- FROM attempts
+-- JOIN quizes ON attempts.quiz_id = quizes.id
+-- JOIN categories ON quizes.category_id = categories.id
+-- WHERE attempts.user_id = 1
+
+SELECT quiz_id, AVG(score) as avg_score
 FROM attempts
-JOIN quizes ON attempts.quiz_id = quizes.id
-JOIN categories ON quizes.category_id = categories.id
-WHERE attempts.user_id = 1
+WHERE quiz_id = 1
+GROUP BY quiz_id;

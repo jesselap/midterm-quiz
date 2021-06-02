@@ -13,26 +13,26 @@ const router = express.Router();
 module.exports = (db) => {
   router.get("/", (req, res) => {
     const queryContent =
-    `
+      `
       SELECT quizes.id, title,image_url, created_at, public, categories.type as category
       FROM quizes
       JOIN categories ON quizes.category_id = categories.id;
     `
     db.query(queryContent)
-     .then(data => {
-      res.json(data.rows)
-    })
-     .catch(err => res.json(err))
+      .then(data => {
+        res.json(data.rows)
+      })
+      .catch(err => res.json(err))
   });
 
   router.get("/new", (req, res) => {
-    if(!req.session.user_id){
+    if (!req.session.user_id) {
       res.redirect('/')
     }
     const queryContent = `SELECT * FROM categories;`
     db.query(queryContent)
       .then(data => {
-        const templateVars = {categories: data.rows, user: req.session.user_id}
+        const templateVars = { categories: data.rows, user: req.session.user_id }
         res.render('create_quiz', templateVars)
       })
   });
@@ -41,46 +41,46 @@ module.exports = (db) => {
   router.post("/", (req, res) => {
     // Getting the necessary data for insert into quizes table
     const owner_id = req.session.user_id;
-    const {category_id, title, image_url} = req.body
+    const { category_id, title, image_url } = req.body
     const public = req.body.public ? true : false;
     const insertIntoQuizes =
-    `
+      `
       INSERT INTO quizes(owner_id, category_id, image_url, title, public)
       VALUES($1, $2, $3, $4, $5)
       returning *;
     `;
     //Making the actual insertion of quiz into the quizes table.
     db.query(insertIntoQuizes, [owner_id, category_id, image_url, title, public])
-    .then(data => {
-      // Once Quiz is added to the db, getting the rest of the for inserting the question into the questions table
-      const quiz_id = data.rows[0].id;
-      const {questions, answers, optionA, optionB, optionC} = req.body ;
-      const insertIntoQuestions =
-      `INSERT INTO questions(quiz_id, question, answer, choice_a, choice_b, choice_c)
+      .then(data => {
+        // Once Quiz is added to the db, getting the rest of the for inserting the question into the questions table
+        const quiz_id = data.rows[0].id;
+        const { questions, answers, optionA, optionB, optionC } = req.body;
+        const insertIntoQuestions =
+          `INSERT INTO questions(quiz_id, question, answer, choice_a, choice_b, choice_c)
        VALUES($1, $2, $3, $4, $5, $6)
       `
-      //Since we have to multiple insertion, using promiseAll
-      return Promise.all(questions.map((question, index)=>
-      db.query(insertIntoQuestions, [quiz_id, question, answers[index], optionA[index], optionB[index], optionC[index]])))
-    }).then(data => {
-      res.redirect('/')
-    }).catch(err => {
-      console.log("error----line 82", err)
-    })
+        //Since we have to multiple insertion, using promiseAll
+        return Promise.all(questions.map((question, index) =>
+          db.query(insertIntoQuestions, [quiz_id, question, answers[index], optionA[index], optionB[index], optionC[index]])))
+      }).then(data => {
+        res.redirect('/')
+      }).catch(err => {
+        console.log("error----line 82", err)
+      })
   });
 
 
 
-    // individual quiz page
-    router.get("/:quiz_id", (req, res) => {
-      db.query(`SELECT *
+  // individual quiz page
+  router.get("/:quiz_id", (req, res) => {
+    db.query(`SELECT *
       FROM users
       WHERE id = $1;`, [req.session.user_id])
-        .then(data => {
-          let templateVars = {
-            user: data.rows[0]
-          };
-          const queryContent = `
+      .then(data => {
+        let templateVars = {
+          user: data.rows[0]
+        };
+        const queryContent = `
                               SELECT quizes.*, questions.question as question, choice_a, choice_b, choice_c, answer as choice_d, users.*, questions.id as question_id
                               FROM quizes
                               JOIN questions ON quizes.id = quiz_id
@@ -106,11 +106,11 @@ module.exports = (db) => {
               .status(500)
               .json({ error: err.message });
           });
-          })
-          .catch(err => {
-            res.status(500).json({ error: err.message });
-          })
-    });
+      })
+      .catch(err => {
+        res.status(500).json({ error: err.message });
+      })
+  });
 
 
 
@@ -145,25 +145,25 @@ module.exports = (db) => {
         db.query(`
           INSERT INTO attempts (user_id, quiz_id, score)
           VALUES ($1, $2, $3)
-          RETURNING user_id;
+          RETURNING user_id, quiz_id;
         `, [reqSessionUserId, data.rows[0].id, result])
           .then((user_id => {
-              db.query(`SELECT *
+            db.query(`SELECT *
                 FROM users
                 WHERE id = $1;`, [req.session.user_id])
-                .then((userData) => {
+              .then((userData) => {
 
                 let templateVars = {
-                user: userData.rows[0],
-                score: result
-              };
-              res.render('quiz_result', templateVars);
-            })
-            .catch((err) => {
-              res
-                .status(500)
-                .json({ error: err.message });
-            });
+                  user: userData.rows[0],
+                  score: result
+                };
+                res.render('quiz_result', templateVars);
+              })
+              .catch((err) => {
+                res
+                  .status(500)
+                  .json({ error: err.message });
+              });
 
           }))
           .catch((err) => {
@@ -171,19 +171,30 @@ module.exports = (db) => {
               .status(500)
               .json({ error: err.message });
           });
-    })
-    .catch((err) => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
+      })
+      .catch((err) => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
   });
 
-
-
-
-
-
+  // .then(data => {
+  //   const queryContent =
+  //     `
+  //     SELECT quiz_id, AVG(score) as avg_score
+  //     FROM attempts
+  //     JOIN
+  //     WHERE quiz_id = $1
+  //     GROUP BY quiz_id;
+  //     `
+  //   db.query(queryContent, [data.rows[0].quiz_id])
+  //   .then(data=> {
+  //     console.log(data.rows)
+  //     const templateVars = {score: result, user: req.session.user_id }
+  //     res.render('quiz_result', templateVars)
+  //   })
+  // })
 
   return router;
 };

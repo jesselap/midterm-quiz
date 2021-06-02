@@ -14,10 +14,11 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
     const queryContent =
       `
-      SELECT quizes.id, title,image_url, created_at, public, categories.type as category
+      SELECT quizes.id, title, image_url, created_at, public, categories.type as category, (SELECT ROUND(AVG(score))
+      FROM attempts WHERE quiz_id = quizes.id) as avg_score
       FROM quizes
       JOIN categories ON quizes.category_id = categories.id
-      WHERE NOT public = false;
+      WHERE public  = true;
     `
     db.query(queryContent)
       .then(data => {

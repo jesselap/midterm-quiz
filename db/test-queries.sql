@@ -32,7 +32,16 @@ WHERE quiz_id = 1;
 -- WHERE quiz_id = 1 AND user_id = 1
 -- GROUP BY user_id;
 
-SELECT quizes.id, title,image_url, created_at, public, categories.type as category
+SELECT quizes.id, categories.type as category, (SELECT ROUND(AVG(score))
+FROM attempts WHERE quiz_id = quizes.id) as avg_score
 FROM quizes
 JOIN categories ON quizes.category_id = categories.id
-WHERE NOT public  = False;
+WHERE public  = true;
+
+-- SELECT quizes.id, categories.type as category, ROUND(AVG(score))as avg_score
+-- FROM quizes
+-- LEFT JOIN attempts ON quizes.id = attempts.quiz_id
+-- JOIN categories ON quizes.category_id = categories.id
+-- WHERE quizes.public = true
+-- GROUP BY quizes.id, categories.type
+-- ORDER BY avg_score DESC;

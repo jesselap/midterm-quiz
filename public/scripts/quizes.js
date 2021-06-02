@@ -8,7 +8,7 @@ const createElement = function (quizObj) {
     <div class="overlay">
       <div class="header">
         <span>${quizObj.category}</span>
-        <span class="avg-score">90%</span>
+        <span class="avg-score">${quizObj.avg_score}%</span>
       </div>
       <p class="card-text">${quizObj.title}</p>
     </div>
@@ -29,7 +29,6 @@ $(document).ready(function () {
     console.log('clicked')
   })
   $.get('/quizes', function (data) {
-    console.log("Inside get")
     console.log(data)
     renderQuiz(data)
   });

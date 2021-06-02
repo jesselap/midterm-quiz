@@ -14,8 +14,8 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
     const queryContent =
       `
-      SELECT quizes.id, title, image_url, created_at, public, categories.type as category, (SELECT ROUND(AVG(score))
-      FROM attempts WHERE quiz_id = quizes.id) as avg_score
+      SELECT quizes.id, title, image_url, created_at, public, categories.type as category, COALESCE((SELECT ROUND(AVG(score))
+      FROM attempts WHERE quiz_id = quizes.id), 0) as avg_score
       FROM quizes
       JOIN categories ON quizes.category_id = categories.id
       WHERE public  = true;

@@ -152,23 +152,27 @@ module.exports = (db) => {
         `, [reqSessionUserId, data.rows[0].id, result.score])
           .then(data => {
             const quizId = data.rows[0].quiz_id;
-
             //Get attempts Data
-            const getAttempts = db.query(`SELECT COUNT(*)
+            const getUsersAttemptsData =
+            db.query(`SELECT user_id, MAX(score), COUNT(score) as total_attempts
               FROM attempts
-              WHERE user_id = 1`).catch(err => res.json(err));
+              WHERE quiz_id = 1 AND user_id = 1
+              GROUP BY user_id;`).catch(err => res.json(err));
 
             //Using the category id in getting similar quizes from the quizes table
-            const getSimilarQuizes = db.query(`SELECT quizes.id, title,image_url, created_at, public, categories.type as category
+            const getSimilarQuizes =
+            db.query(`SELECT quizes.id, title,image_url, created_at, public, categories.type as category
               FROM quizes
               JOIN categories ON quizes.category_id = categories.id
-              WHERE category_id = (SELECT category_id FROM quizes WHERE id= ${quizId})`);
+              WHERE category_id = (SELECT category_id FROM quizes WHERE id= ${quizId})`).catch(err => res.json(err));
 
             // Using user data to show user information
-            const getUser = db.query(`SELECT * FROM users
-              WHERE id = $1;`, [req.session.user_id]);
-            debugger;
-            Promise.all([getAttempts, getSimilarQuizes, getUser])
+            const getUser =
+            db.query(`SELECT *
+              FROM users
+              WHERE id = $1;`, [req.session.user_id]).catch(err => res.json(err));
+
+            Promise.all([getUsersAttemptsData, getSimilarQuizes, getUser])
               .then(data => {
                 // console.log('Attempts: ', data[0].rows)
                 // console.log('quizes: ', data[1].rows)

@@ -16,11 +16,11 @@
 -- WHERE category_id = 2
 -- GROUP BY quizes.id, categories.type;
 
--- SELECT ROUND(AVG(score))
+-- SELECT ROUND(AVG(score)) as avg_score
 -- FROM attempts
--- WHERE quiz_id = 3;
+-- WHERE quiz_id = 6;
 
 SELECT user_id, MAX(score), COUNT(score) as total_attempts
 FROM attempts
-WHERE quiz_id = 6 AND user_id = 4
+WHERE quiz_id = 1 AND user_id = 1
 GROUP BY user_id;

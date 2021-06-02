@@ -39,6 +39,7 @@ module.exports = (db) => {
 
 
   router.post("/", (req, res) => {
+    // Getting the necessary data for insert into quizes table
     const owner_id = req.session.user_id;
     const {category_id, title, image_url} = req.body
     const public = req.body.public ? true : false;
@@ -48,18 +49,17 @@ module.exports = (db) => {
       VALUES($1, $2, $3, $4, $5)
       returning *;
     `;
+    //Making the actual insertion of quiz into the quizes table.
     db.query(insertIntoQuizes, [owner_id, category_id, image_url, title, public])
     .then(data => {
+      // Once Quiz is added to the db, getting the rest of the for inserting the question into the questions table
       const quiz_id = data.rows[0].id;
       const {questions, answers, optionA, optionB, optionC} = req.body ;
-      // console.log("quiz_id: ", quiz_id)
       const insertIntoQuestions =
       `INSERT INTO questions(quiz_id, question, answer, choice_a, choice_b, choice_c)
        VALUES($1, $2, $3, $4, $5, $6)
       `
-      // for(let i = 0; i < questions.length; i++) {
-      //   db.query(insertIntoQuestions, [quiz_id, questions[i], answers[i], optionA[i], optionB[i], optionC[i]])
-      // }
+      //Since we have to multiple insertion, using promiseAll
       return Promise.all(questions.map((question, index)=>
       db.query(insertIntoQuestions, [quiz_id, question, answers[index], optionA[index], optionB[index], optionC[index]])))
     }).then(data => {

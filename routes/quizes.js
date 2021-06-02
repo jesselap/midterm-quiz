@@ -152,12 +152,14 @@ module.exports = (db) => {
         `, [reqSessionUserId, data.rows[0].id, result.score])
           .then(data => {
             const quizId = data.rows[0].quiz_id;
-            //Get attempts Data
+            //Get attempts Data, using a nested select queries to get the average score for quize.
             const getUsersAttemptsData =
-            db.query(`SELECT user_id, MAX(score), COUNT(score) as total_attempts
-              FROM attempts
-              WHERE quiz_id = 1 AND user_id = 1
-              GROUP BY user_id;`).catch(err => {throw `error fetching attempts data`});
+            db.query(`SELECT user_id, MAX(score) as highest_score, COUNT(score) as total_attempts, (SELECT ROUND(AVG(score))
+            FROM attempts
+            WHERE quiz_id = ${quizId}) as Avg_score_all_users
+            FROM attempts
+            WHERE quiz_id = ${quizId} AND user_id = ${reqSessionUserId}
+            GROUP BY user_id;`).catch(err => {throw `error fetching attempts data`});
 
             //Using the category id in getting similar quizes from the quizes table
             const getSimilarQuizes =
@@ -169,12 +171,12 @@ module.exports = (db) => {
             // Using user data to show user information
             const getUser =
             db.query(`SELECT *
-              FROM user
+              FROM users
               WHERE id = $1;`, [req.session.user_id]).catch(err => {throw `error fetching user information`});
 
             Promise.all([getUsersAttemptsData, getSimilarQuizes, getUser])
               .then(data => {
-                // console.log('Attempts: ', data[0].rows)
+                console.log('Attempts: ', data[0].rows)
                 // console.log('quizes: ', data[1].rows)
                 // console.log('user: ', data[2].rows)
                 // Passing in user score, user cookieinformation, categories

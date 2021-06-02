@@ -27,8 +27,8 @@
           <p class="mb-0"><span>No of Attempts: 5</span></p>
         </blockquote>
         <div>
-          <button class="btn btn-info">Retake this quiz</button>
-          <button class="btn btn-success">Create your Own Quiz</button>
+          <a class="btn btn-info" href="/quizes/<%= quizId %> ">Retake this quiz</a>
+          <a class="btn btn-success" href="/quizes/new">Create your Own Quiz</a>
         </div>
 
       </div>
@@ -58,7 +58,7 @@
         </ul>
       </div>
     </header>
-    <% console.log("ejs------line 54", quizes) %>
+    <% console.log("ejs------line 54", quizId) %>
     <% if(quizes.length) {%>
       <section class="quizes-container d-flex flex-column flex-md-row flex-wrap justify-content-between">
         <div class="col-md-12">

@@ -156,7 +156,7 @@ module.exports = (db) => {
                 WHERE category_id = (SELECT category_id FROM quizes WHERE id= ${quizId})`)
               .then(data => {
                 //Passing in user score, user cookieinformation, categories
-                const templateVars = { score: result, user: req.session.user_id, quizes: data.rows }
+                const templateVars = { score: result, user: req.session.user_id, quizes: data.rows, quizId }
                 res.render('quiz_result', templateVars)
               })
           })

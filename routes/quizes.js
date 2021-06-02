@@ -135,7 +135,10 @@ module.exports = (db) => {
             counter++;
           }
         }
-        let result = Math.round((counter / keys.length) * 100)
+        const score = Math.round((counter / keys.length) * 100);
+        const totalQuestion = keys.length;
+        const correctAnswer = counter;
+        const result = { score, totalQuestion, correctAnswer };
         let reqSessionUserId = req.session.user_id
         if (!req.session.user_id) {
           // quiz saved to default user to log attempt
@@ -145,34 +148,41 @@ module.exports = (db) => {
           INSERT INTO attempts (user_id, quiz_id, score)
           VALUES ($1, $2, $3)
           RETURNING user_id, quiz_id;
-        `, [reqSessionUserId, data.rows[0].id, result])
+        `, [reqSessionUserId, data.rows[0].id, result.score])
           .then(data => {
             const quizId = data.rows[0].quiz_id;
-
-            //Get attempts Data
-            const getAttempts = db.query(`SELECT COUNT(*)
-              FROM attempts
-              WHERE user_id = 1`).catch(err => res.json(err));
+            //Geting attempts Data, using a nested select queries to get the average score for quize.
+            const getUsersAttemptsData =
+              db.query(`SELECT user_id, MAX(score) as highest_score, COUNT(score) as total_attempts, (SELECT ROUND(AVG(score))
+            FROM attempts
+            WHERE quiz_id = ${quizId}) as Avg_score_all_users
+            FROM attempts
+            WHERE quiz_id = ${quizId} AND user_id = ${reqSessionUserId}
+            GROUP BY user_id;`).catch(err => { throw `error fetching attempts data` });
 
             //Using the category id in getting similar quizes from the quizes table
-            const getSimilarQuizes = db.query(`SELECT quizes.id, title,image_url, created_at, public, categories.type as category
+            const getSimilarQuizes =
+              db.query(`SELECT quizes.id, title,image_url, created_at, public, categories.type as category
               FROM quizes
               JOIN categories ON quizes.category_id = categories.id
-              WHERE category_id = (SELECT category_id FROM quizes WHERE id= ${quizId})`);
+              WHERE category_id = (SELECT category_id FROM quizes WHERE id= ${quizId})`).catch(err => { throw `error fetching similar quizes` });
 
             // Using user data to show user information
-            const getUser = db.query(`SELECT * FROM users
-              WHERE id = $1;`, [req.session.user_id]);
+            const getUser =
+              db.query(`SELECT *
+              FROM users
+              WHERE id = $1;`, [req.session.user_id]).catch(err => { throw `error fetching user information` });
 
-            Promise.all([getAttempts, getSimilarQuizes, getUser])
+            Promise.all([getUsersAttemptsData, getSimilarQuizes, getUser])
               .then(data => {
-                console.log('Attempts: ', data[0].rows)
-                console.log('quizes: ', data[1].rows)
-                console.log('user: ', data[2].rows)
-                //Passing in user score, user cookieinformation, categories
-                const templateVars = { score: result, quizes: data[1].rows, user: data[2].rows[0], quizId }
+                // Sending back result, which contain user score, no of questions and no of correct answer
+                // attemptInos, contains all information coming from attemps table, like max sscore, avg score of all users, etc
+                // quizes, which is an array of similar quizes
+                // user, which is user information needed for showing user name in the nav
+                // quizId needed for implementing retake this quiz link
+                const templateVars = { result, attemptInfos: data[0].rows[0], quizes: data[1].rows, user: data[2].rows[0], quizId }
                 res.render('quiz_result', templateVars)
-              })
+              }).catch(err => res.json(err));
           })
           .catch((err) => {
             res

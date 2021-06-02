@@ -22,15 +22,24 @@
       <div class="col-8 px-0 d-flex flex-column align-items-center">
         <h3 class="w-100">Result of your attempt!</h3>
         <blockquote class="blockquote text-center d-flex flex-column align-items-start justify-content-center">
-          <p class="mb-0"><span>Your score: <%= score %>%</span></p>
-          <p class="mb-0"><span>Your highest Score: 80%</span></p>
-          <p class="mb-0"><span>No of Attempts: 5</span></p>
+          <p class="mb-0"><span>Your score: <%= result.score %>%</span></p>
+          <% console.log("FROM EJS-----", attemptInfos.user_id) %>
+          <!-- Only showing these below info if user is logged in -->
+          <% if(attemptInfos.user_id !== 1) {%>
+            <p class="mb-0"><span>Your highest Score: <%= attemptInfos.highest_score %>  %</span></p>
+            <p class="mb-0"><span>No of Attempts: <%= attemptInfos.total_attempts %> </span></p>
+          <% }  %>
+          <p class="mb-0"><span>Average score for this quiz: <%= attemptInfos.avg_score_all_users %>% </span></p>
         </blockquote>
         <div>
           <a class="btn btn-info" href="/quizes/<%= quizId %> ">Retake this quiz</a>
-          <a class="btn btn-success" href="/quizes/new">Create your Own Quiz</a>
+          <% if(user) {%>
+            <a class="btn btn-success" href="/quizes/new">Create your Own Quiz</a>
+            <% } else {%>
+              <a class="btn btn-success" href="/login">Login to Save your result</a>
+            <% } %>
+          <% console.log(user) %>
         </div>
-
       </div>
       <div class="col-md-4 d-flex flex-column leaderboard bg-light">
         <h4 class="pt-3">Leaderboard</h4>
@@ -58,7 +67,6 @@
         </ul>
       </div>
     </header>
-    <% console.log("ejs------line 54", quizId) %>
     <% if(quizes.length) {%>
       <section class="quizes-container d-flex flex-column flex-md-row flex-wrap justify-content-between">
         <div class="col-md-12">

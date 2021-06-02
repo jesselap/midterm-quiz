@@ -65,7 +65,7 @@ module.exports = (db) => {
       }).then(data => {
         res.redirect('/')
       }).catch(err => {
-        console.log("error----line 82", err)
+        res.json(err)
       })
   });
 
@@ -129,14 +129,16 @@ module.exports = (db) => {
 
     db.query(queryStr, [keys[0]])
       .then((data) => {
-        console.log('line 133 ----------')
         for (let i = 0; i < data.rows.length; i++) {
           let questId = data.rows[i].question_id;
           if (data.rows[i].answer === req.body[questId]) {
             counter++;
           }
         }
-        let result = Math.round((counter / keys.length) * 100)
+        const score = Math.round((counter / keys.length) * 100);
+        const totalQuestion = keys.length;
+        const correctAnswer = counter;
+        const result = { score, totalQuestion, correctAnswer };
         let reqSessionUserId = req.session.user_id
         if (!req.session.user_id) {
           // quiz saved to default user to log attempt
@@ -146,39 +148,42 @@ module.exports = (db) => {
           INSERT INTO attempts (user_id, quiz_id, score)
           VALUES ($1, $2, $3)
           RETURNING user_id, quiz_id;
-        `, [reqSessionUserId, data.rows[0].id, result])
+        `, [reqSessionUserId, data.rows[0].id, result.score])
           .then(data => {
             const quizId = data.rows[0].quiz_id;
+            //Geting attempts Data, using a nested select queries to get the average score for quize.
+            const getUsersAttemptsData =
+              db.query(`SELECT user_id, MAX(score) as highest_score, COUNT(score) as total_attempts, (SELECT ROUND(AVG(score))
+            FROM attempts
+            WHERE quiz_id = ${quizId}) as Avg_score_all_users
+            FROM attempts
+            WHERE quiz_id = ${quizId} AND user_id = ${reqSessionUserId}
+            GROUP BY user_id;`).catch(err => { throw `error fetching attempts data` });
+
             //Using the category id in getting similar quizes from the quizes table
-            db.query(`SELECT quizes.id, title,image_url, created_at, public, categories.type as category
-                FROM quizes
-                JOIN categories ON quizes.category_id = categories.id
-                WHERE category_id = (SELECT category_id FROM quizes WHERE id= ${quizId})`)
+            const getSimilarQuizes =
+              db.query(`SELECT quizes.id, title,image_url, created_at, public, categories.type as category
+              FROM quizes
+              JOIN categories ON quizes.category_id = categories.id
+              WHERE category_id = (SELECT category_id FROM quizes WHERE id= ${quizId})`).catch(err => { throw `error fetching similar quizes` });
+
+            // Using user data to show user information
+            const getUser =
+              db.query(`SELECT *
+              FROM users
+              WHERE id = $1;`, [req.session.user_id]).catch(err => { throw `error fetching user information` });
+
+            Promise.all([getUsersAttemptsData, getSimilarQuizes, getUser])
               .then(data => {
-                //Passing in user score, user cookieinformation, categories
-                const templateVars = { score: result, user: req.session.user_id, quizes: data.rows, quizId }
+                // Sending back result, which contain user score, no of questions and no of correct answer
+                // attemptInos, contains all information coming from attemps table, like max sscore, avg score of all users, etc
+                // quizes, which is an array of similar quizes
+                // user, which is user information needed for showing user name in the nav
+                // quizId needed for implementing retake this quiz link
+                const templateVars = { result, attemptInfos: data[0].rows[0], quizes: data[1].rows, user: data[2].rows[0], quizId }
                 res.render('quiz_result', templateVars)
-              })
+              }).catch(err => res.json(err));
           })
-          // .then((user_id => {
-          //   db.query(`SELECT *
-          //       FROM users
-          //       WHERE id = $1;`, [req.session.user_id])
-          //     .then((userData) => {
-
-          //       let templateVars = {
-          //         user: userData.rows[0],
-          //         score: result
-          //       };
-          //       res.render('quiz_result', templateVars);
-          //     })
-          //     .catch((err) => {
-          //       res
-          //         .status(500)
-          //         .json({ error: err.message });
-          //     });
-
-          // }))
           .catch((err) => {
             res
               .status(500)
@@ -192,22 +197,6 @@ module.exports = (db) => {
       });
   });
 
-  // .then(data => {
-  //   const queryContent =
-  //     `
-  //     SELECT quiz_id, AVG(score) as avg_score
-  //     FROM attempts
-  //     JOIN
-  //     WHERE quiz_id = $1
-  //     GROUP BY quiz_id;
-  //     `
-  //   db.query(queryContent, [data.rows[0].quiz_id])
-  //   .then(data=> {
-  //     console.log(data.rows)
-  //     const templateVars = {score: result, user: req.session.user_id }
-  //     res.render('quiz_result', templateVars)
-  //   })
-  // })
 
   return router;
 };

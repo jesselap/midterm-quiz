@@ -157,30 +157,30 @@ module.exports = (db) => {
             db.query(`SELECT user_id, MAX(score), COUNT(score) as total_attempts
               FROM attempts
               WHERE quiz_id = 1 AND user_id = 1
-              GROUP BY user_id;`).catch(err => res.json(err));
+              GROUP BY user_id;`).catch(err => {throw `error fetching attempts data`});
 
             //Using the category id in getting similar quizes from the quizes table
             const getSimilarQuizes =
             db.query(`SELECT quizes.id, title,image_url, created_at, public, categories.type as category
               FROM quizes
               JOIN categories ON quizes.category_id = categories.id
-              WHERE category_id = (SELECT category_id FROM quizes WHERE id= ${quizId})`).catch(err => res.json(err));
+              WHERE category_id = (SELECT category_id FROM quizes WHERE id= ${quizId})`).catch(err => {throw `error fetching similar quizes`});
 
             // Using user data to show user information
             const getUser =
             db.query(`SELECT *
-              FROM users
-              WHERE id = $1;`, [req.session.user_id]).catch(err => res.json(err));
+              FROM user
+              WHERE id = $1;`, [req.session.user_id]).catch(err => {throw `error fetching user information`});
 
             Promise.all([getUsersAttemptsData, getSimilarQuizes, getUser])
               .then(data => {
                 // console.log('Attempts: ', data[0].rows)
                 // console.log('quizes: ', data[1].rows)
                 // console.log('user: ', data[2].rows)
-                //Passing in user score, user cookieinformation, categories
+                // Passing in user score, user cookieinformation, categories
                 const templateVars = { result, quizes: data[1].rows, user: data[2].rows[0], quizId }
                 res.render('quiz_result', templateVars)
-              })
+              }).catch(err => res.json(err));
           })
           .catch((err) => {
             res

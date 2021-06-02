@@ -150,13 +150,20 @@ module.exports = (db) => {
           .then(data => {
             const quizId = data.rows[0].quiz_id;
             //Using the category id in getting similar quizes from the quizes table
-            db.query(`SELECT quizes.id, title,image_url, created_at, public, categories.type as category
-                FROM quizes
-                JOIN categories ON quizes.category_id = categories.id
-                WHERE category_id = (SELECT category_id FROM quizes WHERE id= ${quizId})`)
+            const getAttempts = db.query(`SELECT COUNT(*)
+            FROM attempts
+            WHERE user_id = 1`).catch(err => res.json(err))
+
+            const getSimilarQuizes = db.query(`SELECT quizes.id, title,image_url, created_at, public, categories.type as category
+            FROM quizes
+            JOIN categories ON quizes.category_id = categories.id
+            WHERE category_id = (SELECT category_id FROM quizes WHERE id= ${quizId})`)
+
+            Promise.all([getAttempts, getSimilarQuizes])
               .then(data => {
+                console.log('Line 165----', data[0].rows)
                 //Passing in user score, user cookieinformation, categories
-                const templateVars = { score: result, user: req.session.user_id, quizes: data.rows, quizId }
+                const templateVars = { score: result, user: req.session.user_id, quizes: data[1].rows, quizId }
                 res.render('quiz_result', templateVars)
               })
           })

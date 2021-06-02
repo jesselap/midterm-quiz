@@ -135,8 +135,12 @@ module.exports = (db) => {
             counter++;
           }
         }
-        let result = Math.round((counter / keys.length) * 100)
-        let reqSessionUserId = req.session.user_id
+        const score = Math.round((counter / keys.length) * 100);
+        const totalQuestion = keys.length;
+        const correctAnswer = counter;
+        const result = {score, totalQuestion, correctAnswer};
+        // console.log("line 142", result)
+        const reqSessionUserId = req.session.user_id
         if (!req.session.user_id) {
           // quiz saved to default user to log attempt
           reqSessionUserId = 1;
@@ -145,7 +149,7 @@ module.exports = (db) => {
           INSERT INTO attempts (user_id, quiz_id, score)
           VALUES ($1, $2, $3)
           RETURNING user_id, quiz_id;
-        `, [reqSessionUserId, data.rows[0].id, result])
+        `, [reqSessionUserId, data.rows[0].id, result.score])
           .then(data => {
             const quizId = data.rows[0].quiz_id;
 
@@ -163,14 +167,14 @@ module.exports = (db) => {
             // Using user data to show user information
             const getUser = db.query(`SELECT * FROM users
               WHERE id = $1;`, [req.session.user_id]);
-
+            debugger;
             Promise.all([getAttempts, getSimilarQuizes, getUser])
               .then(data => {
-                console.log('Attempts: ', data[0].rows)
-                console.log('quizes: ', data[1].rows)
-                console.log('user: ', data[2].rows)
+                // console.log('Attempts: ', data[0].rows)
+                // console.log('quizes: ', data[1].rows)
+                // console.log('user: ', data[2].rows)
                 //Passing in user score, user cookieinformation, categories
-                const templateVars = { score: result, quizes: data[1].rows, user: data[2].rows[0], quizId }
+                const templateVars = { result, quizes: data[1].rows, user: data[2].rows[0], quizId }
                 res.render('quiz_result', templateVars)
               })
           })

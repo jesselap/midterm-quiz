@@ -15,3 +15,12 @@
 -- JOIN categories ON quizes.category_id = categories.id
 -- WHERE category_id = 2
 -- GROUP BY quizes.id, categories.type;
+
+-- SELECT ROUND(AVG(score))
+-- FROM attempts
+-- WHERE quiz_id = 3;
+
+SELECT user_id, MAX(score), COUNT(score) as total_attempts
+FROM attempts
+WHERE quiz_id = 6 AND user_id = 4
+GROUP BY user_id;

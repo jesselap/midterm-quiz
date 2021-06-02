@@ -1,5 +1,8 @@
 $(() => {
   $(".shareLink").hide();
+  $(".card").on("click", function() {
+    window.location.href = $(this).attr("url");
+  })
   $(".share").on("click", function() {
       /* Get the text field */
       var copyText = document.getElementById(`linkField${$(this).attr("id")}`);

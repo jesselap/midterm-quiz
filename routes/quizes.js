@@ -152,7 +152,7 @@ module.exports = (db) => {
         `, [reqSessionUserId, data.rows[0].id, result.score])
           .then(data => {
             const quizId = data.rows[0].quiz_id;
-            //Get attempts Data, using a nested select queries to get the average score for quize.
+            //Geting attempts Data, using a nested select queries to get the average score for quize.
             const getUsersAttemptsData =
             db.query(`SELECT user_id, MAX(score) as highest_score, COUNT(score) as total_attempts, (SELECT ROUND(AVG(score))
             FROM attempts
@@ -177,10 +177,13 @@ module.exports = (db) => {
             Promise.all([getUsersAttemptsData, getSimilarQuizes, getUser])
               .then(data => {
                 console.log('Attempts: ', data[0].rows)
-                // console.log('quizes: ', data[1].rows)
-                // console.log('user: ', data[2].rows)
-                // Passing in user score, user cookieinformation, categories
-                const templateVars = { result, quizes: data[1].rows, user: data[2].rows[0], quizId }
+
+                // Sending back result, which contain user score, no of questions and no of correct answer
+                // attemptInos, contains all information coming from attemps table, like max sscore, avg score of all users, etc
+                // quizes, which is an array of similar quizes
+                // user, which is user information needed for showing user name in the nav
+                // quizId needed for implementing retake this quiz link
+                const templateVars = { result, attemptInos: data[0].rows, quizes: data[1].rows, user: data[2].rows[0], quizId }
                 res.render('quiz_result', templateVars)
               }).catch(err => res.json(err));
           })

@@ -149,43 +149,31 @@ module.exports = (db) => {
         `, [reqSessionUserId, data.rows[0].id, result])
           .then(data => {
             const quizId = data.rows[0].quiz_id;
-            //Using the category id in getting similar quizes from the quizes table
+
+            //Get attempts Data
             const getAttempts = db.query(`SELECT COUNT(*)
-            FROM attempts
-            WHERE user_id = 1`).catch(err => res.json(err))
-
+              FROM attempts
+              WHERE user_id = 1`).catch(err => res.json(err))
+            //Using the category id in getting similar quizes from the quizes table
             const getSimilarQuizes = db.query(`SELECT quizes.id, title,image_url, created_at, public, categories.type as category
-            FROM quizes
-            JOIN categories ON quizes.category_id = categories.id
-            WHERE category_id = (SELECT category_id FROM quizes WHERE id= ${quizId})`)
+              FROM quizes
+              JOIN categories ON quizes.category_id = categories.id
+              WHERE category_id = (SELECT category_id FROM quizes WHERE id= ${quizId})`)
 
-            Promise.all([getAttempts, getSimilarQuizes])
+            // Using user data to show user information
+            const getUser = db.query(`SELECT * FROM users
+              WHERE id = $1;`, [req.session.user_id])
+
+            Promise.all([getAttempts, getSimilarQuizes, getUser])
               .then(data => {
-                console.log('Line 165----', data[0].rows)
+                console.log('Attempts: ', data[0].rows)
+                console.log('quizes: ', data[1].rows)
+                console.log('user: ', data[2].rows)
                 //Passing in user score, user cookieinformation, categories
-                const templateVars = { score: result, user: req.session.user_id, quizes: data[1].rows, quizId }
+                const templateVars = { score: result, quizes: data[1].rows, user: data[2].rows[0], quizId }
                 res.render('quiz_result', templateVars)
               })
           })
-          // .then((user_id => {
-          //   db.query(`SELECT *
-          //       FROM users
-          //       WHERE id = $1;`, [req.session.user_id])
-          //     .then((userData) => {
-
-          //       let templateVars = {
-          //         user: userData.rows[0],
-          //         score: result
-          //       };
-          //       res.render('quiz_result', templateVars);
-          //     })
-          //     .catch((err) => {
-          //       res
-          //         .status(500)
-          //         .json({ error: err.message });
-          //     });
-
-          // }))
           .catch((err) => {
             res
               .status(500)

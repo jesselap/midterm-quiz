@@ -25,5 +25,15 @@ module.exports = (db) => {
       res.render("quizactivity", {user: null})
     })
   });
+  //route for testing error pages - /users/errortest
+  router.get("/errortest", (req, res) => {
+    if (!req.session.user_id) {
+      const templateVars = {user: null}
+      res.render("404", templateVars);
+    } else {
+      const templateVars = {user: req.session.user_id}
+      res.render("404", templateVars);
+    }
+  })
   return router;
 };

@@ -158,7 +158,6 @@ module.exports = (db) => {
                 score: result
               };
               res.render('quiz_result', templateVars);
-
             })
             .catch((err) => {
               res

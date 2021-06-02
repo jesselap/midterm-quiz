@@ -16,7 +16,8 @@ module.exports = (db) => {
       `
       SELECT quizes.id, title,image_url, created_at, public, categories.type as category
       FROM quizes
-      JOIN categories ON quizes.category_id = categories.id;
+      JOIN categories ON quizes.category_id = categories.id
+      WHERE NOT public = false;
     `
     db.query(queryContent)
       .then(data => {

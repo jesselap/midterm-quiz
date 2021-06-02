@@ -18,8 +18,16 @@ module.exports = (db) => {
         const templateVars = {activities: data.rows, user: null}
         res.render("quizactivity", templateVars);
       } else {
-        const templateVars = {activities: data.rows, user: req.session.user_id}
-        res.render("quizactivity", templateVars);
+        db.query(`SELECT *
+                  FROM users
+                  WHERE id = $1;`, [req.session.user_id])
+          .then(userData => {
+            const templateVars = {activities: data.rows, user: userData.rows[0]}
+            res.render("quizactivity", templateVars);
+          })
+          .catch(err => {
+            res.render("quizactivity", {user: null})
+          })
       }})
     .catch(err => {
       res.render("quizactivity", {user: null})

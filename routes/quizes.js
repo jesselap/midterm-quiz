@@ -138,7 +138,7 @@ module.exports = (db) => {
         const score = Math.round((counter / keys.length) * 100);
         const totalQuestion = keys.length;
         const correctAnswer = counter;
-        const result = {score, totalQuestion, correctAnswer};
+        const result = { score, totalQuestion, correctAnswer };
         let reqSessionUserId = req.session.user_id
         if (!req.session.user_id) {
           // quiz saved to default user to log attempt
@@ -153,30 +153,28 @@ module.exports = (db) => {
             const quizId = data.rows[0].quiz_id;
             //Geting attempts Data, using a nested select queries to get the average score for quize.
             const getUsersAttemptsData =
-            db.query(`SELECT user_id, MAX(score) as highest_score, COUNT(score) as total_attempts, (SELECT ROUND(AVG(score))
+              db.query(`SELECT user_id, MAX(score) as highest_score, COUNT(score) as total_attempts, (SELECT ROUND(AVG(score))
             FROM attempts
             WHERE quiz_id = ${quizId}) as Avg_score_all_users
             FROM attempts
             WHERE quiz_id = ${quizId} AND user_id = ${reqSessionUserId}
-            GROUP BY user_id;`).catch(err => {throw `error fetching attempts data`});
+            GROUP BY user_id;`).catch(err => { throw `error fetching attempts data` });
 
             //Using the category id in getting similar quizes from the quizes table
             const getSimilarQuizes =
-            db.query(`SELECT quizes.id, title,image_url, created_at, public, categories.type as category
+              db.query(`SELECT quizes.id, title,image_url, created_at, public, categories.type as category
               FROM quizes
               JOIN categories ON quizes.category_id = categories.id
-              WHERE category_id = (SELECT category_id FROM quizes WHERE id= ${quizId})`).catch(err => {throw `error fetching similar quizes`});
+              WHERE category_id = (SELECT category_id FROM quizes WHERE id= ${quizId})`).catch(err => { throw `error fetching similar quizes` });
 
             // Using user data to show user information
             const getUser =
-            db.query(`SELECT *
+              db.query(`SELECT *
               FROM users
-              WHERE id = $1;`, [req.session.user_id]).catch(err => {throw `error fetching user information`});
+              WHERE id = $1;`, [req.session.user_id]).catch(err => { throw `error fetching user information` });
 
             Promise.all([getUsersAttemptsData, getSimilarQuizes, getUser])
               .then(data => {
-                console.log('Attempts: ', data[0].rows)
-
                 // Sending back result, which contain user score, no of questions and no of correct answer
                 // attemptInos, contains all information coming from attemps table, like max sscore, avg score of all users, etc
                 // quizes, which is an array of similar quizes

@@ -65,7 +65,7 @@ module.exports = (db) => {
       }).then(data => {
         res.redirect('/')
       }).catch(err => {
-        console.log("error----line 82", err)
+        res.json(err)
       })
   });
 
@@ -129,7 +129,6 @@ module.exports = (db) => {
 
     db.query(queryStr, [keys[0]])
       .then((data) => {
-        console.log('line 133 ----------')
         for (let i = 0; i < data.rows.length; i++) {
           let questId = data.rows[i].question_id;
           if (data.rows[i].answer === req.body[questId]) {
@@ -153,16 +152,17 @@ module.exports = (db) => {
             //Get attempts Data
             const getAttempts = db.query(`SELECT COUNT(*)
               FROM attempts
-              WHERE user_id = 1`).catch(err => res.json(err))
+              WHERE user_id = 1`).catch(err => res.json(err));
+
             //Using the category id in getting similar quizes from the quizes table
             const getSimilarQuizes = db.query(`SELECT quizes.id, title,image_url, created_at, public, categories.type as category
               FROM quizes
               JOIN categories ON quizes.category_id = categories.id
-              WHERE category_id = (SELECT category_id FROM quizes WHERE id= ${quizId})`)
+              WHERE category_id = (SELECT category_id FROM quizes WHERE id= ${quizId})`);
 
             // Using user data to show user information
             const getUser = db.query(`SELECT * FROM users
-              WHERE id = $1;`, [req.session.user_id])
+              WHERE id = $1;`, [req.session.user_id]);
 
             Promise.all([getAttempts, getSimilarQuizes, getUser])
               .then(data => {
@@ -187,22 +187,6 @@ module.exports = (db) => {
       });
   });
 
-  // .then(data => {
-  //   const queryContent =
-  //     `
-  //     SELECT quiz_id, AVG(score) as avg_score
-  //     FROM attempts
-  //     JOIN
-  //     WHERE quiz_id = $1
-  //     GROUP BY quiz_id;
-  //     `
-  //   db.query(queryContent, [data.rows[0].quiz_id])
-  //   .then(data=> {
-  //     console.log(data.rows)
-  //     const templateVars = {score: result, user: req.session.user_id }
-  //     res.render('quiz_result', templateVars)
-  //   })
-  // })
 
   return router;
 };

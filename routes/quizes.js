@@ -139,8 +139,7 @@ module.exports = (db) => {
         const totalQuestion = keys.length;
         const correctAnswer = counter;
         const result = {score, totalQuestion, correctAnswer};
-        // console.log("line 142", result)
-        const reqSessionUserId = req.session.user_id
+        let reqSessionUserId = req.session.user_id
         if (!req.session.user_id) {
           // quiz saved to default user to log attempt
           reqSessionUserId = 1;

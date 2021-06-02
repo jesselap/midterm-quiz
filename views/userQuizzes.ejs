@@ -13,10 +13,13 @@
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/scripts/userQuizzes.js"></script>
 
 </head>
 
 <body>
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0" nonce="ggzyp8oV"></script>
   <%- include('partials/_nav'); %>
   <%- include('partials/_navUser')  %>
 <main>
@@ -31,6 +34,16 @@
     <% for (quiz of quizzes) { %>
       <div class="card bg-dark text-white col-md-4">
         <img src="https://i.guim.co.uk/img/media/5cbce71c025dd78ca31d03111bd2ee4453a7029e/0_167_2400_1440/master/2400.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=b44c9a27a5b38c0388b092e5b0291c32" class="card-img" alt="...">
+        <div class="card-img-overlay">
+        <div>
+          <input class="linkField" type="text" value="lightquiz.com/quizes/<%= quiz.id %>" id="linkField<%= quiz.id %>">
+          <button class="btn btn-sm share" id=<%= quiz.id %>>
+            Copy Link
+          </button>
+        </div>
+          <a class="twitter-share-button" rel="hi" href="https://twitter.com/intent/tweet?text=Check%20out%20my%20quiz!&url=lightquiz.com/quizes/<%= quiz.id %>">Tweet</a>
+          <div class="fb-share-button" data-href="https://lightquiz.com/quizes/" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flightquiz.com%2Fquizes%2F<%=quiz.id%>%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+        </div>
         <div class="overlay">
           <span><%= quiz.category %> </span>
           <p class="card-text"><%= quiz.title %></p>
@@ -44,5 +57,22 @@
 </main>
 <%- include('partials/_footer'); %>
 </body>
+  <script>window.twttr = (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0],
+      t = window.twttr || {};
+    if (d.getElementById(id)) return t;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "https://platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js, fjs);
+
+    t._e = [];
+    t.ready = function(f) {
+      t._e.push(f);
+    };
+
+    return t;
+  }(document, "script", "twitter-wjs"));
+  </script>
 
 </html>

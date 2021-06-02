@@ -174,3 +174,36 @@ h3 {
     flex-grow: 1;
   }
 }
+
+.dot {
+  height: 2.5em;
+  width: 2.5em;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.card-img-overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.hideme {
+  opacity: 0;
+}
+
+.share {
+  margin-bottom: 5px;
+  width: 5.5em;
+  padding: 2px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  font-size: 0.8em;
+  color: white;
+  background-color: #1687A7;
+}
+
+.linkField {
+  height: 1.5em;
+}

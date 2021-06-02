@@ -183,7 +183,7 @@ module.exports = (db) => {
                 // quizes, which is an array of similar quizes
                 // user, which is user information needed for showing user name in the nav
                 // quizId needed for implementing retake this quiz link
-                const templateVars = { result, attemptInos: data[0].rows, quizes: data[1].rows, user: data[2].rows[0], quizId }
+                const templateVars = { result, attemptInfos: data[0].rows[0], quizes: data[1].rows, user: data[2].rows[0], quizId }
                 res.render('quiz_result', templateVars)
               }).catch(err => res.json(err));
           })

@@ -147,25 +147,38 @@ module.exports = (db) => {
           VALUES ($1, $2, $3)
           RETURNING user_id, quiz_id;
         `, [reqSessionUserId, data.rows[0].id, result])
-          .then((user_id => {
-            db.query(`SELECT *
-                FROM users
-                WHERE id = $1;`, [req.session.user_id])
-              .then((userData) => {
-
-                let templateVars = {
-                  user: userData.rows[0],
-                  score: result
-                };
-                res.render('quiz_result', templateVars);
+          .then(data => {
+            const quizId = data.rows[0].quiz_id;
+            //Using the category id in getting similar quizes from the quizes table
+            db.query(`SELECT quizes.id, title,image_url, created_at, public, categories.type as category
+                FROM quizes
+                JOIN categories ON quizes.category_id = categories.id
+                WHERE category_id = (SELECT category_id FROM quizes WHERE id= ${quizId})`)
+              .then(data => {
+                //Passing in user score, user cookieinformation, categories
+                const templateVars = { score: result, user: req.session.user_id, quizes: data.rows, quizId }
+                res.render('quiz_result', templateVars)
               })
-              .catch((err) => {
-                res
-                  .status(500)
-                  .json({ error: err.message });
-              });
+          })
+          // .then((user_id => {
+          //   db.query(`SELECT *
+          //       FROM users
+          //       WHERE id = $1;`, [req.session.user_id])
+          //     .then((userData) => {
 
-          }))
+          //       let templateVars = {
+          //         user: userData.rows[0],
+          //         score: result
+          //       };
+          //       res.render('quiz_result', templateVars);
+          //     })
+          //     .catch((err) => {
+          //       res
+          //         .status(500)
+          //         .json({ error: err.message });
+          //     });
+
+          // }))
           .catch((err) => {
             res
               .status(500)

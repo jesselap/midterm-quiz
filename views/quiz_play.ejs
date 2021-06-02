@@ -25,19 +25,19 @@
     <fieldset>
     <legend><%= question.question %></legend>
     <% let choices = [question.choice_a, question.choice_b, question.choice_c, question.choice_d].sort(()=> Math.random() - 0.5) %>
-      <input type="radio" name='<%=question.question_id%>' id="opt1" value="<%= choices[0] %>"> <%= choices[0] %>
+      <input type="radio" name='<%=question.question_id%>' id="opt1" value="<%= choices[0] %>" required> <%= choices[0] %>
       <br>
-      <input type="radio" name='<%=question.question_id%>' id="opt2" value="<%= choices[1] %>"> <%= choices[1] %>
+      <input type="radio" name='<%=question.question_id%>' id="opt2" value="<%= choices[1] %>" required> <%= choices[1] %>
       <br>
-      <input type="radio" name='<%=question.question_id%>' id="opt3" value="<%= choices[2] %>"> <%= choices[2] %>
+      <input type="radio" name='<%=question.question_id%>' id="opt3" value="<%= choices[2] %>" required> <%= choices[2] %>
       <br>
-      <input type="radio" name='<%=question.question_id%>' id="opt4" value="<%= choices[3] %>"> <%= choices[3] %>
+      <input type="radio" name='<%=question.question_id%>' id="opt4" value="<%= choices[3] %>" required> <%= choices[3] %>
       <br>
     </fieldset>
     <% } %>
       <br>
       <button class="btn btn-secondary" type="submit" >Submit</button>
     </form>
-
+    <%- include('partials/_footer'); %>
 </body>
 </html>

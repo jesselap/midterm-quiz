@@ -26,6 +26,18 @@ nav {
  }
 }
 
+footer {
+  background-color:#32a8c9;
+  text-align: center;
+  p {
+    color:#EEE;
+  }
+}
+.logo {
+  margin-bottom: 1em;
+  width: 5em;
+}
+
 
 .main-body {
   background-color: #bfbbb0;
@@ -87,7 +99,17 @@ nav {
       word-break: break-word;
       width: 100%;
       padding-bottom: 2%;
-      span {
+
+      .header{
+        display: flex;
+        justify-content: space-between;
+
+        .avg-score {
+          background-color: green;
+          padding: 0.2rem 0.5rem;
+        }
+      }
+      span:first-child {
         background-color: brown;
         text-transform: uppercase;
         padding: 0.2rem 0.5rem;
@@ -134,3 +156,21 @@ h3 {
 }
 
 
+.result-header{
+  display: flex;
+
+  .sec-1{
+    // width: 200px;
+    height: 200px;
+    background-color: blue;
+  }
+  .sec-2{
+    // width: 200px;
+    height: 200px;
+    background-color: red;
+  }
+
+  blockquote{
+    flex-grow: 1;
+  }
+}

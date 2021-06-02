@@ -1,4 +1,4 @@
-INSERT INTO attempts (user_id, quiz_id, score) VALUES (1, 1, 50)
+INSERT INTO attempts (user_id, quiz_id, score) VALUES (1, 1, 50);
 INSERT INTO attempts (user_id, quiz_id, score) VALUES (1, 1, 41);
 INSERT INTO attempts (user_id, quiz_id, score) VALUES (1, 1, 89);
 INSERT INTO attempts (user_id, quiz_id, score) VALUES (2, 1, 80);

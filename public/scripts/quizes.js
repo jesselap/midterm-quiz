@@ -6,7 +6,10 @@ const createElement = function (quizObj) {
       src=${quizObj.image_url}
       class="card-img" alt="..."></a>
     <div class="overlay">
-      <span>${quizObj.category}</span>
+      <div class="header">
+        <span>${quizObj.category}</span>
+        <span class="avg-score">90%</span>
+      </div>
       <p class="card-text">${quizObj.title}</p>
     </div>
   </div>`

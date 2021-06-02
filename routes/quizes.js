@@ -148,22 +148,17 @@ module.exports = (db) => {
           RETURNING user_id, quiz_id;
         `, [reqSessionUserId, data.rows[0].id, result])
           .then(data => {
-            //Getting the category id for the quiz
-            db.query(`SELECT category_id FROM quizes WHERE id= ${data.rows[0].quiz_id}`)
-            .then(data => {
-              const category_id = data.rows[0].category_id;
-              //Using the category id getting similar quizes from the quizes table
-              db.query(`SELECT quizes.id, title,image_url, created_at, public, categories.type as category
+            const quizId = data.rows[0].quiz_id;
+            //Using the category id in getting similar quizes from the quizes table
+            db.query(`SELECT quizes.id, title,image_url, created_at, public, categories.type as category
                 FROM quizes
                 JOIN categories ON quizes.category_id = categories.id
-                WHERE category_id = ${category_id};`)
-                .then(data=> {
-                  //Passing in user score, user cookieinformation, categories
-                  const templateVars = { score: result, user: req.session.user_id, data: data.rows }
-                  res.render('quiz_result', templateVars)
-                })
-            })
-
+                WHERE category_id = (SELECT category_id FROM quizes WHERE id= ${quizId})`)
+              .then(data => {
+                //Passing in user score, user cookieinformation, categories
+                const templateVars = { score: result, user: req.session.user_id, quizes: data.rows }
+                res.render('quiz_result', templateVars)
+              })
           })
           // .then((user_id => {
           //   db.query(`SELECT *

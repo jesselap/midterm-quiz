@@ -74,8 +74,6 @@ module.exports = (db) => {
     const owner_id = req.session.user_id;
     const { category_id, title, image_url } = req.body
     const public = req.body.public ? false : true;
-    console.log('line 77 ------', req.body.public)
-    console.log('line 78--------',public)
     const insertIntoQuizes =
       `
       INSERT INTO quizes(owner_id, category_id, image_url, title, public)

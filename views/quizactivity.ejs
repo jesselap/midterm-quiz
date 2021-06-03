@@ -32,8 +32,8 @@
     <% for (activity of activities) { %>
       <div class="card bg-dark text-white col-md-4">
         <img src="<%= activity.image %>" class="card-img" alt="...">
-        <div class="card-img-overlay delete-container">
-          <button class="btn btn-sm btn-danger">
+        <div class="card-img-overlay attempt-container">
+          <button class="btn btn-sm btn-danger attempted">
             Attempted at: <%= String(activity.attempttime).split(" ").slice(0,5).join(" ")  %>
           </button>
         </div>

@@ -82,10 +82,6 @@ app.get("/", (req, res) => {
   }
 });
 
-// Create a quiz page
-app.get("/quiz/create", (req, res) => {
-  res.render("create_quiz");
-});
 
 
 

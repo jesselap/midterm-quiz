@@ -135,7 +135,7 @@ footer {
   .card{
     border: 2px solid #276678;
     max-height: 350px;
-    width: 32.5%;
+    // width: 32.5%;
     margin-bottom: 1.5%;
     align-items: flex-start;
     justify-content: flex-end;
@@ -406,12 +406,37 @@ h3 {
 
 // Media Queries
 
+@media screen and (min-width: 769px) {
+  .quizes-container {
+    justify-content: space-between;
+    .card {
+      width: 32.5%;
+    }
+  }
+}
+
 @media screen and (max-width: 768px){
   .home-header {
     .jumbotron {
       border-radius: 25px;
       width: 100%;
       margin-bottom: 1em;
+    }
+  }
+
+  .quizes-container {
+    justify-content: space-between;
+    .card {
+      width: 49%;
+    }
+  }
+}
+
+@media  screen and (max-width: 499px) {
+  .quizes-container {
+    justify-content: center;
+    .card {
+      width: 95%;
     }
   }
 }

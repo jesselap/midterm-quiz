@@ -27,6 +27,10 @@ module.exports = (db) => {
       .catch(err => res.json(err))
   });
 
+  router.get("/all_quizes", (req, res) => {
+    res.send("Okay")
+  })
+
   router.get("/new", (req, res) => {
     if (!req.session.user_id) {
       res.redirect('/')

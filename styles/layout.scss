@@ -27,6 +27,7 @@ body {
 
 nav {
  background-color:#32a8c9;
+ background-image: url("/images/groovepaper.png");
  a {
    color:#EEE;
  }
@@ -65,6 +66,7 @@ footer {
   display: flex;
   justify-content: space-between;
   flex-direction: row;
+  background-image: url("/images/groovepaper.png");
   p {
     color:#EEE;
     margin-bottom: 0;
@@ -128,6 +130,7 @@ footer {
 .quizes-container {
   // background-color: red;
   // height: 200px;
+  background-image: url("/images/groovepaper.png");
 
   .card{
     border: 2px solid #276678;
@@ -329,6 +332,7 @@ h3 {
 
 #quiz-title {
   margin: 0;
+  margin-top: .5rem!important;
 }
 #quiz-owner {
   margin: 0;
@@ -379,6 +383,7 @@ h3 {
   color: #EEE;
   text-align: center;
   text-transform: uppercase ;
+  background-image: url("/images/groovepaper.png");
   }
   h4 {
   font-size: 1.2rem ;
@@ -387,5 +392,14 @@ h3 {
   margin-top: 0.5rem;
   text-align: center;
   text-transform: uppercase ;
+  background-image: url("/images/groovepaper.png");
   }
+}
+
+.display-7 {
+  background-image: url("/images/groovepaper.png");
+}
+
+h3 {
+  background-image: url("/images/groovepaper.png");
 }

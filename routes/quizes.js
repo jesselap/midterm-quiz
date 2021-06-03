@@ -101,6 +101,41 @@ module.exports = (db) => {
   });
 
 
+  // random quiz
+  router.post('/random', (req, res) => {
+
+    const fetchRandom =
+      db.query(`SELECT quizes.*, questions.question as question, choice_a, choice_b, choice_c, answer as choice_d, users.*, questions.id as question_id
+      FROM quizes
+      JOIN questions ON quizes.id = quiz_id
+      JOIN users ON users.id = quizes.owner_id
+      WHERE quizes.id = (SELECT id
+        FROM quizes
+        WHERE public = true
+        ORDER BY random()
+        LIMIT 1)
+      AND users.id = quizes.owner_id;
+    `).catch(err => {
+        res.json(err)
+      })
+      const fetchUser =
+        db.query(`SELECT *
+        FROM users
+        WHERE id = $1;`, [req.session.user_id]).catch(err => {
+          res.json(err)
+        })
+      Promise.all([fetchRandom, fetchUser])
+      .then(data => {
+        let templateVars = {
+          data: data[0].rows,
+          user: data[1].rows[0]
+        }
+        res.render('quiz_play', templateVars)
+      }).catch(err => {
+        res.json(err)
+      })
+  })
+
 
   // individual quiz page
   router.get("/:quiz_id", (req, res) => {

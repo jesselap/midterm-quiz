@@ -26,7 +26,9 @@
           <hr class="my-4">
           <p class="lead welcome-lead">Not sure where to get started? Try a random quiz!</p>
           <p class="lead welcome-lead">
-            <a class="btn btn-primary btn-lg start-quiz" href="#" role="button">START QUIZ</a>
+            <form class="lead welcome-lead" action="/quizes/random" method="post">
+              <button class="btn btn-primary btn-lg start-quiz welcome-lead" type="submit" >START QUIZ</button>
+            </form>
           </p>
         </div>
         <div class="col-md-4 d-flex flex-column leaderboard bg-light">

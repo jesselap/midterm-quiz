@@ -340,31 +340,26 @@ h3 {
   font-size: 100%;
 }
 
-.jumbotron {
-  border-radius: 25px;
-  width: 65%;
-}
-
-.result-header {
-  .jumbotron {
-    border-radius: 25px;
-    width: 65%;
-  }
-  .leaderboard {
-    border-radius: 25px;
-    h4 {
-      text-align: center;
-      text-transform: uppercase;
-      color: #276678;
-    }
-    li {
-      span{
-        background-color:#36874c;
-        // color:black;
-      }
-    }
-  }
-}
+// .result-header {
+//   .jumbotron {
+//     border-radius: 25px;
+//     width: 65%;
+//   }
+//   .leaderboard {
+//     border-radius: 25px;
+//     h4 {
+//       text-align: center;
+//       text-transform: uppercase;
+//       color: #276678;
+//     }
+//     li {
+//       span{
+//         background-color:#36874c;
+//         // color:black;
+//       }
+//     }
+//   }
+// }
 
 .attempt-container{
   display: flex;
@@ -392,5 +387,16 @@ h3 {
   margin-top: 0.5rem;
   text-align: center;
   text-transform: uppercase ;
+  }
+}
+
+
+@media screen and (max-width: 768px){
+  .home-header {
+    .jumbotron {
+      border-radius: 25px;
+      width: 100%;
+      margin-bottom: 1em;
+    }
   }
 }

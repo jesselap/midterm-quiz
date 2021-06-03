@@ -14,13 +14,17 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
-  <script type="text/javascript" src="/scripts/quizes.js"></script>
+  <script type="text/javascript" src="/scripts/all_quizes.js"></script>
 </head>
 
 <body>
   <%- include('partials/_nav'); %>
-
-
+    <section>
+      <button class="btn btn-success">Science</button>
+      <button class="btn btn-danger">Geography</button>
+      <button class="btn btn-info">Space</button>
+      <button class="btn btn-secondary">History</button>
+    </section>
     <section class="quizes-container d-flex flex-column flex-md-row flex-wrap justify-content-between">
       <div class="col-md-12">
         <h4 class="display-5">All Our Quizes</h4>

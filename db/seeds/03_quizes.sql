@@ -28,9 +28,9 @@ INSERT INTO quizes (owner_id, category_id, image_url, title, public) VALUES (5, 
 INSERT INTO quizes (owner_id, category_id, image_url, title, public) VALUES (2, 7, 'https://images.unsplash.com/photo-1536924940846-227afb31e2a5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1347&q=80', 'ARTARTART', true);
 INSERT INTO quizes (owner_id, category_id, image_url, title, public) VALUES (3, 2, 'https://images.unsplash.com/photo-1447727214830-cbcbf097b52c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1458&q=80', 'the  greeks', true);
 INSERT INTO quizes (owner_id, category_id, image_url, title, public) VALUES (4, 8, 'https://images.unsplash.com/photo-1497903964211-19e65cc3360c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80', 'doggies lol', true);
-INSERT INTO quizes (owner_id, category_id, image_url, title, public) VALUES (1, 3, 'https://images.unsplash.com/photo-1471295253337-3ceaaedca402?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1348&q=80', 'Tennis', true);
+INSERT INTO quizes (owner_id, category_id, image_url, title, public) VALUES (1, 3, 'https://images.unsplash.com/photo-1587280501635-68a0e82cd5ff?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80', 'Tennis', true);
 INSERT INTO quizes (owner_id, category_id, image_url, title, public) VALUES (1, 5, 'https://images.unsplash.com/photo-1610131914242-9e1642e441fd?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80', 'Sesame Street', true);
-INSERT INTO quizes (owner_id, category_id, image_url, title, public) VALUES (2, 3, 'https://images.unsplash.com/photo-1587280501635-68a0e82cd5ff?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80', 'Baseball', true);
+INSERT INTO quizes (owner_id, category_id, image_url, title, public) VALUES (2, 3, 'https://images.unsplash.com/photo-1471295253337-3ceaaedca402?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1348&q=80', 'Baseball', true);
 INSERT INTO quizes (owner_id, category_id, image_url, title, public) VALUES (6, 9, 'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1352&q=80', 'Astronauts', true);
 INSERT INTO quizes (owner_id, category_id, image_url, title, public) VALUES (7, 10, 'https://images.unsplash.com/photo-1616593437252-0631aeb95590?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1350&q=80', 'what am I thinking', true);
 INSERT INTO quizes (owner_id, category_id, image_url, title, public) VALUES (7, 8, 'https://images.unsplash.com/photo-1530213786676-41ad9f7736f6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80', 'A is for Animals', true);
@@ -38,6 +38,7 @@ INSERT INTO quizes (owner_id, category_id, image_url, title, public) VALUES (7, 
 INSERT INTO quizes (owner_id, category_id, image_url, title, public) VALUES (9, 1, 'https://images.unsplash.com/photo-1524661135-423995f22d0b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1353&q=80', 'World Capitals', false);
 INSERT INTO quizes (owner_id, category_id, image_url, title, public) VALUES (3, 1, 'https://images.unsplash.com/photo-1473163928189-364b2c4e1135?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1350&q=80', 'India!', false);
 INSERT INTO quizes (owner_id, category_id, image_url, title, public) VALUES (5, 5, 'https://images.unsplash.com/photo-1618500299034-abce7ed0e8df?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80', 'Monsters', false);
+
 
 
 

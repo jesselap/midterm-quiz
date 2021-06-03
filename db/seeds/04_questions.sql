@@ -76,7 +76,7 @@ INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) 
 INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (16, 'Which African American explorer was the first known human to set foot on the North Pole?', 'Paulson Quintain', 'Nathaniel J. Moore', 'Bart Cubbins, Jr.', 'Matthew Alexander Henson');
 INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (17, 'Which state has the capital with the highest population?', 'New York', 'New Jersey', 'California', 'Arizona');
 INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (17, 'Which state has a capital that shares a name with the famous Jackson 5?', 'Missouri', 'Hawaii', 'Iowa', 'Mississippi');
-INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (17, 'Which state capital is shares its name with a famous German ruler?', 'Carson City', 'Lincoln', 'Columbus', 'Bismarck');
+INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (17, 'Which state capital shares its name with a famous German ruler?', 'Carson City', 'Lincoln', 'Columbus', 'Bismarck');
 INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (17, 'Which state has a capital known for the trial of witches?', 'Utah', 'Texas', 'New York', 'Oregon');
 INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (17, 'What is the capital of Wyoming?', 'Alabama', 'Salt Lake City', 'Victorville', 'Cheyenne');
 INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (18, 'Which city is famous for a particular syndrome?', 'Barcelona', 'Geneva', 'Belgrade', 'Stockholm');

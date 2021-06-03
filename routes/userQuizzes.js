@@ -33,5 +33,11 @@ module.exports = (db) => {
         res.render("userQuizzes", {user: null})
       })
     });
+    router.delete("/quizzes/:id", (req, res) => {
+      const queryParams = [Number(req.params.id)];
+      const queryContent = `DELETE FROM quizes
+                            WHERE quizes.id = $1`
+      db.query(queryContent, queryParams)
+    })
     return router;
   };

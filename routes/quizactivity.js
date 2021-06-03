@@ -7,7 +7,7 @@ const router = express.Router();
 module.exports = (db) => {
   router.get("/activity", (req, res) => {
     const queryParams = [Number(req.session.user_id)];
-    const queryContent = `SELECT quizes.id, title, created_at, categories.type as category, score
+    const queryContent = `SELECT quizes.id, quizes.image_url as image, attempts.attempted_at as attempttime, title, created_at, categories.type as category, score
                           FROM attempts
                           JOIN quizes ON attempts.quiz_id = quizes.id
                           JOIN categories ON quizes.category_id = categories.id

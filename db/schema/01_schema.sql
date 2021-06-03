@@ -58,6 +58,7 @@ GRANT SELECT ON quizes TO PUBLIC;
 GRANT SELECT ON questions TO PUBLIC;
 GRANT SELECT ON attempts TO PUBLIC;
 GRANT SELECT ON ratings TO PUBLIC;
+GRANT DELETE ON ALL TABLES IN SCHEMA public TO PUBLIC;
 
 GRANT ALL ON users_id_seq to labber;
 GRANT ALL ON categories_id_seq to labber;

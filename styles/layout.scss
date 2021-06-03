@@ -193,6 +193,10 @@ h3 {
   align-items: flex-end;
 }
 
+.delete-container {
+  align-items: flex-start;
+}
+
 .hideme {
   opacity: 0;
 }
@@ -206,6 +210,17 @@ h3 {
   font-size: 0.8em;
   color: white;
   background-color: #1687A7;
+}
+
+.delete {
+  z-index: 5;
+  margin-top: 1px;
+  width: 6em;
+  padding: 2px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  font-size: 0.8em;
+  color: white;
 }
 
 .linkField {

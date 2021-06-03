@@ -14,6 +14,15 @@ body {
   h1 {
     color: #244751;
   }
+  .start-quiz {
+    color: #eee;
+    background-color: #276678;
+    border: none;
+  }
+  .start-quiz:focus, .start-quiz:hover {
+    color: #eee;
+    background-color: #276678;
+  }
 }
 
 nav {
@@ -24,6 +33,30 @@ nav {
  .nav-link {
   color:#EEE;
  }
+  .nav-link:focus, .nav-link:hover {
+  color: #276678;
+  }
+  .user-link {
+    background-color:#EEE;
+    color: #276678;
+    border: none;
+  }
+  .user-link:focus, .user-link:hover {
+    color: #eee;
+    background-color: #276678;
+  }
+  .logout-link {
+    color: #eee;
+    background-color: #276678;
+    border: none;
+  }
+  .logout-link:focus, .logout-link:hover {
+    color: #eee;
+    background-color: #276678;
+    border: none;
+  }
+
+
 }
 
 footer {
@@ -44,7 +77,7 @@ footer {
 }
 
 .main-body {
-  background-color: #bfbbb0;
+  background-color: #d3e0ea;
 }
 .home-header {
   .jumbotron {
@@ -52,12 +85,11 @@ footer {
     width: 65%;
   }
   .leaderboard {
-    background-color: #bfbbb0;
     border-radius: 25px;
     h4 {
       text-align: center;
       text-transform: uppercase;
-      color: #36874c;
+      color: #276678;
     }
     li {
       span{
@@ -72,7 +104,7 @@ footer {
   // height: 200px;
 
   .card{
-    border: 2px solid blue;
+    border: 2px solid #32a8c9;
     max-height: 350px;
     width: 32.5%;
     margin-bottom: 1.5%;

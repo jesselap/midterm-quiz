@@ -18,12 +18,12 @@
     </ul>
     <div class="d-flex flex-column flex-md-row align-items-start">
       <% if (!user) { %>
-      <a class="btn btn-success mx-md-2 my-sm-2 my-md-0" href="/login">LOGIN</a>
-      <a class="btn btn-secondary" href="/register">SIGNUP</a>
+      <a class="btn btn-success mx-md-2 my-sm-2 my-md-0 user-link" href="/login">LOGIN</a>
+      <a class="btn btn-secondary user-link" href="/register">SIGNUP</a>
       <% } else { %>
-        <a class="btn btn-success mx-md-2 my-sm-2 my-md-0" href="/users/quizzes"><%= user.name %></a>
+        <a class="btn mx-md-2 my-sm-2 my-md-0 user-link" href="/users/quizzes"><%= user.name %></a>
         <form action="/logout" method="post">
-          <button class="btn btn-secondary" type="submit" >Logout</button>
+          <button class="btn btn-secondary logout-link" type="submit" >Logout</button>
         </form>
         <% } %>
     </div>

@@ -22,11 +22,12 @@ const createElement = function (quizObj) {
 const renderQuiz = function (quizes) {
   for (const item of quizes) {
     const quizElement = createElement(item)
-    $('.quizes-container').append(quizElement).fadeOut(300);
+    $('.quizes-container').append(quizElement).fadeIn(200);
   }
 }
 
 const filterQuizes = function(filterBy) {
+  $('.quizes-container').fadeOut(200).empty();
   $.get('/quizes',{filterBy}, function (data) {
     renderQuiz(data)
   });
@@ -37,6 +38,7 @@ $(document).ready(function () {
   $('.card').on('click', function () {
     console.log('clicked')
   })
+  $('.random').click(()=> filterQuizes())
   $('.popular').click(()=> filterQuizes('popular'))
   $('.latest').click(()=> filterQuizes('latest'))
   filterQuizes();

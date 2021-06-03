@@ -13,13 +13,15 @@ const router = express.Router();
 module.exports = (db) => {
   router.get("/", (req, res) => {
     const queryContent =
+      ` SELECT quizes.id, title, image_url, created_at, public, categories.type as category, ROUND(AVG(score))as avg_score, COUNT(attempts.*) as total_attempts
+        FROM quizes
+        LEFT JOIN attempts ON quizes.id = attempts.quiz_id
+        JOIN categories ON quizes.category_id = categories.id
+        WHERE quizes.public = true
+        GROUP BY quizes.id, categories.type
+        ORDER BY RANDOM()
+        LIMIT 12;
       `
-      SELECT quizes.id, title, image_url, created_at, public, categories.type as category, COALESCE((SELECT ROUND(AVG(score))
-      FROM attempts WHERE quiz_id = quizes.id), 0) as avg_score
-      FROM quizes
-      JOIN categories ON quizes.category_id = categories.id
-      WHERE public  = true;
-    `
     db.query(queryContent)
       .then(data => {
         res.json(data.rows)
@@ -27,7 +29,7 @@ module.exports = (db) => {
       .catch(err => res.json(err))
   });
 
-  router.get('/filteredQuizes', (req, res)=> {
+  router.get('/filteredQuizes', (req, res) => {
     const type = req.query.type;
     const queryContent =
       `
@@ -50,10 +52,10 @@ module.exports = (db) => {
     db.query(`SELECT *
     FROM users
     WHERE id = $1;`, [req.session.user_id])
-    .then(data => {
-      let templateVars = {user: data.rows[0]};
-      res.render('all_quizes', templateVars)
-  })
+      .then(data => {
+        let templateVars = { user: data.rows[0] };
+        res.render('all_quizes', templateVars)
+      })
   })
 
   router.get("/new", (req, res) => {

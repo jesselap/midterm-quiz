@@ -10,7 +10,7 @@ const createElement = function (quizObj) {
     <div class="overlay">
       <div class="header">
         <span>${quizObj.category}</span>
-        <span class=${score === '0' ? 'new-quiz': 'avg-score'}>${score=== '0' ? 'NEW' : scoreStr}</span>
+        <span class=${score === null ? 'new-quiz': 'avg-score'}>${score=== null ? 'NEW' : scoreStr}</span>
       </div>
       <p class="card-text">${quizObj.title}</p>
     </div>

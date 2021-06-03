@@ -64,9 +64,27 @@ WHERE quiz_id = 1;
 -- JOIN categories ON categories.id = quizes.category_id
 -- WHERE categories.type LIKE '%cience';
 
-SELECT quizes.id, title, image_url, created_at, public, categories.type as category, COALESCE((SELECT ROUND(AVG(score))
-FROM attempts WHERE quiz_id = quizes.id), 0) as avg_score
+-- SELECT quizes.id, title, image_url, created_at, public, categories.type as category, COALESCE((SELECT ROUND(AVG(score))
+-- FROM attempts WHERE quiz_id = quizes.id), 0) as avg_score
+-- FROM quizes
+-- JOIN categories ON quizes.category_id = categories.id
+-- WHERE public  = true AND
+-- categories.type LIKE '%Science%'
+
+
+-- SELECT quizes.id, title, created_at, categories.type as category, (SELECT ROUND(AVG(score), COUNT(*))
+-- FROM attempts WHERE quiz_id = quizes.id) as avg_score
+-- FROM quizes
+-- JOIN categories ON quizes.category_id = categories.id
+-- WHERE public  = true
+-- ORDER BY
+-- LIMIT 12;
+
+SELECT quizes.id, created_at, categories.type as category, ROUND(AVG(score))as avg_score, COUNT(attempts.*) as total_attempts
 FROM quizes
+LEFT JOIN attempts ON quizes.id = attempts.quiz_id
 JOIN categories ON quizes.category_id = categories.id
-WHERE public  = true AND
-categories.type LIKE '%Science%'
+WHERE quizes.public = true
+GROUP BY quizes.id, categories.type
+ORDER BY RANDOM()
+LIMIT 12;

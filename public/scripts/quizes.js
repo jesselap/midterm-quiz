@@ -28,6 +28,7 @@ const renderQuiz = function (quizes) {
 
 const filterQuizes = function(filterBy) {
   $('.quizes-container').fadeOut(200).empty();
+  $('#quiz-type').text(filterBy)
   $.get('/quizes',{filterBy}, function (data) {
     renderQuiz(data)
   });
@@ -38,7 +39,7 @@ $(document).ready(function () {
   $('.card').on('click', function () {
     console.log('clicked')
   })
-  $('.random').click(()=> filterQuizes())
+  $('.random').click(()=> filterQuizes('random'))
   $('.popular').click(()=> filterQuizes('popular'))
   $('.latest').click(()=> filterQuizes('latest'))
   filterQuizes();

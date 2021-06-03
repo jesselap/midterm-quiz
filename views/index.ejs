@@ -40,8 +40,11 @@
     </header>
 
     <section class="quizes-container d-flex flex-column flex-md-row flex-wrap justify-content-between">
-      <div class="col-md-12">
-        <h4 class="display-5">All Our Quizes</h4>
+      <div class="col-md-12 d-flex flex-column justify-content-center">
+        <h4 class="display-5 w-100">All Our Quizes
+        </h4>
+        <button class="popular btn btn-success w-25">POPULAR Quizes</button>
+        <button class="new btn btn-warning w-25">New Quizes</button>
       </div>
     </section>
 
@@ -51,7 +54,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"></script>
-      <%- include('partials/_footer'); %>
+    <%- include('partials/_footer'); %>
 </body>
 
 </html>

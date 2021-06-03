@@ -401,6 +401,16 @@ h3 {
   background-image: url("/images/groovepaper.png");
 }
 
+.category-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .btn {
+    margin: 5px 5px;
+  }
+}
+
 // Media Queries
 
 @media screen and (min-width: 769px) {
@@ -461,3 +471,4 @@ h3 {
     }
   }
 }
+

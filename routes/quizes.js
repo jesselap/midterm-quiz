@@ -28,7 +28,13 @@ module.exports = (db) => {
   });
 
   router.get("/all_quizes", (req, res) => {
-    res.send("Okay")
+    db.query(`SELECT *
+    FROM users
+    WHERE id = $1;`, [req.session.user_id])
+    .then(data => {
+      let templateVars = {user: data.rows[0]};
+      res.render('all_quizes', templateVars)
+  })
   })
 
   router.get("/new", (req, res) => {

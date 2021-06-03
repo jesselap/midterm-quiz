@@ -21,13 +21,14 @@
     <header class="main-body px-3">
       <section class="home-header row p-4 d-flex justify-content-between">
         <div class=" bg-light col-md-8 jumbotron pt-3">
-          <h2 class="display-4 text-center">Hello, world!</h2>
-          <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to
-            featured content or information.</p>
+          <h2 class="display-4 welcome-lead">Welcome to light QUIZ</h2>
+          <p class="lead welcome-lead">Test your wits with our quizzes or create your own.</p>
           <hr class="my-4">
-          <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-          <p class="lead">
-            <a class="btn btn-primary btn-lg" href="#" role="button">START QUIZ</a>
+          <p class="lead welcome-lead">Not sure where to get started? Try a random quiz!</p>
+          <p class="lead welcome-lead">
+            <form class="lead welcome-lead" action="/quizes/random" method="post">
+              <button class="btn btn-primary btn-lg start-quiz welcome-lead" type="submit" >START QUIZ</button>
+            </form>
           </p>
         </div>
         <div class="col-md-4 d-flex flex-column leaderboard bg-light">

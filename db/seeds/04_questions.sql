@@ -26,7 +26,7 @@ INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) 
 INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (6, 'What does Dada mean?', 'What I call my Dad', 'Loneliness', 'Being connected with nature', 'It is nonsensical');
 INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (7, 'Which club has the most Champions League Titles?', 'Barcelona', 'Manchester United', 'PSG', 'Real Madrid');
 INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (7, 'Which club did Zinedine Zidane NOT play for?', 'Real Madrid', 'Juventus', 'Bordeaux', 'PSG');
-INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (7, 'Which club one the 2021 Champions League Title', 'Manchester City', 'Real Madrid', 'Bayern', 'Chelsea');
+INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (7, 'Which club won the 2021 Champions League Title', 'Manchester City', 'Real Madrid', 'Bayern', 'Chelsea');
 INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (7, 'Which country is hosting the 2022 World Cup?', 'United Kingdom', 'Japan', 'Russia', 'Qatar');
 INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (7, 'Which club did Diego Maradona play for?', 'Real Madrid', 'Leeds United', 'Juventus', 'Napoli');
 INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (8, 'Which is the smallest planet within our solar system?', 'Saturn', 'Earth', 'Pluto', 'Mercury');

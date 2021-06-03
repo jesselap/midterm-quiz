@@ -65,7 +65,7 @@ $(document).ready(function () {
     filterQuizes('Art');
   })
   $('.misc').click(()=> {
-    filterQuizes('Misccellaneous');
+    filterQuizes('Miscellaneous');
   })
 
 });

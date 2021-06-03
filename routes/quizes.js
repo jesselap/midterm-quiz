@@ -28,7 +28,6 @@ module.exports = (db) => {
   });
 
   router.get('/filteredQuizes', (req, res)=> {
-    console.log(req.query.type)
     const type = req.query.type;
     const queryContent =
       `
@@ -41,7 +40,6 @@ module.exports = (db) => {
     `
     db.query(queryContent)
       .then(data => {
-        console.log(data.rows)
         res.json(data.rows)
       })
       .catch(err => res.json(err))
@@ -60,7 +58,7 @@ module.exports = (db) => {
 
   router.get("/new", (req, res) => {
     if (!req.session.user_id) {
-      res.redirect('/')
+      res.redirect('/login')
     }
     const queryContent = `SELECT * FROM categories;`
     db.query(queryContent)

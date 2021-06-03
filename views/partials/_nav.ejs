@@ -13,17 +13,10 @@
         <a class="nav-link" href="/quizes/all_quizes">CATEGORIES</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">TOP QUIZES</a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" href="/quizes/new">CREATE QUIZ</a>
       </li>
     </ul>
     <div class="d-flex flex-column flex-md-row align-items-start">
-      <form class="form-inline mx-lg-2 d-flex flex-row">
-        <input class="form-control px-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-dark my-2 my-sm-0" type="submit">Search</button>
-      </form>
       <% if (!user) { %>
       <a class="btn btn-success mx-md-2 my-sm-2 my-md-0" href="/login">LOGIN</a>
       <a class="btn btn-secondary" href="/register">SIGNUP</a>
@@ -32,7 +25,6 @@
         <form action="/logout" method="post">
           <button class="btn btn-secondary" type="submit" >Logout</button>
         </form>
-        <a class="btn btn-secondary" href="">New Quiz</a>
         <% } %>
     </div>
   </div>

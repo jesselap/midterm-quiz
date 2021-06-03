@@ -19,10 +19,11 @@
 
 <body>
   <%- include('partials/_nav'); %>
-
+  <h3 id="quiz-title" class="display-6"><%=data[0].title%></h3>
+  <h3 id="quiz-owner" class="w-100">Created by: <%=data[0].name%></h3>
   <form class="quiz-display" action="/quizes/result"  method="POST">
   <% for (question of data) { %>
-    <fieldset>
+    <fieldset class="quiz-question">
     <legend><%= question.question %></legend>
     <% let choices = [question.choice_a, question.choice_b, question.choice_c, question.choice_d].sort(()=> Math.random() - 0.5) %>
       <input type="radio" name='<%=question.question_id%>' id="opt1" value="<%= choices[0] %>" required> <%= choices[0] %>
@@ -36,8 +37,9 @@
     </fieldset>
     <% } %>
       <br>
-      <button class="btn btn-secondary" type="submit" >Submit</button>
+      <button id="quiz-play-submit" class="btn btn-secondary" type="submit" >Submit</button>
     </form>
+    <br>
     <%- include('partials/_footer'); %>
 </body>
 </html>

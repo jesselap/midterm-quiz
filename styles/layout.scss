@@ -376,9 +376,6 @@ h3 {
   align-items: center;
   background-color: #32a8c9;
 
-  div {
-    padding-right: 1em;
-  }
   h2 {
   color: #EEE;
   text-align: center;
@@ -386,7 +383,7 @@ h3 {
   background-image: url("/images/groovepaper.png");
   }
   h4 {
-  font-size: 1.2rem ;
+  font-size: 1.0rem ;
   min-width: 25%;
   color: #EEE;
   margin-top: 0.5rem;
@@ -413,6 +410,12 @@ h3 {
       width: 32.5%;
     }
   }
+.quiz-container-title {
+
+  div {
+      padding-right: 1em;
+  }
+}
 }
 
 @media screen and (max-width: 768px){
@@ -422,6 +425,11 @@ h3 {
       width: 100%;
       margin-bottom: 1em;
     }
+  }
+
+  .quiz-container-title {
+    flex-direction: column;
+    padding: 0.5em 0;
   }
 
   .quizes-container {
@@ -437,6 +445,19 @@ h3 {
     justify-content: center;
     .card {
       width: 95%;
+    }
+  }
+}
+
+@media screen and(max-width : 399px) {
+  .quiz-container-title {
+    div {
+      flex-direction: column;
+      width: 75%;
+
+      .btn {
+        margin: 2px;
+      }
     }
   }
 }

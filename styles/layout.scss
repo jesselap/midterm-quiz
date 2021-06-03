@@ -99,12 +99,16 @@ footer {
     }
   }
 }
+.welcome-lead {
+  text-align: center;
+  color: #276678;
+}
 .quizes-container {
   // background-color: red;
   // height: 200px;
 
   .card{
-    border: 2px solid #32a8c9;
+    border: 2px solid #276678;
     max-height: 350px;
     width: 32.5%;
     margin-bottom: 1.5%;

@@ -22,7 +22,7 @@ const createElement = function (quizObj) {
 const renderQuiz = function (quizes) {
   for (const item of quizes) {
     const quizElement = createElement(item)
-    $('.quizes-container').fadeIn().append(quizElement)
+    $('.quizes-container').fadeIn(300).append(quizElement)
   }
 }
 

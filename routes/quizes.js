@@ -12,6 +12,13 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
+    console.log(req.query.filterBy)
+    let filterStr = `RANDOM()`;
+    if(req.query.filterBy === 'popular') {
+      filterStr = 'total_attempts';
+    } else if(req.query.filterBy === 'latest'){
+      filterStr = 'created_at';
+    }
     const queryContent =
       ` SELECT quizes.id, title, image_url, created_at, public, categories.type as category, ROUND(AVG(score))as avg_score, COUNT(attempts.*) as total_attempts
         FROM quizes
@@ -19,7 +26,7 @@ module.exports = (db) => {
         JOIN categories ON quizes.category_id = categories.id
         WHERE quizes.public = true
         GROUP BY quizes.id, categories.type
-        ORDER BY RANDOM()
+        ORDER BY ${filterStr} DESC
         LIMIT 12;
       `
     db.query(queryContent)

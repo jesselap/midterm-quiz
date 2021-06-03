@@ -86,5 +86,5 @@ LEFT JOIN attempts ON quizes.id = attempts.quiz_id
 JOIN categories ON quizes.category_id = categories.id
 WHERE quizes.public = true
 GROUP BY quizes.id, categories.type
-ORDER BY RANDOM()
+ORDER BY RANDOM() DESC
 LIMIT 12;

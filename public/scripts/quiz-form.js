@@ -3,7 +3,7 @@ const createQuizHTML = function(no) {
   `
     <div class="col-12">
     <label for="question1">Question No: ${no}</label>
-    <input type="text" class="form-control" id="question1" name="questions[${no}]" placeholder="First Question" required>
+    <input type="text" class="form-control" id="question1" name="questions[${no}]" placeholder="Question No: ${no}" required>
     </div>
     <div class="col-md-6">
     <label for="answer">Your Answer</label>

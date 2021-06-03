@@ -403,3 +403,15 @@ h3 {
 h3 {
   background-image: url("/images/groovepaper.png");
 }
+
+// Media Queries
+
+@media screen and (max-width: 768px){
+  .home-header {
+    .jumbotron {
+      border-radius: 25px;
+      width: 100%;
+      margin-bottom: 1em;
+    }
+  }
+}

@@ -26,13 +26,20 @@ const renderQuiz = function (quizes) {
   }
 }
 
+const filterQuizes = function(category) {
+  $.get('/quizes/filteredQuizes', {type: category}, function (data) {
+    renderQuiz(data)
+  });
+}
+
 $(document).ready(function () {
+  const science = $('.science');
+  science.click(function() {
+    alert('science')
+  })
   console.log('Jquery Working');
   $('.card').on('click', function () {
     console.log('clicked')
   })
-  $.get('/quizes', function (data) {
-    console.log(data)
-    renderQuiz(data)
-  });
+  filterQuizes('science');
 });

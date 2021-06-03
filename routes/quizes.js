@@ -65,15 +65,21 @@ module.exports = (db) => {
       })
   })
 
+
   router.get("/new", (req, res) => {
     if (!req.session.user_id) {
       res.redirect('/login')
     }
-    const queryContent = `SELECT * FROM categories;`
-    db.query(queryContent)
+    const fetchUser = db.query(`SELECT *
+      FROM users
+      WHERE id = $1;`, [req.session.user_id])
+      .catch(err => res.json(err))
+    const fetchCategories = db.query(`SELECT * FROM categories;`)
+      .catch(err => res.json(err))
+    Promise.all([fetchCategories, fetchUser])
       .then(data => {
-        const templateVars = { categories: data.rows, user: req.session.user_id }
-        res.render('create_quiz', templateVars)
+        const templateVars = { categories: data[0].rows, user: data[1].rows[0] }
+      res.render('create_quiz', templateVars)
       })
   });
 

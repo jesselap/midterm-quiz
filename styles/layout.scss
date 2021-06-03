@@ -2,7 +2,7 @@
 
 @mixin title-tab {
   background-color: #32a8c9;
-  color: #EEE;;
+  color: #EEE;
   text-transform: uppercase;
   text-align: center;
 }
@@ -343,4 +343,26 @@ h3 {
   display: flex;
   padding: 6px;
   align-items: flex-start;
+.quiz-container-title{
+  display: flex;
+  align-items: center;
+  background-color: #32a8c9;
+
+  div {
+    padding-right: 1em;
+  }
+  h2 {
+  color: #EEE;
+  text-align: center;
+  text-transform: uppercase ;
+  }
+  h4 {
+  font-size: 1.2rem ;
+  min-width: 25%;
+  color: #EEE;
+  margin-top: 0.5rem;
+  text-align: center;
+  text-transform: uppercase ;
+  }
+}
 }

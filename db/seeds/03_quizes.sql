@@ -38,8 +38,3 @@ INSERT INTO quizes (owner_id, category_id, image_url, title, public) VALUES (7, 
 INSERT INTO quizes (owner_id, category_id, image_url, title, public) VALUES (9, 1, 'https://images.unsplash.com/photo-1524661135-423995f22d0b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1353&q=80', 'World Capitals', false);
 INSERT INTO quizes (owner_id, category_id, image_url, title, public) VALUES (3, 1, 'https://images.unsplash.com/photo-1473163928189-364b2c4e1135?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1350&q=80', 'India!', false);
 INSERT INTO quizes (owner_id, category_id, image_url, title, public) VALUES (5, 5, 'https://images.unsplash.com/photo-1618500299034-abce7ed0e8df?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80', 'Monsters', false);
-
-
-
-
-

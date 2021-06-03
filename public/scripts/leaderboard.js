@@ -1,11 +1,11 @@
 const createBoard = function (leaderObj) {
-  const score = leaderObj.score;
+  console.log('line 2 ----------- ', leaderObj);
+  const score = Math.round(leaderObj.score);
   const name = leaderObj.name
-  const quiz = leaderObj.quiz;
   const leaderHTML = `
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      ${name} <span style="background-color:transparent;">${quiz}</span>
-      <span id="leaderboard" class="badge badge-pill badge-danger">${score}</span>
+    <li class="bg-light list-group-item d-flex justify-content-between align-items-center" style="border: none; color:#276678;" >
+      ${name}
+      <span id="leaderboard" class="badge badge-pill badge-danger">Average Score: ${score}</span>
     </li>
   `;
   return leaderHTML;

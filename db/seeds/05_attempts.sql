@@ -77,4 +77,6 @@ INSERT INTO attempts (user_id, quiz_id, score) VALUES (8, 3, 22);
 INSERT INTO attempts (user_id, quiz_id, score) VALUES (9, 3, 12);
 INSERT INTO attempts (user_id, quiz_id, score) VALUES (9, 4, 87);
 INSERT INTO attempts (user_id, quiz_id, score) VALUES (9, 4, 75);
-INSERT INTO attempts (user_id, quiz_id, score) VALUES (9, 4, 49);
+INSERT INTO attempts (user_id, quiz_id, score) VALUES (9, 31, 49);
+INSERT INTO attempts (user_id, quiz_id, score) VALUES (8, 31, 79);
+INSERT INTO attempts (user_id, quiz_id, score) VALUES (10, 31, 75);

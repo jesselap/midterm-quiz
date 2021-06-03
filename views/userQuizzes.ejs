@@ -34,6 +34,11 @@
     <% for (quiz of quizzes) { %>
       <div class="card bg-dark text-white col-md-4" url=/quizes/<%= quiz.id %>>
         <img src="<%= quiz.image %>" class="card-img" alt="...">
+        <div class="card-img-overlay delete-container">
+          <button class="btn btn-sm btn-danger delete" quiz-id=<%= quiz.id %>>
+            Delete Quiz
+          </button>
+        </div>
         <div class="card-img-overlay">
         <div>
           <input class="linkField" type="text" value="lightquiz.com/quizes/<%= quiz.id %>" id="linkField<%= quiz.id %>">

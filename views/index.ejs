@@ -39,12 +39,21 @@
         </div>
       </section>
     </header>
-
-    <section class="quizes-container d-flex flex-column flex-md-row flex-wrap justify-content-between">
-      <div class="col-md-12">
-        <h4 class="display-5">All Our Quizes</h4>
+    <section class="mb-1">
+      <div class="col-md-12 mt-2 quiz-container-title">
+        <h2 class="display-6 text-center w-100"><span id="quiz-type">Random</span> Quizes
+        </h2>
+        <div class="d-flex flex-md-row w-50 justify-content-end">
+          <h4>sort by: </h4>
+          <button class="random btn btn-secondary w-15 mx-1">Random</button>
+          <button class="popular btn btn-primary w-15 mx-1">POPULAR</button>
+          <button class="latest btn btn-warning w-15 mx-1">LATEST</button>
+        </div>
       </div>
     </section>
+
+    <main class="quizes-container d-flex flex-column flex-md-row flex-wrap justify-content-between">
+    </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
       integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -52,7 +61,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"></script>
-      <%- include('partials/_footer'); %>
+    <%- include('partials/_footer'); %>
 </body>
 
 </html>

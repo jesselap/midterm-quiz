@@ -1,8 +1,20 @@
 $(() => {
   $(".shareLink").hide();
-  $(".card").on("click", function() {
-    window.location.href = $(this).attr("url");
+  $(".card-img-overlay").on("click", function(event) {
+    if (event.target !== this) {
+      return;
+    }
+    window.location.href = $(this).parent().attr("url");
   })
+  $(".delete").on("click", function() {
+    const quizid = $(this).attr("quiz-id");
+    $.ajax({
+      url: `/users/quizzes/${quizid}`,
+      type: 'DELETE',
+    })
+    location.reload()
+  })
+
   $(".share").on("click", function() {
       /* Get the text field */
       var copyText = document.getElementById(`linkField${$(this).attr("id")}`);

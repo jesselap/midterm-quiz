@@ -22,12 +22,12 @@ const createElement = function (quizObj) {
 const renderQuiz = function (quizes) {
   for (const item of quizes) {
     const quizElement = createElement(item)
-    $('.quizes-container').fadeIn(300).append(quizElement)
+    $('.quizes-container').append(quizElement).fadeIn(200)
   }
 }
 
 const filterQuizes = function(category) {
-  $('.quizes-container').fadeOut(500).empty();
+  $('.quizes-container').fadeOut(200).empty();
   // $('.quizes-container').fadeOut();
   $.get('/quizes/filteredQuizes', {type: category}, function (data) {
     renderQuiz(data)
@@ -35,19 +35,47 @@ const filterQuizes = function(category) {
 }
 
 $(document).ready(function () {
-  const science = $('.science');
+  // const science = $('.science');
   filterQuizes('');
   $('.science').click(()=> {
     filterQuizes('Science');
   })
+  $('.space').click(()=> {
+    filterQuizes('Space');
+  })
   $('.geography').click(()=> {
     filterQuizes('Geography');
   })
-  $('.space').click(()=> {
-    filterQuizes('Space');
+  $('.biology').click(()=> {
+    filterQuizes('Biology');
+  })
+  $('.sports').click(()=> {
+    filterQuizes('Sports');
+  })
+  $('.culture').click(()=> {
+    filterQuizes('Popular Culture');
+  })
+  $('.music').click(()=> {
+    filterQuizes('Music');
   })
   $('.history').click(()=> {
     filterQuizes('History');
   })
+  $('.art').click(()=> {
+    filterQuizes('Art');
+  })
+  $('.misc').click(()=> {
+    filterQuizes('Misccellaneous');
+  })
 
 });
+{/* <button class="science btn btn-success">Computer Science</button>
+<button class="geography btn btn-danger">Geography</button>
+<button class="space btn btn-info">Space</button>
+<button class="biology btn btn-primary">Biology</button>
+<button class="sports btn btn-warning">Sports</button>
+<button class="culture btn btn-dark">Popular Culture</button>
+<button class="music btn btn-success">Music</button>
+<button class="history btn btn-warning">History</button>
+<button class="art btn btn-danger">Art</button>
+<button class="misc btn btn-info">Miscellaneous</button> */}

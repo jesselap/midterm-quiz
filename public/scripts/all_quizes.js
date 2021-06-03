@@ -27,6 +27,7 @@ const renderQuiz = function (quizes) {
 }
 
 const filterQuizes = function(category) {
+  $('.quizes-container').empty();
   $.get('/quizes/filteredQuizes', {type: category}, function (data) {
     renderQuiz(data)
   });
@@ -34,12 +35,18 @@ const filterQuizes = function(category) {
 
 $(document).ready(function () {
   const science = $('.science');
-  science.click(function() {
-    alert('science')
+  filterQuizes('');
+  $('.science').click(()=> {
+    filterQuizes('Science');
   })
-  console.log('Jquery Working');
-  $('.card').on('click', function () {
-    console.log('clicked')
+  $('.geography').click(()=> {
+    filterQuizes('Geography');
   })
-  filterQuizes('science');
+  $('.space').click(()=> {
+    filterQuizes('Space');
+  })
+  $('.history').click(()=> {
+    filterQuizes('History');
+  })
+
 });

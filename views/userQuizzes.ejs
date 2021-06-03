@@ -23,14 +23,11 @@
   <%- include('partials/_nav'); %>
   <%- include('partials/_navUser')  %>
 <main>
-  <section class="quizes-container d-flex flex-column flex-md-row flex-wrap justify-content-between">
-    <div class="col-md-12">
-      <h4 class="display-6">My Quizzes</h4>
-
+    <div class="col-md-12 mt-3">
+      <h3 class="display-6">My Quizzes</h3>
     </div>
-  </section>
   <% if (user) { %>
-  <section class="quizes-container d-flex flex-column flex-md-row flex-wrap justify-content-between">
+  <section class="quizes-container d-flex flex-md-row flex-wrap justify-content-sm-between">
     <% for (quiz of quizzes) { %>
       <div class="card bg-dark text-white col-md-4" url=/quizes/<%= quiz.id %>>
         <img src="<%= quiz.image %>" class="card-img" alt="...">

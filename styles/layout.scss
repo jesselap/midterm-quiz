@@ -62,14 +62,36 @@ nav {
 footer {
   background-color:#32a8c9;
   text-align: center;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
   p {
     color:#EEE;
+    margin-bottom: 0;
   }
+  .github-links {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+  .logo {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    width: 5em;
+  }
+  .git-logo {
+    width: 1em;
+  }
+  .github-links a {
+    text-decoration: none;
+    color:#EEE;
 }
-.logo {
-  margin-bottom: 1em;
-  width: 5em;
 }
+
 
 .nav-logo {
   margin-left: 1em;

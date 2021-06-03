@@ -166,7 +166,11 @@ footer {
       .header{
         display: flex;
         justify-content: space-between;
+        align-items: center;
 
+        #percent {
+          border-radius: 5px 0 0 5px;
+        }
         .avg-score {
           background-color: green;
           padding: 0.2rem 0.5rem;
@@ -175,6 +179,7 @@ footer {
       span:first-child {
         background-color: brown;
         text-transform: uppercase;
+        border-radius: 0 5px 5px 0;
         padding: 0.2rem 0.5rem;
         font-size: 0.9rem;
       }
@@ -342,27 +347,6 @@ h3 {
   font-size: 100%;
 }
 
-// .result-header {
-//   .jumbotron {
-//     border-radius: 25px;
-//     width: 65%;
-//   }
-//   .leaderboard {
-//     border-radius: 25px;
-//     h4 {
-//       text-align: center;
-//       text-transform: uppercase;
-//       color: #276678;
-//     }
-//     li {
-//       span{
-//         background-color:#36874c;
-//         // color:black;
-//       }
-//     }
-//   }
-// }
-
 .attempt-container{
   display: flex;
   padding: 6px;
@@ -457,10 +441,16 @@ h3 {
     justify-content: center;
     .card {
       width: 95%;
+
+      .overlay{
+        span:first-child {
+          padding: 0.2rem 0.3rem;
+          font-size: 0.7rem;
+      }
     }
   }
 }
-
+}
 @media screen and(max-width : 399px) {
   .quiz-container-title {
     div {

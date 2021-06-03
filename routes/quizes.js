@@ -27,6 +27,37 @@ module.exports = (db) => {
       .catch(err => res.json(err))
   });
 
+  router.get('/filteredQuizes', (req, res)=> {
+    console.log(req.query.type)
+    const type = req.query.type;
+    const queryContent =
+      `
+      SELECT quizes.id, title, image_url, created_at, public, categories.type as category, COALESCE((SELECT ROUND(AVG(score))
+      FROM attempts WHERE quiz_id = quizes.id), 0) as avg_score
+      FROM quizes
+      JOIN categories ON quizes.category_id = categories.id
+      WHERE public  = true AND
+      categories.type LIKE '%${type}%';
+    `
+    db.query(queryContent)
+      .then(data => {
+        console.log(data.rows)
+        res.json(data.rows)
+      })
+      .catch(err => res.json(err))
+  })
+
+  router.get("/all_quizes", (req, res) => {
+
+    db.query(`SELECT *
+    FROM users
+    WHERE id = $1;`, [req.session.user_id])
+    .then(data => {
+      let templateVars = {user: data.rows[0]};
+      res.render('all_quizes', templateVars)
+  })
+  })
+
   router.get("/new", (req, res) => {
     if (!req.session.user_id) {
       res.redirect('/')

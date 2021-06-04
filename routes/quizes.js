@@ -56,9 +56,7 @@ module.exports = (db) => {
 
   router.get("/all_quizes", (req, res) => {
 
-    db.query(`SELECT *
-    FROM users
-    WHERE id = $1;`, [req.session.user_id])
+    fetchUser(req)
       .then(data => {
         let templateVars = { user: data.rows[0] };
         res.render('all_quizes', templateVars)
@@ -70,13 +68,9 @@ module.exports = (db) => {
     if (!req.session.user_id) {
       res.redirect('/login')
     }
-    const fetchUser = db.query(`SELECT *
-      FROM users
-      WHERE id = $1;`, [req.session.user_id])
-      .catch(err => res.json(err))
     const fetchCategories = db.query(`SELECT * FROM categories;`)
       .catch(err => res.json(err))
-    Promise.all([fetchCategories, fetchUser])
+    Promise.all([fetchCategories, fetchUser(req)])
       .then(data => {
         const templateVars = { categories: data[0].rows, user: data[1].rows[0] }
         res.render('create_quiz', templateVars)
@@ -133,13 +127,7 @@ module.exports = (db) => {
     `).catch(err => {
         res.json(err)
       })
-    const fetchUser =
-      db.query(`SELECT *
-        FROM users
-        WHERE id = $1;`, [req.session.user_id]).catch(err => {
-        res.json(err)
-      })
-    Promise.all([fetchRandom, fetchUser])
+    Promise.all([fetchRandom, fetchUser(req)])
       .then(data => {
         let templateVars = {
           data: data[0].rows,
@@ -154,26 +142,23 @@ module.exports = (db) => {
 
   // individual quiz page
   router.get("/:quiz_id", (req, res) => {
-    db.query(`SELECT *
-      FROM users
-      WHERE id = $1;`, [req.session.user_id])
+    fetchUser(req)
       .then(data => {
         let templateVars = {
           user: data.rows[0]
         };
-        const queryContent = `
-                              SELECT quizes.*, questions.question as question, choice_a, choice_b, choice_c, answer as choice_d, users.*, questions.id as question_id
-                              FROM quizes
-                              JOIN questions ON quizes.id = quiz_id
-                              JOIN users ON users.id = quizes.owner_id
-                              WHERE quizes.id = $1
-                              AND users.id = quizes.owner_id;
-                           `;
+        const queryContent =
+          `
+        SELECT quizes.*, questions.question as question, choice_a, choice_b, choice_c, answer as choice_d, users.*, questions.id as question_id
+        FROM quizes
+        JOIN questions ON quizes.id = quiz_id
+        JOIN users ON users.id = quizes.owner_id
+        WHERE quizes.id = $1
+        AND users.id = quizes.owner_id;
+        `;
         db.query(queryContent, [req.params.quiz_id])
           .then((quizData) => {
             if (!quizData.rows[0]) {
-              // res.status(403).send("<html><body><h1>ERROR: bad gateway</h1></body></html>");
-              // return;
               res.render('404', templateVars);
               return;
             }
@@ -194,8 +179,6 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       })
   });
-
-
 
   // individual quiz page (answer submission)
 
@@ -250,13 +233,7 @@ module.exports = (db) => {
               JOIN categories ON quizes.category_id = categories.id
               WHERE category_id = (SELECT category_id FROM quizes WHERE id= ${quizId})`).catch(err => { throw `error fetching similar quizes` });
 
-            // Using user data to show user information
-            const getUser =
-              db.query(`SELECT *
-              FROM users
-              WHERE id = $1;`, [req.session.user_id]).catch(err => { throw `error fetching user information` });
-
-            Promise.all([getUsersAttemptsData, getSimilarQuizes, getUser])
+            Promise.all([getUsersAttemptsData, getSimilarQuizes, fetchUser(req)])
               .then(data => {
                 // Sending back result, which contain user score, no of questions and no of correct answer
                 // attemptInos, contains all information coming from attemps table, like max sscore, avg score of all users, etc
@@ -280,6 +257,13 @@ module.exports = (db) => {
       });
   });
 
+  // Helper function to get user data using cookie
+  const fetchUser = (req) => {
+    return db.query(`SELECT *
+    FROM users
+    WHERE id = $1;`, [req.session.user_id])
+      .catch(err => { throw `error fetching user information` })
+  }
 
   return router;
 };

@@ -48,12 +48,13 @@
 
         </ul>
       </div>
+      </section>
     </header>
     <% if(quizes.length) {%>
-      <section class="quizes-container d-flex flex-column flex-md-row flex-wrap justify-content-between">
-        <div class="col-md-12">
-          <h4 class="display-7">Similar Quizes on <%= quizes[0].category  %> </h4>
-        </div>
+      <div class="col-md-12">
+        <h3 class="display-7 mt-3">Similar Quizes on <%= quizes[0].category  %> </h3>
+      </div>
+      <section class="quizes-container d-flex flex-md-row flex-wrap justify-content-sm-between">
         <% for(let quiz of quizes) {%>
         <div class="card bg-dark text-white col-md-4">
           <img
@@ -70,7 +71,7 @@
         <% } %>
       </section>
       <%} %>
-  </main>
+    </section>
   <%- include('partials/_footer'); %>
 </body>
 

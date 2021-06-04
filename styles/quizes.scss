@@ -16,17 +16,35 @@
   .card{
     border: 2px solid #276678;
     max-height: 350px;
-    // width: 32.5%;
     margin-bottom: 1.5%;
     align-items: flex-start;
     justify-content: flex-end;
     &:hover {
       cursor: pointer;
-      img {
+      img, .card-more-info {
         opacity: 0.9;
       }
       .overlay {
         background-color: rgba(0,0,0,.5);
+      }
+    }
+
+    .card-more-info{
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      position: absolute;
+      top: 0;
+      // background-color: rgba(0,0,0,.5);
+      opacity: 0;
+      transition: 1s;
+
+      span {
+        border-radius: 0 25px 25px 0;
+        background-color: #32a8c9;
+        padding-left: 0.2rem;
+        padding-right: 0.8rem;
+        margin-bottom: 0.2em;
       }
     }
     a{
@@ -75,17 +93,5 @@
   h4{
     @include title-tab;
     margin-top: 1%;
-  }
-}
-
-.result-container {
-  display: flex;
-  justify-content: space-between;
-
-  .result-body {
-    width: 65%;
-  }
-  blockquote {
-    flex-grow: 1;
   }
 }

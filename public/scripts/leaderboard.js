@@ -1,5 +1,4 @@
 const createBoard = function (leaderObj) {
-  console.log('line 2 ----------- ', leaderObj);
   const score = Math.round(leaderObj.score);
   const name = leaderObj.name
   const leaderHTML = `

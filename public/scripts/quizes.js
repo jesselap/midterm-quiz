@@ -7,6 +7,11 @@ const createElement = function (quizObj) {
     <img
       src=${quizObj.image_url}
       class="card-img" alt="..."></a>
+      <div class = 'card-more-info'>
+      <span>No of Questions: ${quizObj.total_attempts}</span>
+      <span>Total Attempts: ${quizObj.total_attempts}</span>
+      <span>Average Score:: ${quizObj.total_attempts}</span>
+      </div>
     <div class="overlay">
       <div class="header">
         <span>${quizObj.category}</span>
@@ -30,6 +35,7 @@ const filterQuizes = function(filterBy) {
   $('.quizes-container').fadeOut(400).empty();
   $('#quiz-type').text(filterBy)
   $.get('/quizes/getAllQuizes',{filterBy}, function (data) {
+    console.log(data)
     renderQuiz(data)
   });
 }

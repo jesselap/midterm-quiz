@@ -80,11 +80,23 @@ WHERE quiz_id = 1;
 -- ORDER BY
 -- LIMIT 12;
 
-SELECT quizes.id, created_at, categories.type as category, ROUND(AVG(score))as avg_score, COUNT(attempts.*) as total_attempts
-FROM quizes
-LEFT JOIN attempts ON quizes.id = attempts.quiz_id
-JOIN categories ON quizes.category_id = categories.id
-WHERE quizes.public = true
-GROUP BY quizes.id, categories.type
-ORDER BY RANDOM() DESC
-LIMIT 12;
+-- SELECT quizes.id, created_at, categories.type as category, ROUND(AVG(score))as avg_score, COUNT(attempts.*) as total_attempts
+-- FROM quizes
+-- LEFT JOIN attempts ON quizes.id = attempts.quiz_id
+-- JOIN categories ON quizes.category_id = categories.id
+-- WHERE quizes.public = true
+-- GROUP BY quizes.id, categories.type
+-- ORDER BY RANDOM() DESC
+-- LIMIT 12;
+
+-- SELECT quizes.id, title, categories.type as category,
+-- ROUND(AVG(score))as avg_score, COUNT(attempts.*) as total_attempts,
+-- (SELECT COUNT(*) FROM questions WHERE questions.quiz_id = quizes.id) as total_questions
+-- FROM quizes
+-- LEFT JOIN attempts ON quizes.id = attempts.quiz_id
+-- JOIN categories ON quizes.category_id = categories.id
+-- JOIN questions ON questions.quiz_id = quizes.id
+-- WHERE quizes.public = true
+-- GROUP BY quizes.id, categories.type
+-- ORDER BY total_attempts DESC
+-- LIMIT 12;

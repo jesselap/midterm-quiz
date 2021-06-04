@@ -18,7 +18,6 @@ const createElement = function (quizObj) {
   return quizHTML
 }
 
-// quizObj.avg_score === 0 ? 'btn-danger': 'avg-score'
 const renderQuiz = function (quizes) {
   for (const item of quizes) {
     const quizElement = createElement(item)

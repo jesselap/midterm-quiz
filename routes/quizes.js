@@ -11,7 +11,16 @@ const express = require('express');
 const router = express.Router();
 
 module.exports = (db) => {
+
   router.get("/", (req, res) => {
+    fetchUser(req)
+      .then(data => {
+        let templateVars = { user: data.rows[0] };
+        res.render('quizes', templateVars)
+      })
+  })
+
+  router.get("/getAllQuizes", (req, res) => {
     console.log(req.query.filterBy)
     let filterStr = `RANDOM()`;
     if (req.query.filterBy === 'popular') {
@@ -53,16 +62,6 @@ module.exports = (db) => {
       })
       .catch(err => res.json(err))
   })
-
-  router.get("/all_quizes", (req, res) => {
-
-    fetchUser(req)
-      .then(data => {
-        let templateVars = { user: data.rows[0] };
-        res.render('all_quizes', templateVars)
-      })
-  })
-
 
   router.get("/new", (req, res) => {
     if (!req.session.user_id) {

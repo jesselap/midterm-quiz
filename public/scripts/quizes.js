@@ -29,7 +29,7 @@ const renderQuiz = function (quizes) {
 const filterQuizes = function(filterBy) {
   $('.quizes-container').fadeOut(200).empty();
   $('#quiz-type').text(filterBy)
-  $.get('/quizes',{filterBy}, function (data) {
+  $.get('/quizes/getAllQuizes',{filterBy}, function (data) {
     renderQuiz(data)
   });
 }

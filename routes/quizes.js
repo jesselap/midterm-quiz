@@ -14,9 +14,9 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
     console.log(req.query.filterBy)
     let filterStr = `RANDOM()`;
-    if(req.query.filterBy === 'popular') {
+    if (req.query.filterBy === 'popular') {
       filterStr = 'total_attempts';
-    } else if(req.query.filterBy === 'latest'){
+    } else if (req.query.filterBy === 'latest') {
       filterStr = 'created_at';
     }
     const queryContent =
@@ -79,7 +79,7 @@ module.exports = (db) => {
     Promise.all([fetchCategories, fetchUser])
       .then(data => {
         const templateVars = { categories: data[0].rows, user: data[1].rows[0] }
-      res.render('create_quiz', templateVars)
+        res.render('create_quiz', templateVars)
       })
   });
 
@@ -133,13 +133,13 @@ module.exports = (db) => {
     `).catch(err => {
         res.json(err)
       })
-      const fetchUser =
-        db.query(`SELECT *
+    const fetchUser =
+      db.query(`SELECT *
         FROM users
         WHERE id = $1;`, [req.session.user_id]).catch(err => {
-          res.json(err)
-        })
-      Promise.all([fetchRandom, fetchUser])
+        res.json(err)
+      })
+    Promise.all([fetchRandom, fetchUser])
       .then(data => {
         let templateVars = {
           data: data[0].rows,
@@ -172,7 +172,9 @@ module.exports = (db) => {
         db.query(queryContent, [req.params.quiz_id])
           .then((quizData) => {
             if (!quizData.rows[0]) {
-              res.status(403).send("<html><body><h1>ERROR: bad gateway</h1></body></html>");
+              // res.status(403).send("<html><body><h1>ERROR: bad gateway</h1></body></html>");
+              // return;
+              res.render('404', templateVars);
               return;
             }
             if (!quizData.rows[0].public) {

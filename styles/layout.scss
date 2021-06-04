@@ -168,7 +168,7 @@ footer {
         justify-content: space-between;
         align-items: center;
 
-        #percent {
+        #percent, .avg-score, .new-quiz {
           border-radius: 5px 0 0 5px;
         }
         .avg-score {
@@ -219,7 +219,7 @@ h3 {
 }
 
 .error-desc {
-  color: #D3E0EA;
+  color: #276678;
   font-family: 'Quicksand', sans-serif;
 }
 
@@ -443,9 +443,8 @@ h3 {
       width: 95%;
 
       .overlay{
-        span:first-child {
-          padding: 0.2rem 0.3rem;
-          font-size: 0.7rem;
+        span{
+          padding: 0.1rem 0.3rem;
       }
     }
   }

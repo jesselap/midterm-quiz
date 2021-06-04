@@ -43,10 +43,10 @@ app.use(
 const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
 const quizesRoutes = require("./routes/quizes");
-const authRoutes = require("./routes/auth");
 const userQuizzes = require('./routes/userQuizzes');
 const quizactivity = require('./routes/quizactivity');
 const leaderboardRoutes = require('./routes/leaderboard');
+const authRoutes = require("./routes/auth");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -83,7 +83,17 @@ app.get("/", (req, res) => {
     })
   }
 });
-
+app.get('/:id', (req, res)=> {
+  db.query(`SELECT *
+  FROM users
+  WHERE id = $1;`, [req.session.user_id])
+  .then(data => {
+    let templateVars = {
+      user: data.rows[0]
+    };
+  res.render('404', templateVars);
+})
+});
 
 
 

@@ -1,0 +1,18 @@
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.error-text {
+  font-size: 10em;
+  color: #276678;
+  font-family: "Quicksand", sans-serif;
+  margin-top: 1.2em;
+  margin-bottom: 0.1em;
+}
+
+.error-desc {
+  color: #276678;
+  font-family: "Quicksand", sans-serif;
+}

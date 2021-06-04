@@ -1,0 +1,24 @@
+.home-header {
+  .jumbotron {
+    border-radius: 25px;
+    width: 65%;
+  }
+  .leaderboard {
+    border-radius: 25px;
+    h4 {
+      text-align: center;
+      text-transform: uppercase;
+      color: #276678;
+    }
+    li {
+      span {
+        background-color: #36874c;
+        // color:black;
+      }
+    }
+  }
+}
+.welcome-lead {
+  text-align: center;
+  color: #276678;
+}

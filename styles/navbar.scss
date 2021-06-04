@@ -1,0 +1,37 @@
+nav {
+  background-color:#32a8c9;
+  background-image: url("/images/groovepaper.png");
+  a {
+    color:#EEE;
+  }
+  .nav-link {
+   color:#EEE;
+  }
+   .nav-link:focus, .nav-link:hover {
+   color: #276678;
+   }
+   .user-link {
+     background-color:#EEE;
+     color: #276678;
+     border: none;
+   }
+   .user-link:focus, .user-link:hover {
+     color: #eee;
+     background-color: #276678;
+   }
+   .logout-link {
+     color: #eee;
+     background-color: #276678;
+     border: none;
+   }
+   .logout-link:focus, .logout-link:hover {
+     color: #eee;
+     background-color: #276678;
+     border: none;
+   }
+ }
+
+ .nav-logo {
+   margin-left: 1em;
+   width: 6em;
+ }

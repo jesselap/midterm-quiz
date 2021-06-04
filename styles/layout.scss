@@ -1,14 +1,16 @@
 // See: https://sass-lang.com/
-
 @mixin title-tab {
   background-color: #32a8c9;
-  color: #EEE;
+  color: #eee;
   text-transform: uppercase;
   text-align: center;
 }
 
+@import "header", "navbar", "users_page", "quizes", "footer", "404",
+  "media_queries";
+
 body {
-  background-color: #EEE;
+  background-color: #eee;
   padding: 1%;
 
   h1 {
@@ -21,264 +23,30 @@ body {
   }
 }
 
-nav {
- background-color:#32a8c9;
- background-image: url("/images/groovepaper.png");
- a {
-   color:#EEE;
- }
- .nav-link {
-  color:#EEE;
- }
-  .nav-link:focus, .nav-link:hover {
-  color: #276678;
-  }
-  .user-link {
-    background-color:#EEE;
-    color: #276678;
-    border: none;
-  }
-  .user-link:focus, .user-link:hover {
-    color: #eee;
-    background-color: #276678;
-  }
-  .logout-link {
-    color: #eee;
-    background-color: #276678;
-    border: none;
-  }
-  .logout-link:focus, .logout-link:hover {
-    color: #eee;
-    background-color: #276678;
-    border: none;
-  }
-
-
-}
-
-footer {
-  background-color:#32a8c9;
-  text-align: center;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-  background-image: url("/images/groovepaper.png");
-  p {
-    color:#EEE;
-    margin-bottom: 0;
-  }
-  .github-links {
-    display: flex;
-    flex-direction: column;
-    list-style: none;
-    justify-content: center;
-    align-items: center;
-    margin-top: 1em;
-    margin-bottom: 1em;
-  }
-  .logo {
-    margin-top: 1em;
-    margin-bottom: 1em;
-    width: 5em;
-  }
-  .git-logo {
-    width: 1em;
-  }
-  .github-links a {
-    text-decoration: none;
-    color:#EEE;
-}
-}
-
-
-.nav-logo {
-  margin-left: 1em;
-  width: 6em;
-}
-
 .main-body {
   background-color: #d3e0ea;
-}
-.home-header {
-  .jumbotron {
-    border-radius: 25px;
-    width: 65%;
-  }
-  .leaderboard {
-    border-radius: 25px;
-    h4 {
-      text-align: center;
-      text-transform: uppercase;
-      color: #276678;
-    }
-    li {
-      span{
-        background-color:#36874c;
-        // color:black;
-      }
-    }
-  }
-}
-.welcome-lead {
-  text-align: center;
-  color: #276678;
-}
-.quizes-container {
-  background-image: url("/images/groovepaper.png");
-
-  .card{
-    border: 2px solid #276678;
-    max-height: 350px;
-    // width: 32.5%;
-    margin-bottom: 1.5%;
-    align-items: flex-start;
-    justify-content: flex-end;
-    &:hover {
-      cursor: pointer;
-      img {
-        opacity: 0.9;
-      }
-      .overlay {
-        background-color: rgba(0,0,0,.5);
-      }
-    }
-    a{
-      width: 100%;
-      height: 100%;
-    }
-
-    img{
-      opacity: 1.0;
-      width: 100%;
-      height: 100%;
-    }
-    .overlay {
-      background-color: rgba(0,0,0,.3);
-      position: absolute;
-      word-break: break-word;
-      width: 100%;
-      padding-bottom: 2%;
-
-      .header{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        #percent, .avg-score, .new-quiz {
-          border-radius: 5px 0 0 5px;
-        }
-        .avg-score {
-          background-color: green;
-          padding: 0.2rem 0.5rem;
-        }
-      }
-      span:first-child {
-        background-color: brown;
-        text-transform: uppercase;
-        border-radius: 0 5px 5px 0;
-        padding: 0.2rem 0.5rem;
-        font-size: 0.9rem;
-      }
-      .card-text {
-        padding-left: 0.5rem;
-      }
-    }
-  }
-
-  h4{
-    @include title-tab;
-    margin-top: 1%;
-  }
 }
 
 h3 {
   @include title-tab;
 }
 
-#questions-container{
+#questions-container {
   padding: 20px 0;
   margin: auto;
   border: none;
 }
 
-.error-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.error-text {
-  font-size: 10em;
-  color: #276678;
-  font-family: 'Quicksand', sans-serif;
-  margin-top: 1.2em;
-  margin-bottom: 0.1em;
-}
-
-.error-desc {
-  color: #276678;
-  font-family: 'Quicksand', sans-serif;
-}
-
-
-.result-container{
+.result-container {
   display: flex;
   justify-content: space-between;
 
   .result-body {
     width: 65%;
   }
-  blockquote{
+  blockquote {
     flex-grow: 1;
   }
-}
-
-.dot {
-  height: 2.5em;
-  width: 2.5em;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-}
-
-.card-img-overlay {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.delete-container {
-  align-items: flex-start;
-}
-
-.hideme {
-  opacity: 0;
-}
-
-.share {
-  margin-bottom: 5px;
-  width: 5.5em;
-  padding: 2px;
-  padding-top: 1px;
-  padding-bottom: 1px;
-  font-size: 0.8em;
-  color: white;
-  background-color: #1687A7;
-}
-
-.delete {
-  z-index: 5;
-  margin-top: 1px;
-  width: 6em;
-  padding: 2px;
-  padding-top: 1px;
-  padding-bottom: 1px;
-  font-size: 0.8em;
-  color: white;
-}
-
-.linkField {
-  height: 1.5em;
 }
 
 .new-quiz {
@@ -290,19 +58,19 @@ h3 {
   background-color: #36874c;
 }
 
-.science{
-  color: #FFF;
+.science {
+  color: #fff;
   background-color: #9362d3;
   border-color: #9362d3;
 }
 .music {
-  color: #FFF;
+  color: #fff;
   background-color: rosybrown;
   border-color: rosybrown;
 }
 
 .history {
-  color: #FFF;
+  color: #fff;
   background-color: chocolate;
   border-color: chocolate;
 }
@@ -312,7 +80,7 @@ h3 {
   background-color: #a9da0a;
   border-color: #a9da0a;
 }
-.misc{
+.misc {
   color: black;
   background-color: #e49d04;
   border-color: #e49d04;
@@ -330,38 +98,38 @@ h3 {
 
 #quiz-title {
   margin: 0;
-  margin-top: .5rem!important;
+  margin-top: 0.5rem !important;
 }
 #quiz-owner {
   margin: 0;
   font-size: 100%;
 }
 
-.attempt-container{
+.attempt-container {
   display: flex;
   padding: 6px;
   align-items: flex-start;
 }
 
-.quiz-container-title{
+.quiz-container-title {
   display: flex;
   align-items: center;
   background-color: #32a8c9;
 
   h2 {
-  color: #EEE;
-  text-align: center;
-  text-transform: uppercase ;
-  background-image: url("/images/groovepaper.png");
+    color: #eee;
+    text-align: center;
+    text-transform: uppercase;
+    background-image: url("/images/groovepaper.png");
   }
   h4 {
-  font-size: 1.0rem ;
-  min-width: 25%;
-  color: #EEE;
-  margin-top: 0.5rem;
-  text-align: center;
-  text-transform: uppercase ;
-  background-image: url("/images/groovepaper.png");
+    font-size: 1rem;
+    min-width: 25%;
+    color: #eee;
+    margin-top: 0.5rem;
+    text-align: center;
+    text-transform: uppercase;
+    background-image: url("/images/groovepaper.png");
   }
 }
 
@@ -372,89 +140,3 @@ h3 {
 h3 {
   background-image: url("/images/groovepaper.png");
 }
-
-.category-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-
-  .btn {
-    margin: 5px 5px;
-    padding: 0.1rem 0.5rem;
-  }
-}
-
-// Media Queries
-
-@media screen and (min-width: 769px) {
-  .quizes-container {
-    justify-content: space-between;
-    .card {
-      width: 32.5%;
-    }
-  }
-.quiz-container-title {
-
-  div {
-      padding-right: 1em;
-  }
-}
-}
-
-@media screen and (max-width: 768px){
-  .home-header {
-    .jumbotron {
-      border-radius: 25px;
-      width: 100%;
-      margin-bottom: 1em;
-    }
-  }
-
-  .quiz-container-title {
-    flex-direction: column;
-    padding: 0.5em 0;
-  }
-
-  .quizes-container {
-    justify-content: space-between;
-    .card {
-      width: 49%;
-    }
-  }
-  .nav {
-    justify-content: center;
-  }
-  .result-container {
-    .result-body {
-      width: 100%;
-    }
-  }
-}
-
-@media  screen and (max-width: 499px) {
-  .quizes-container {
-    justify-content: center;
-    .card {
-      width: 95%;
-
-      .overlay{
-        span{
-          padding: 0.1rem 0.3rem;
-      }
-    }
-  }
-}
-}
-@media screen and(max-width : 399px) {
-  .quiz-container-title {
-    div {
-      flex-direction: column;
-      width: 75%;
-
-      .btn {
-        margin: 2px;
-      }
-    }
-  }
-}
-

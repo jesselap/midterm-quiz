@@ -1,0 +1,48 @@
+
+.dot {
+  height: 2.5em;
+  width: 2.5em;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.card-img-overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.delete-container {
+  align-items: flex-start;
+}
+
+.hideme {
+  opacity: 0;
+}
+
+.share {
+  margin-bottom: 5px;
+  width: 5.5em;
+  padding: 2px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  font-size: 0.8em;
+  color: white;
+  background-color: #1687a7;
+}
+
+.delete {
+  z-index: 5;
+  margin-top: 1px;
+  width: 6em;
+  padding: 2px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  font-size: 0.8em;
+  color: white;
+}
+
+.linkField {
+  height: 1.5em;
+}

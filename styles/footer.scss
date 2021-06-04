@@ -17,6 +17,11 @@ footer {
     align-items: center;
     margin-top: 1em;
     margin-bottom: 1em;
+    a {
+      &:hover {
+        color: #d1fd30;
+      }
+    }
   }
   .logo {
     margin-top: 1em;

@@ -24,7 +24,19 @@
   <div class="col-md-12 mt-3">
     <h3 class="display-6">My Quiz Activity</h3>
   </div>
-  <% if (user) { %>
+  <% console.log("user------", user) %>
+  <% if(!user) {%>
+    <div class="text-center my-5">
+      <p class="lead text-capitalize">Oops! you are not logged in</p>
+      <a class="btn btn-primary" href="/login">Login To See Your Records</a>
+    </div>
+  <% } else { %>
+    <% if(!activities || !activities.length) {%>
+      <div class="text-center my-5">
+        <p class="lead text-capitalize">Oops! You havent attempted any Quiz yet</p>
+        <a class="btn btn-primary text-capitalize" href="/quizes">Play any quiz you like</a>
+      </div>
+      <% } %>
   <section class="quizes-container d-flex flex-md-row flex-wrap justify-content-sm-between">
     <% for (activity of activities) { %>
       <div class="card bg-dark text-white col-md-4">
@@ -50,12 +62,7 @@
       </div>
     <% } %>
   </section>
-  <% } else { %>
-    <div class="text-center my-5">
-      <p class="lead text-capitalize">Oops! you are not logged in</p>
-      <a class="btn btn-primary" href="/login">Login To See Your Records</a>
-    </div>
-  <% } %>
+  <% }%>
 </main>
 <%- include('partials/_footer'); %>
 </body>

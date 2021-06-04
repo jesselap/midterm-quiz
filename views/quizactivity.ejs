@@ -51,7 +51,10 @@
     <% } %>
   </section>
   <% } else { %>
-    <h2>NO! LOG IN!!!</h2>
+    <div class="text-center my-5">
+      <p class="lead text-capitalize">Oops! you are not logged in</p>
+      <a class="btn btn-primary" href="/login">Login To See Your Records</a>
+    </div>
   <% } %>
 </main>
 <%- include('partials/_footer'); %>

@@ -27,6 +27,12 @@
       <h3 class="display-6">My Quizzes</h3>
     </div>
   <% if (user) { %>
+    <% if(!quizzes.length) {%>
+      <div class="text-center my-5">
+        <p class="lead text-capitalize">Oops! You have not created any quiz yet.</p>
+        <a class="btn btn-primary text-capitalize" href="/login">Create your first quiz</a>
+      </div>
+      <% } %>
   <section class="quizes-container d-flex flex-md-row flex-wrap justify-content-sm-between">
     <% for (quiz of quizzes) { %>
       <div class="card bg-dark text-white col-md-4" url=/quizes/<%= quiz.id %>>
@@ -54,7 +60,10 @@
     <% } %>
   </section>
   <% } else { %>
-    <h2>NO! LOG IN!!!</h2>
+    <div class="text-center my-5">
+      <p class="lead text-capitalize">Oops! you are not logged in</p>
+      <a class="btn btn-primary text-capitalize" href="/login">Login To See Your records</a>
+    </div>
   <% } %>
 </main>
 <%- include('partials/_footer'); %>

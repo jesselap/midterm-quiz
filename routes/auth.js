@@ -1,5 +1,6 @@
 const express = require('express');
 const router  = express.Router();
+const bcrypt = require('bcrypt');
 
 module.exports = (db) => {
 
@@ -23,7 +24,7 @@ module.exports = (db) => {
     SELECT * FROM users WHERE email = $1
     `, [email])
       .then(data => {
-        if (password === data.rows[0].password) {
+        if (bcrypt.compareSync(password, data.rows[0].hashed_password)) {
           req.session.user_id = data.rows[0].id;
           console.log(`line 28 ${req.session.user_id}`);
           res.redirect('/');
@@ -58,11 +59,12 @@ module.exports = (db) => {
 
   router.post('/register', (req, res) => {
     const { name, email, password } = req.body
+    const hashed_password = bcrypt.hashSync(password, 10);
     db.query(`
-      INSERT INTO users (name, email, password)
+      INSERT INTO users (name, email, hashed_password)
       VALUES ($1, $2, $3)
       RETURNING id;
-    `, [name, email, password])
+    `, [name, email, hashed_password])
       .then((data) => {
         req.session.user_id = data.rows[0].id;
         res.redirect("/");

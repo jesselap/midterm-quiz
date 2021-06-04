@@ -185,7 +185,7 @@ module.exports = (db) => {
   // individual quiz page (answer submission)
 
   router.post("/result", (req, res) => {
-    console.log('line 120 --------')
+    console.log('line 120 --------', req.body)
     const keys = Object.keys(req.body)
     let counter = 0;
     const queryStr = `SELECT quizes.*, questions.answer as answer, questions.id as question_id
@@ -199,6 +199,7 @@ module.exports = (db) => {
       .then((data) => {
         for (let i = 0; i < data.rows.length; i++) {
           let questId = data.rows[i].question_id;
+          console.log("i---",i, 'answer----', data.rows[i].answer, '----', req.body[questId])
           if (data.rows[i].answer === req.body[questId]) {
             counter++;
           }

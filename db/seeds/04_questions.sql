@@ -194,3 +194,18 @@ INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) 
 INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (40, 'Which actor played Frankenstein in the 1931 film adaptation, complete with a flat head and protruding neck bolts?', 'Edward Van Sloan', 'Colin Clive', 'John Boles', 'Boris Karloff');
 INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (40, 'Who directed Dr. Jekyll and Mr. Hyde (1931), widely considered the best adaptation of Robert Louis Stevenson’s classic novel?', 'Fredric March', 'Holmes Herbert', 'Karl Struss', 'Rouben Mamoulian');
 INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (40, 'Which book, which originally received only moderate sales and somewhat poor reviews, was catapulted to success with the release of a film adaptation in 1925?', 'The Werewolf of London', 'The Outsider', 'The Picture of Dorian Gray', 'Le Fantôme de l’opéra');
+INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (41, 'What is JavaScript?', 'a framework', 'A movie', 'upcoming BMW model', 'programming language');
+INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (41, 'What is 2 + 2?', '5', '3', '1', '4');
+INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (41, 'What is a prime number?', 'Definetly not a number', 'numbers which are very large?', 'how would I know?', 'numbers that have only two factors');
+INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (41, 'Which is the most popular framework at the moment?', 'Ruby on Rails', 'Angular', 'Vue.js', 'React');
+INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (41, 'What is MERN?', 'Mongoose Express Angular Node', 'Mango Express React Node', 'Mongoose Elephant Rhino Numbat ', 'Mongoose Express React Node');
+INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (42, 'What is Antartica?', 'An animal', 'A Plane', 'An animal', 'A Continent');
+INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (42, 'Capital Of Canada', 'Scarborough', 'Toronto', 'Montreal', 'Ottawa');
+INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (42, 'Biggest Country in the world?', 'USA', 'Canada', 'China', 'Russia');
+INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (42, 'Most populated country in the world?', 'Saudi Arabia', 'India', 'Bangladesh', 'China');
+INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (42, 'Currency of India', 'Yen', 'USD', 'Pound', 'Rupee');
+INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (43, 'When was Avatar released?', '2008', '2010', '2011', '2009');
+INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (43, 'Best Actor of llast 20 years?', 'Brad Pit', 'Hugh Jackman', 'I am', 'Leonardo Di Caprio');
+INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (43, 'How many Movies are in LOTR Series?', '2', '4', '1', '3');
+INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (43, 'Who is Harry Potter?', 'A boy', 'A magician', 'Just a regular guy', 'A Wizard');
+INSERT INTO questions (quiz_id, question, choice_a, choice_b, choice_c, answer) VALUES (43, 'Highest Grossing Movie of All time?', 'Avenger: Endgame', 'Titanic', 'Hobbit 2', 'Avatar');

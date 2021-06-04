@@ -23,11 +23,9 @@ nav {
      color: #eee;
      background-color: #276678;
      border: none;
-   }
-   .logout-link:focus, .logout-link:hover {
-     color: #eee;
-     background-color: #276678;
-     border: none;
+     &:hover {
+      background-color:#d62845;
+     }
    }
  }
 

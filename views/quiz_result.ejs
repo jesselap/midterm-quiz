@@ -57,9 +57,10 @@
       <section class="quizes-container d-flex flex-md-row flex-wrap justify-content-sm-between">
         <% for(let quiz of quizes) {%>
         <div class="card bg-dark text-white col-md-4">
+          <a href="/quizes/<%= quiz.id %> ">
           <img
           src="<%= quiz.image_url %> "
-          class="card-img" alt="<%= quiz.category%> image ">
+          class="card-img" alt="<%= quiz.category%> image "></a>
           <div class="overlay">
             <div class="header">
               <span><%= quiz.category%></span>

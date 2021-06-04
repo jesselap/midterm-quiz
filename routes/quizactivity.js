@@ -11,7 +11,8 @@ module.exports = (db) => {
                           FROM attempts
                           JOIN quizes ON attempts.quiz_id = quizes.id
                           JOIN categories ON quizes.category_id = categories.id
-                          WHERE attempts.user_id = $1`;
+                          WHERE attempts.user_id = $1
+                          ORDER BY attempttime DESC`;
     db.query(queryContent, queryParams)
     .then(data => {
       if (!req.session.user_id) {

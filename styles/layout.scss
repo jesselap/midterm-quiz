@@ -37,18 +37,6 @@ h3 {
   border: none;
 }
 
-.result-container {
-  display: flex;
-  justify-content: space-between;
-
-  .result-body {
-    width: 65%;
-  }
-  blockquote {
-    flex-grow: 1;
-  }
-}
-
 .new-quiz {
   background-color: blue;
   padding: 0.2rem 0.5rem;

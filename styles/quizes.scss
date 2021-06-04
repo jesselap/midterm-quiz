@@ -77,3 +77,15 @@
     margin-top: 1%;
   }
 }
+
+.result-container {
+  display: flex;
+  justify-content: space-between;
+
+  .result-body {
+    width: 65%;
+  }
+  blockquote {
+    flex-grow: 1;
+  }
+}

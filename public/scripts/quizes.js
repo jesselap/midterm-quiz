@@ -22,12 +22,12 @@ const createElement = function (quizObj) {
 const renderQuiz = function (quizes) {
   for (const item of quizes) {
     const quizElement = createElement(item)
-    $('.quizes-container').append(quizElement).fadeIn(200);
+    $('.quizes-container').append(quizElement).fadeIn(400);
   }
 }
 
 const filterQuizes = function(filterBy) {
-  $('.quizes-container').fadeOut(200).empty();
+  $('.quizes-container').fadeOut(400).empty();
   $('#quiz-type').text(filterBy)
   $.get('/quizes/getAllQuizes',{filterBy}, function (data) {
     renderQuiz(data)

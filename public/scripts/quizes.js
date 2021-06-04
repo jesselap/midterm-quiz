@@ -3,23 +3,24 @@ const createElement = function (quizObj) {
   const scoreStr = `${quizObj.avg_score}%`
   const quizHTML =
     `<div class="card bg-dark text-white col-md-4">
-    <a href="/quizes/${quizObj.id}">
-    <img
-      src=${quizObj.image_url}
-      class="card-img" alt="..."></a>
+      <a href="/quizes/${quizObj.id}">
+        <img
+          src=${quizObj.image_url}
+          class="card-img" alt="...">
+      </a>
       <div class = 'card-more-info'>
-      <span>No of Questions: ${quizObj.total_attempts}</span>
-      <span>Total Attempts: ${quizObj.total_attempts}</span>
-      <span>Average Score:: ${quizObj.total_attempts}</span>
+        <span>Total Questions: ${quizObj.total_questions}</span>
+        <span>Total Attempts: ${quizObj.total_attempts}</span>
+        <span>Average Score: ${score === null ? 'New' : scoreStr}</span>
       </div>
-    <div class="overlay">
-      <div class="header">
+      <div class="overlay">
+        <div class="header">
         <span>${quizObj.category}</span>
         <span class=${score === null ? 'new-quiz': 'avg-score'}>${score=== null ? 'NEW' : scoreStr}</span>
+        </div>
+        <p class="card-text">${quizObj.title}</p>
       </div>
-      <p class="card-text">${quizObj.title}</p>
-    </div>
-  </div>`
+    </div>`
   return quizHTML
 }
 

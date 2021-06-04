@@ -29,7 +29,8 @@ module.exports = (db) => {
       filterStr = 'created_at';
     }
     const queryContent =
-      ` SELECT quizes.id, title, image_url, created_at, public, categories.type as category, ROUND(AVG(score))as avg_score, COUNT(attempts.*) as total_attempts
+      ` SELECT quizes.id, title, image_url, created_at, public, categories.type as category, ROUND(AVG(score))as avg_score, COUNT(attempts.*) as total_attempts,
+        (SELECT COUNT(*) FROM questions WHERE questions.quiz_id = quizes.id) as total_questions
         FROM quizes
         LEFT JOIN attempts ON quizes.id = attempts.quiz_id
         JOIN categories ON quizes.category_id = categories.id
@@ -49,12 +50,14 @@ module.exports = (db) => {
     const type = req.query.type;
     const queryContent =
       `
-      SELECT quizes.id, title, image_url, created_at, public, categories.type as category, COALESCE((SELECT ROUND(AVG(score))
-      FROM attempts WHERE quiz_id = quizes.id), 0) as avg_score
+      SELECT quizes.id, title, image_url, created_at, public, categories.type as category, ROUND(AVG(score))as avg_score, COUNT(attempts.*) as total_attempts,
+      (SELECT COUNT(*) FROM questions WHERE questions.quiz_id = quizes.id) as total_questions
       FROM quizes
+      LEFT JOIN attempts ON quizes.id = attempts.quiz_id
       JOIN categories ON quizes.category_id = categories.id
       WHERE public  = true AND
-      categories.type LIKE '%${type}%';
+      categories.type LIKE '%${type}%'
+      GROUP BY quizes.id, categories.type;
     `
     db.query(queryContent)
       .then(data => {
@@ -263,6 +266,5 @@ module.exports = (db) => {
     WHERE id = $1;`, [req.session.user_id])
       .catch(err => { throw `error fetching user information` })
   }
-
   return router;
 };

@@ -9,6 +9,13 @@ lightQUIZ is an app that encourages users to test test quiz solving skills. It a
 - jQuery
 - Bootstrap
 
+## Final Product
+
+!["Home"](https://github.com/jesselap/midterm-quiz/blob/master/public/images/screenshots/home.jpeg?raw=true)&nbsp;
+!["Quiz"](https://github.com/jesselap/midterm-quiz/blob/master/public/images/screenshots/quiz.jpeg?raw=true)&nbsp;
+!["Create Quiz"](https://github.com/jesselap/midterm-quiz/blob/master/public/images/screenshots/create-quiz.jpeg?raw=true)&nbsp;
+!["Categories"](https://github.com/jesselap/midterm-quiz/blob/master/public/images/screenshots/quiz-category.jpeg?raw=true)
+
 ## Getting Started
 
 1. Create the `.env` by using `.env.example` as a reference: `cp .env.example .env`

@@ -1,6 +1,6 @@
 # LightQUIZ
 
-lightQUIZ is an app that encourages users to test test quiz solving skills. It allows users to take part in wide category of quizes and also lets them create their own quizes. After a user perfrom their quiz, they can see their score and can also keep tract of all their previous attempts and try to improve based on that.
+lightQUIZ is an app that encourages users to test quiz solving skills. It allows users to take part in a wide category of quizzes and also lets them create their own quizzes. After a user perform their quiz, they can see their score and can also keep track of all their previous attempts and try to improve based on that.
 
 ## Tech Stack
 
